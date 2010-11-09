@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8"> 
+    <title>{% block title %}{% endblock %}{{config.name}}</title>
+    <meta name="description" content="{{config.description}}">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0;"> 
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.2.0/build/cssreset/reset-min.css&3.2.0/build/cssfonts/fonts-min.css&3.2.0/build/cssgrids/grids-min.css">
+    <link rel="stylesheet" href="/static/css/style.css?v=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script type="text/javascript" src="/static/js/modernizr-1.6.min.js"></script>
+    {% block head %}{% endblock %}
+</head>
+<body class="{% if admin %}admin {% endif %}{% block body_classes %}{% endblock %}">
+    <div id="wrapper">
+		{% block header %}{% endblock %}
+		{% block nav %}{% endblock %}
+	    <div id="main">
+    	    <div id="primary"> 
+        	    <div id="content">
+        	        {% block body %}{% endblock %}
+        	    </div><!-- #content -->
+        	</div><!-- #primary -->
+        	{% block sidebar %}{% endblock %}
+        </div><!-- #main -->
+        
+        <footer id="colophon">
+	        <div id="footer-nav">
+				<ul>
+					<li><span id="fb-likeinline-block"><fb:like href="http://pagifyapp.com" layout="button_count" width="75" font="lucida grande"></fb:like></span></li>
+					<li><a href="/terms">Terms</a></li>
+					<li><span class="divider">|</span></li>
+					<li><a href="/privacy">Privacy</a></li>
+					<li><span class="divider">|</span></li>
+					<li><a href="javascript:void(0);" onclick="feedback_widget.show()">Support</a></li>
+					<li><span class="divider">|</span></li>
+					<li><a href="http://twitter.com/pagifyapp">Follow us on Twitter</a></li>
+				</ul>
+            </div>
+        </footer>
+        
+    </div><!-- #wrapper -->
+    {% include "inc.fbjssdk.html" %}
+    <!-- Google API's -->
+    <script src="http://www.google.com/jsapi?key={{google.api_key}}"></script>
+    <script>
+        google.load("jquery", "{{google.jquery_version}}");
+    </script>
+    <!-- My Scripts -->
+    <script src="/static/js/plugins.js?v=1"></script>
+    <script src="/static/js/script.js?v=1"></script>
+    <!--[if lt IE 7 ]>
+    <script type="text/javascript" src="/static/js/dd_belatedpng.js?v=1"></script>
+    <![endif]-->
+    {% if config.google_analytics_id and not is_admin %}
+    <!-- Google Analytics -->
+    <script>
+        //<![CDATA[
+    	var _gaq = _gaq || [];
+    	_gaq.push(['_setAccount','{{config.google_analytics_id}}']);
+    	_gaq.push(['_trackPageview']);
+    	(function() {
+    		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    	})();
+    	//]]>
+	</script>
+    {% endif %}
+    <!-- Get Satisfaction -->
+	<script>
+	  var is_ssl = ("https:" == document.location.protocol);
+	  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+	  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script>
+	  var feedback_widget_options = {};
+	  feedback_widget_options.display = "overlay";  
+	  feedback_widget_options.company = "tweetc";
+	  feedback_widget_options.placement = "hidden";
+	  feedback_widget_options.color = "#222";
+	  feedback_widget_options.style = "question";
+	  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+	</script>
+	{% block foot %}{% endblock %}
+</body>
+</html>

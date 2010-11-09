@@ -1,0 +1,196 @@
+// My Scripts
+$.ajaxSetup ({
+    // Disable caching of AJAX responses */
+    cache: false
+});
+switch(location.pathname)
+{
+case "/dashboard":
+    $(document).ready(function() {
+        // Set hover state for Pages list
+        $(".scroll-content-item").hover(
+            function () {
+                $(this).addClass("ui-state-hover hand");
+              },
+              function () {
+                $(this).removeClass("ui-state-hover hand");
+              }
+        ).click(
+            function () {
+                window.location = $(".page-title a",this).attr('href');
+              }
+        );
+    });
+    $(window).load(function() {
+        //Resize Pages to match max height
+        var postMaxHeight = 0;
+        $(".scroll-content-item").each(function (i) {
+            var elHeight = $(this).height();
+            if(parseInt(elHeight) > postMaxHeight){
+                postMaxHeight = parseInt(elHeight);
+            }
+        });
+        $(".scroll-content-item").each(function (i) {
+           log(postMaxHeight);
+           $(this).css({'height':postMaxHeight+'px','display':'block'});
+        });  
+    });
+  
+  break;
+case "/upgrade":
+    $(document).ready(function() {
+        $(".btn-upgrade").button();
+    });
+  break;
+default:
+    $(document).ready(function() {
+        // Header
+        $("#pagify-image").draggable();
+		$("#pagify-header").resizable({handles: 's',alsoResize: "#pagify-image"});
+		$( "#pagify-header" ).bind( "resizestop", function(event, ui) {
+				$( "#widget-list" ).sortable( "refresh" );
+		});
+		//Scrolll Widgets
+		$(window).scroll(function()
+		{
+    		if($(window).scrollTop() == 0){
+    		    $('#sb-widgets-menu').animate({top:220+"px" },{queue: false, duration: 500});
+    		}else{
+    		    $('#sb-widgets-menu').animate({top:$(window).scrollTop()+50+"px" },{queue: false, duration: 500});
+    		}
+		});
+		//Dialogs
+		var left= 20;
+		var top= 20;
+		$( "#upload-dialog" ).dialog({
+			autoOpen: false,
+			show: "fade",
+			hide: "fade",
+			open: function() { 
+						$(".ui-dialog").position({
+						       my: 'right',
+						       at: 'right',
+						       of: "#pagify-header"
+						    });
+				}
+		});
+
+		$( "#pagify-header" ).click(function() {
+			$( "#upload-dialog" ).dialog( "open" );
+			return false;
+		});
+        // Prepare Widget List for accordian and sortable
+        var stop = false;
+		$( "#widget-list h3" ).click(function( event ) {
+			if ( stop ) {
+				event.stopImmediatePropagation();
+				event.preventDefault();
+				stop = false;
+			}
+		});
+		$( "#widget-list" )
+			.accordion({
+				header: "> div > h3",
+				autoHeight: false
+			})
+			.sortable({
+				axis: "y",
+				handle: "h3",
+				placeholder: "ui-state-highlight",
+				forcePlaceholderSize:true,
+				stop: function() {
+					stop = true;
+				}
+			});
+		$( ".draggable" ).draggable({
+			connectToSortable: "#widget-list",
+			helper: "clone",
+			revert: "invalid"
+		});
+		$( "ul, li" ).disableSelection();
+		// After dragged and dropped destroy and recreate accordian
+		$( ".draggable" ).draggable({
+		   stop: function(event, ui) { 
+			var wType = $(this).attr('id');
+			var wName = $(this).html();
+			var wId = uuid();
+			var wContents = '';
+			if(wType){
+			   //get widget content
+			   $.get("/api/getwidget", {wid:wId, wtype: wType},function(data){
+			       wContents = data
+			       $('#widget-list #' + wType).replaceWith('<div id="'+wId+'"><h3><a href="#">'+wName+'</a></h3><div>'+wContents+'</div></div>');
+			       var stop = false;
+      				$( "#widget-list h3" ).click(function( event ) {
+      					if ( stop ) {
+      						event.stopImmediatePropagation();
+      						event.preventDefault();
+      						stop = false;
+      					}
+      				});
+   				    $( "#widget-list" ).accordion('destroy').accordion({
+   						header: "> div > h3",
+   						autoHeight: false
+   					})
+   					.sortable({
+   						axis: "y",
+   						handle: "h3",
+   						stop: function() {
+   							stop = true;
+   						}
+   					});
+			   });//end ajax request
+               	
+			   } // end if
+			}
+		});
+
+		// Ajax Accordian
+		$("#widget-list" ).bind('accordionchange', function(event, ui) {
+		  if($(ui.newContent).html() == 'Loading...'){
+		      $(ui.newContent).load("/api/getwidget?wid="+ encodeURIComponent($(ui.newContent).parent('div').attr('id')));
+		  }
+		});
+		
+		// Load default widget if there is one
+		var firstWidget = $("#widget-list > div:eq(0) > div:eq(0)");
+		if($(firstWidget)){
+		    $(firstWidget).load("/api/getwidget?wid="+ encodeURIComponent($("#widget-list > div:eq(0)").attr('id')));
+	    }
+	    
+	    // Sort update
+	    $( "#widget-list" ).bind( "sortupdate", function(event, ui) {
+            $("#widget-list > div").each(function(index) {
+                $(this).attr('id');
+            });
+        });
+    });
+}
+
+// Functions
+function getParameterByName( name )
+{
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+   
+function S4() {
+   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+}
+
+function uuid(p) {
+   if (p === undefined){p=''};
+   return (p+S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+}  
+   
+
+    
+
+
+

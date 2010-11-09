@@ -1,0 +1,22 @@
+<!-- Facebook API -->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({appId: '{{facebook.app_id}}', status: true, cookie: true, xfbml: true});
+	FB.Event.subscribe('{% if current_user %}auth.logout{% else %}auth.login{% endif %}', 		function(response) {
+        {% if current_user %}
+        window.location = '/';
+        {% else %}
+         window.location = '/dashboard';
+        {% endif %}
+    });
+  };
+  (function() {
+    var e = document.createElement('script');
+    e.type = 'text/javascript';
+    e.src = document.location.protocol +
+      '//connect.facebook.net/en_US/all.js';
+    e.async = true;
+    document.getElementById('fb-root').appendChild(e);
+  }());
+</script>

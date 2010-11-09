@@ -1,0 +1,41 @@
+application: pagifyapp
+version: beta
+runtime: python
+api_version: 1
+
+skip_files: |
+ ^(.*/)?(
+ (app\.yaml)|
+ (app\.yml)|
+ (index\.yaml)|
+ (index\.yml)|
+ (#.*#)|
+ (.*~)|
+ (.*\.py[co])|
+ (.*\.DS_Store)|
+ (.*\.git)|
+ (.*\.gitignore)|
+ (Crypto)
+ )$
+
+builtins:
+- remote_api: on
+- datastore_admin: on
+
+handlers:
+- url: /_ah/queue/deferred
+  script: $PYTHON_LIB/google/appengine/ext/deferred/deferred.py
+  login: admin
+
+- url: /(robots\.txt|favicon\.ico|apple-touch-icon\.png)
+  static_files: static/\1
+  upload: static/.*
+  
+- url: /static
+  static_dir: static
+
+- url: /.*
+  script: main.py
+  
+error_handlers:
+- file: templates/default_gae_error.html

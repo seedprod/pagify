@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/cupertino/jquery-ui-1.8.5.custom.css">
+{% endblock %}
+{% block header %}
+{% include "inc.admin.header.title.html" %}
+{% endblock %}
+{% block body %}
+<h1>Pages</h1>
+<p>These are the pages you have admin rights to. Click on a Page to manage.
+<div id="pages-list" class="scroll-content clearfix">
+    {% for p in pages %}
+		<div class="scroll-content-item boxer">
+		  <img src="{{p.picture}}" class="fb-picture">
+		  <span class="page-title"><a href="/edit/page/{{p.id}}">{{p.name}}</a></span>
+		  <span class="upgrade"><a href="/upgrade?p={{p.id}}">Upgrade</a></span>
+		</div>
+	{% endfor %}
+</div>
+{% endblock %}
+{% block sidebar %}
+<!--<div id="secondary" class="widget-area">
+	<ul class="xoxo">
+        <li id="widget-" class="widget-container">
+            <h2 class="widget-title"></h2>
+            <ul>
+                <li>fdgfdgdgdfg</li>
+            </ul>
+        </li>
+    </ul>
+</div>  #secondary -->
+{% endblock %}
+{% block foot %}
+<script src="/static/js/jquery-ui-1.8.6.custom.min.js"></script>
+{% endblock %}

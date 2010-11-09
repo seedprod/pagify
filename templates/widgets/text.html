@@ -1,0 +1,19 @@
+<span class="mark"></span>
+<textarea name="html" rows="2" cols="20" class="{{widget.id}}">
+{{widget.contents|default:"Oh Yeah"}}
+</textarea>
+
+<script>
+$('#{{widget.id}} textarea').blur(function() { 
+	var wId = '{{widget.id}}';
+	var wType = '{{widget.type}}';
+	var wName = 'None';
+	var wContents = $('#{{widget.id}} textarea').val();
+	var pageId = $("#page-id").html();  
+	$.post("/api/savewidget", { wid: wId , wtype: wType , wname: wName, wcontents: wContents, pageid: pageId},function(data){
+	    if(data){
+	        log('Saved');
+	    };
+	});//end ajax request
+});
+</script>

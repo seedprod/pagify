@@ -1,0 +1,272 @@
+/*
+Theme Name: Thinker
+Description: One bad ass theme.
+Author: John Turner
+Author URI: http://johndturner.com
+Version: 0.1
+
+
+*/
+
+/*-------------------------------------------------------------------------------------------
+
+INDEX:
+0. RESETS
+-0.1 reset
+-0.2 fonts
+
+1. SETUP
+-1.1 Defaults
+-1.2 Hyperlinks
+
+2. SITE STRUCTURE & APPEARANCE
+-2.1 Layout
+-2.2 Navigation
+-2.2.1 Drop-down menus
+-2.3 Header
+-2.4 Content
+-2.5 Sidebar
+
+6. MISC
+-6.1 Buttons
+-6.2 Info Boxes
+-6.3 Conatct Form 
+
+7. ADMIN
+-7.1 Datatable
+
+4. WIDGETS
+-4.1 Homepage widgets
+-4.2 Generic sidebar Widgets
+-4.3 Specific Widgets
+-------------------------------------------------------------------------------------------*/
+
+/*-------------------------------------------------------------------------------------------*/
+/* 1. RESETS */
+/*-------------------------------------------------------------------------------------------*/
+/*
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.2.0/build/cssreset/reset-min.css&3.2.0/build/cssfonts/fonts-min.css&3.2.0/build/cssgrids/grids-min.css&3.2.0/build/cssbase/base-min.css">
+*/
+/* 0.1 html5 */
+article, aside, figure, footer, header, 
+hgroup, menu, nav, section, menu,
+time, mark, audio, video {
+  margin:0;
+  padding:0;
+  border:0;
+  outline:0;
+  vertical-align:baseline;
+  background:transparent;
+}                  
+article, aside, figure, footer, header, 
+hgroup, nav, section { display:block; }
+
+
+/* 0.2 fonts */
+body {line-height:1.22;}
+
+/*-------------------------------------------------------------------------------------------*/
+/* 1. SETUP */
+/*-------------------------------------------------------------------------------------------*/
+
+/* 1.1 Defaults */
+html {-webkit-font-smoothing: antialiased;background:#fff;}
+body, select, input, textarea { color:#888;text-shadow: white 0px 1px 0px; }
+h1,h2,h3,h4,h5,h6{color:#333;}
+h1,h2,h3,h4,h5,h6{font-weight:bold;}
+h1{font-size:197%;}
+h2{font-size:167%;}
+h3{font-size:108%;}
+h1,h2,h3{margin:0 0 0.7em 0;}
+strong{font-weight:bold;}
+abbr,acronym{border-bottom:1px dotted #000;cursor:help;}
+em{font-style:italic;}
+blockquote,ul,ol,dl{margin:1em;}
+ol,ul,dl{margin-left:2em;}
+ol li{list-style:decimal outside;}
+ul li{list-style:disc outside;}
+dl dd{margin-left:1em;}
+small { font-size:85%; }
+th { font-weight: bold; }
+td, td img { vertical-align:top; } 
+sub { vertical-align: sub; font-size: smaller; }
+sup { vertical-align: super; font-size: smaller; }
+/*th,td{border:1px solid #000;padding:.5em;}
+th{font-weight:bold;text-align:center;}caption{margin-bottom:.5em;text-align:center;}
+p,fieldset,table{margin-bottom:1em;}*/
+p,fieldset{margin-bottom:1em;}
+input, textarea {}
+/* align checkboxes, radios, text inputs with their label
+   by: Thierry Koblentz tjkdesign.com/ez-css/css/base.css  */
+input[type="radio"] { vertical-align: text-bottom; }
+input[type="checkbox"] { vertical-align: bottom; *vertical-align: baseline; }
+.ie6 input { vertical-align: text-bottom; }
+/* hand cursor on clickable input elements */
+label, input[type=button], input[type=submit], button { cursor: pointer; }
+.hand{cursor: pointer;}
+/* always force a scrollbar in non-IE */
+html { overflow-y: scroll; }
+/* make buttons play nice in IE: www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
+button {  width: auto; overflow: visible; }
+/* bicubic resizing for non-native sized IMG: code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
+.ie7 img { -ms-interpolation-mode: bicubic; }
+
+/*  Non-semantic helper classes */
+/* for image replacement */
+.ir { display:block; text-indent:-999em; overflow:hidden; background-repeat: no-repeat; }
+/* Hide for both screenreaders and browserscss-discuss.incutio.com/wiki/Screenreader_Visibility */
+.hidden { display:none; visibility:hidden; } 
+/* Hide only visually, but have it available for screenreaders www.webaim.org/techniques/css/invisiblecontent/ Solution from: j.mp/visuallyhidden - Thanks Jonathan Neal! */
+.visuallyhidden { position:absolute !important;    
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px); }
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+/* >> The Magnificent CLEARFIX << j.mp/phayesclearfix */
+.clearfix:after  { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.clearfix { zoom: 1; }
+
+/* 1.2 Hyperlinks */
+a, a:visited,a:active  { color: #444; text-decoration:none; }
+footer a,footer a:visited,footer a:active{color: #999;}
+a:hover { text-decoration:underline; }
+/* Accessible focus treatment: people.opera.com/patrickl/experiments/keyboard/test */
+a:hover, a:active { outline: none; }
+
+#site-title a,#site-title a:visited,#site-title a:active{ color: #000; }
+
+h1 a, h1 a:visited, h2 a, h2 a:visited, h3 a, h3 a:visited,
+h4 a, h4 a:visited, h5 a, h5 a:visited, h6 a, h6 a:visited  { text-decoration: none; }
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-decoration: underline;}
+
+/*-------------------------------------------------------------------------------------------*/
+/* 2. SITE STRUCTURE & APPEARANCE */
+/*-------------------------------------------------------------------------------------------*/
+
+/* 2.1 Layout */
+#wrapper{
+    width:960px;
+    margin:0 auto; 
+    font-family:'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;
+    }
+#primary{width: 100%;}
+#content {margin:0;}
+#secondary {float: right;overflow: hidden;width: 200px;}
+#colophon {width: 100%;}
+
+/* 2.2 Navigation */
+#access{}
+
+/* 2.2.1 Drop-down menus */
+
+/* 2.3 Header */
+#site-title{font-size:300%;margin:0;font-weight:normal;font-family:Georgia, serif;}
+#site-description{color:#111;margin:0 0 1.5em 0;font-weight:bold;}
+    
+#index #branding{padding:0;}
+#index #site-title{font-size:500%;margin:50px auto 30px;font-weight:normal;text-align:center;}
+#index #site-description,#index #wrapper-features h3{font-size:197%; }
+#index p{}
+/* 2.4 Content */
+#content{padding:0 0 40px;}
+#content p,#content li{font-size:108%;}
+#pagify-example{
+    margin:60px auto;
+    display:block;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.296875) 0px 1px 3px;
+    }
+#find-us-on-facebook {margin:0 auto;display:block;}
+#wrapper-sign-in {text-align:center;margin:40px 0;}
+#sign-in{font-size:197%; padding:0 20px;color:#333;font-weight: bold;
+    text-shadow: white 0px 1px 0px;
+    }
+#fb-like-btn{display: inline-block;vertical-align: text-bottom;}
+#index p, #index li{line-height:1.66;}
+
+/* 2.5 Sidebar */
+#sidebar{overflow:hidden;margin:80px 0 0;}
+
+/* 2.6 Footer */
+#footer-nav ul{margin:20px auto;text-align:center;}
+#footer-nav ul li{display:inline;list-style: none;padding: 0px 15px 0px 0px;font-size:93%}
+.divider{color:#D0D0D0;}
+
+/*-------------------------------------------------------------------------------------------*/
+/* 6. ADMIN */
+/*-------------------------------------------------------------------------------------------*/
+
+/* 6.1 General */
+
+/* 2.1 Layout */
+//.admin{min-width:600px;}
+
+.admin #wrapper{width:100%;}
+.admin #site-title{font-size:200%; margin:8px 0 0 20px;}
+.admin #site-title a{}
+.menu{text-align:right;}
+.admin #content{width:90%;margin:30px 40px 0;padding:0;}
+.admin #site-description{display:none;}
+.admin #access ul li{display: inline;list-style-type: none;padding:0 20px 0 0;}
+.admin #access ul li a{color:#333;}
+
+
+#pages-list{margin:30px 0 0;} 
+.scroll-content-item{display:none;width:150px; float:left; margin: 0 40px 40px 0; text-align:center;}
+.scroll-content-item img{margin:15px 15px 0;width:100px;}
+.page-title{display:block;font-size:123.1%;font-weight:bold;margin:10px;}
+.upgrade{display:block;margin:0 0 15px 0;}
+
+#edit #left_column{width:200px;float:left;}
+#edit #right_column{width:540px;float:left;}
+
+#pagify-header{overflow: hidden;}
+#sb{position:relative;}
+#sb-widgets-menu{position:absolute;}
+
+.box_shadow {
+     -moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.296875); 
+  -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.296875); 
+          box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.296875); 
+}
+
+.boxer{
+  border: 1px solid #DDD;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.296875) 0px 1px 3px;
+  background-color: #ffffff;
+  background-image: -moz-linear-gradient(top, #ffffff, #f5f6f7); /* FF3.6 */
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(1, #f5f6f7)); /* Saf4+, Chrome */
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#f5f6f7'); /* IE6,IE7 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#f5f6f7')"; /* IE8 */
+}
+
+
+/* 2.2 Uploader */
+.uploadifyQueueItem {
+	font: 11px Verdana, Geneva, sans-serif;
+	border: 2px solid #E5E5E5;
+	background-color: #F5F5F5;
+	margin-top: 5px;
+	padding: 10px;
+	width: 350px;
+}
+.uploadifyError {
+	border: 2px solid #FBCBBC !important;
+	background-color: #FDE5DD !important;
+}
+.uploadifyQueueItem .cancel {
+	float: right;
+}
+.uploadifyProgress {
+	background-color: #FFFFFF;
+	border-top: 1px solid #808080;
+	border-left: 1px solid #808080;
+	border-right: 1px solid #C5C5C5;
+	border-bottom: 1px solid #C5C5C5;
+	margin-top: 10px;
+	width: 100%;
+}
+.uploadifyProgressBar {
+	background-color: #0099FF;
+	width: 1px;
+	height: 3px;
+}

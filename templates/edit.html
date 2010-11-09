@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}Edit - {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/cupertino/jquery-ui-1.8.5.custom.css">
+{% endblock %}
+{% block header %}
+{% include "inc.admin.header.title.html" %}
+{% endblock %}
+{% block body %}
+<h1>Edit</h1>
+<div id="edit" class="yui3-g">
+	<div class="yui3-u-3-4">
+	    <div id="left_column">
+	        <img src="{{page.picture}}">
+	        <ul>
+	            <li>Edit Page</li>
+	            <li>Promote with an Ad</li>
+	            <li>Add to My Page's Favorites</li>
+	            <li>Suggest to Friends</li>
+	        </ul>
+	        <p>
+	            Write something about {{page.name}}
+	        </p>
+	    </div>
+	    <div id="right_column">
+	        <h1>{{page.name}}</h1>
+	        <ul>
+	            <li>Pagify</li>
+	            <li>Wall</li>
+	            <li>Info</li>
+	            <li>Photos</li>
+	            <li>Discussions</li>
+	            <li>Reviews</li>
+	            <li>+</li>
+	        </ul>
+	        <!-- Image Header -->
+			<div id="pagify-header" class="ui-corner-all boxer">
+				<div id="pagify-image" style="width:500px;height:500px;background:url('{{page.header_image_url}}=s540') no-repeat";>
+				</div>
+			</div>
+			<!-- Widgets -->
+			<div id="widget-list">
+				{% for w in widgets %}
+				<div id="{{w.id}}">
+					<h3><a href="#">{{w.name}}</a></h3>
+					<div>Loading...</div>
+				</div>
+				{% endfor %}
+			</div>
+			<!-- Dialogs -->
+			<div id="upload-dialog" title="upload">
+	    	    <div id="fileQueue"></div>
+	            <input type="file" name="uploadify" id="uploadify" />
+	            <p><a href="javascript:jQuery('#uploadify').uploadifyClearQueue()">Cancel All Uploads</a></p>
+			</div>
+	    </div>
+	</div>
+	<div class="yui3-u-1-4">
+		<div id="sb">
+		    <h2>Install</h2>
+		    <ul>
+		        <li>Add Pagify app to your Page</li>
+		    </ul>
+		    <div id="sb-widgets-menu">
+		    	<h2>Widgets</h2>
+			    <ul>
+					<li id="wi-text" class="draggable ui-state-highlight">Text</li>
+			        <li id="wi-youtube" class="draggable ui-state-highlight">YouTube</li>
+					<li id="wi-flickr" class="draggable ui-state-highlight">Flickr</li>
+					<li id="wi-twitter" class="draggable ui-state-highlight">Twitter</li>
+			    </ul>
+		    </div>
+	</div>
+	</div>
+</div>
+<span id="page-id" class="hidden">{{page.id}}</span>
+{% endblock %}
+{% block foot %}
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script src="/static/js/jquery-ui-1.8.6.custom.min.js"></script>
+<script src="/static/js/jquery.uploadify.v2.1.3.min.js"></script>
+<script>
+$.ajaxSetup ({
+    // Disable caching of AJAX responses */
+    cache: false
+});
+$(document).ready(function() {
+	var scriptUrl = '{{upload_url}}';
+	$("#uploadify").uploadify({
+		'uploader'       : '/static/swf/uploadify.swf',
+		'script'         : scriptUrl,
+		'cancelImg'      : '/static/images/cancel.png',
+		'folder'         : '{{page_id}}',
+		'queueID'        : 'fileQueue',
+		'fileExt'        : '*.jpg;*.jpeg;*.png',
+		'fileDesc'       : 'Image Files',
+		'auto'           : true,
+		'multi'          : false,
+		'onError': function(event, queueID,fileOb,errorObj) {
+                       if(errorObj.type == 'HTTP' && errorObj.info == '302'){
+                          $(".uploadifyQueueItem").fadeOut(function() {
+                              $("#fileQueue").html('');
+							  // Grab new script url
+							  $.get("/api/scripturl", function(data){scriptUrl=data;});
+							  //Refresh Picture
+							  $.get("/api/headerimageurl", { p: "{{page.id}}"},function(data){$("#pagify-image").css('background-image','url('+data+'=s540)');});
+                          });
+                          return false;   
+                       } else {$.get("/api/scripturl", function(data){scriptUrl=data;});}
+                    }
+	});
+});
+</script>
+{% endblock %}

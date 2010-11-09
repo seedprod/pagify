@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Upgrade - {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/cupertino/jquery-ui-1.8.5.custom.css">
+{% endblock %}
+{% block header %}
+{% include "inc.admin.header.title.html" %}
+{% endblock %}
+{% block body %}
+<h1>Upgrade</h1>
+<ul id="upgrade-list" class="">
+    {% for p in pages %}
+        <li><img src="{{p.picture}}">{{p.name}} <input type="checkbox" id="{{p.id}}" class="btn-upgrade" /><label for="{{p.id}}">Upgrade</label></li>
+	{% endfor %}
+</ul>
+<p><a href="{{subscribe_url}}">Subscribe</a></p>
+{% endblock %}
+{% block foot %}
+<script src="/static/js/jquery-ui-1.8.6.custom.min.js"></script>
+{% endblock %}
