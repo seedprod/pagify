@@ -171,7 +171,20 @@ default:
         	        log('Saved');
         	    };
         	});//end ajax request
-        });
+        }); // end sort
+        
+        // Delete update
+        $( ".btn-delete" ).bind( "click", function(event, ui) {
+            var wId = $(this).parents('div').attr('id');
+            $('#'+wId).fadeOut(function() {
+            $.post("/api/deletewidget", { wid: wId},function(data){
+        	    if(data){
+        	        log('Saved');
+        	    };
+        	});//end ajax request
+        	});//end fadeout
+        }); // end delete
+            
     });
 }
 

@@ -42,7 +42,7 @@
 			<div id="widget-list">
 				{% for w in widgets %}
 				<div id="{{w.id}}">
-					<h3><a href="#">{{w.name}}</a></h3>
+					<h3><a href="#">{{w.name}}</a><button class="btn-delete">Delete</button></h3>
 					<div>Loading...</div>
 				</div>
 				{% endfor %}
