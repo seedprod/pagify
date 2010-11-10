@@ -1,6 +1,7 @@
 indexes:
 - kind: Widget
   properties:
+  - name: deleted
   - name: page
   - name: order
   

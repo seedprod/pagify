@@ -191,7 +191,7 @@ class EditPageHandler(BaseHandler):
         for p in pages:
             if p.id == page_id:
                 page = p
-                widgets = Widget.all().filter('page =', page).order('order')
+                widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
                 admin = True
         if admin:
             #page = Page.get_by_key_name(str(page_id))
@@ -262,14 +262,26 @@ class AjaxApiHandler(BaseHandler):
         user =  self.current_user
         admin = False
         method = kwargs.get('method')
+        if method == 'deletewidget':
+            key_name = self.request.get("wid")
+            widget = Widget.get_by_key_name(key_name)
+            if widget:
+                widget.deleted = True
+            try:
+                db.put(widget)
+                self.response.out.write('True')
+            except:
+                self.response.out.write('False')
+                
         if method == 'savepageorder':
             page_order = self.request.get('pageorder')
             page_order = page_order.split(',')
             batch = []
             for k,v in enumerate(page_order):
                 widget = Widget.get_by_key_name(v)
-                widget.order = k
-                batch.append(widget)
+                if widget:
+                    widget.order = k
+                    batch.append(widget)
             try:
                 db.put(batch)
                 self.response.out.write('True')
