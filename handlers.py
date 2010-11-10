@@ -191,7 +191,7 @@ class EditPageHandler(BaseHandler):
         for p in pages:
             if p.id == page_id:
                 page = p
-                widgets = p.widgets.fetch(100)
+                widgets = Widget.all().filter('page =', page).order('order')
                 admin = True
         if admin:
             #page = Page.get_by_key_name(str(page_id))
