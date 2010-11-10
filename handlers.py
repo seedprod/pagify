@@ -269,6 +269,7 @@ class AjaxApiHandler(BaseHandler):
             widget = Widget.get_by_key_name(key_name)
             if widget:
                 widget.deleted = True
+                widget.last_modified_by = user
             try:
                 db.put(widget)
                 self.response.out.write('True')
@@ -283,6 +284,7 @@ class AjaxApiHandler(BaseHandler):
                 widget = Widget.get_by_key_name(v)
                 if widget:
                     widget.order = k
+                    widget.last_modified_by = user
                     batch.append(widget)
             try:
                 db.put(batch)
@@ -299,11 +301,13 @@ class AjaxApiHandler(BaseHandler):
                                 type = self.request.get('wtype'),
                                 name = self.request.get('wname'),
                                 page = page,
-                                contents = self.request.get('wcontents')
+                                contents = self.request.get('wcontents'),
+                                last_modified_by = user
                                )
             else:
                 widget.name = self.request.get('wname')
                 widget.contents = self.request.get('wcontents')
+                widget.last_modified_by = user
                 
             try:
                 db.put(widget)
