@@ -233,13 +233,15 @@ class AjaxApiHandler(BaseHandler):
             upload_url = blobstore.create_upload_url('/upload')
             self.response.out.write(upload_url)
         if method == 'headerimageurl':
-            pages = Page.get(user.pages)
-            page_id = self.request.get("p")
-            for p in pages:
-                if p.id == page_id:
-                    page = p
-                    admin = True
-            if admin:
+            #pages = Page.get(user.pages)
+            key_name = self.request.get("p")
+            #for p in pages:
+            #    if p.id == page_id:
+            #        page = p
+            #        admin = True
+            #if admin:
+            page = Page.get_by_key_name(key_name)
+            if page:
                 header_image_url = page.header_image_url
                 self.response.out.write(header_image_url)
             else:
