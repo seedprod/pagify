@@ -13,6 +13,7 @@ $('#{{widget.id}} textarea').blur(function() {
 	$.post("/api/savewidget", { wid: wId , wtype: wType , wname: wName, wcontents: wContents, pageid: pageId},function(data){
 	    if(data){
 	        log('Saved');
+	        $('#widget-list').trigger('sortupdate')
 	    };
 	});//end ajax request
 });

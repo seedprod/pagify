@@ -44,6 +44,7 @@ class Widget(db.Expando):
     name = db.StringProperty(required=True)
     order = db.IntegerProperty(default=0)
     page = db.ReferenceProperty(Page,collection_name='widgets')
+    deleted = db.BooleanProperty(default=False)
 
     
 class Option(db.Model):
