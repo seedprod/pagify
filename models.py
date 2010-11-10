@@ -42,7 +42,7 @@ class Widget(db.Expando):
     created = db.DateTimeProperty(auto_now_add=True)
     updated = db.DateTimeProperty(auto_now=True)
     name = db.StringProperty(required=True)
-    order = dbIntegerProperty(default=0)
+    order = db.IntegerProperty(default=0)
     page = db.ReferenceProperty(Page,collection_name='widgets')
 
     
@@ -52,4 +52,4 @@ class Option(db.Model):
     updated = db.DateTimeProperty(auto_now=True)
     name = db.StringProperty(required=True)
     value = db.StringProperty(required=True)
-    kind = db.ReferenceProperty()
+    type = db.ReferenceProperty()

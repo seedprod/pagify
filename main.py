@@ -38,7 +38,7 @@ debug = os.environ.get('SERVER_SOFTWARE', '').startswith('Dev')
 
 app = webapp.WSGIApplication([
     Route('/<page:(|privacy|terms)>', 'handlers.PageHandler', name='frontend-pages'),
-    Route('/api/<method:(scripturl|headerimageurl|getwidget|savewidget)>', 'handlers.AjaxApiHandler', name='api'),
+    Route('/api/<method:(scripturl|headerimageurl|getwidget|savewidget|savepageorder)>', 'handlers.AjaxApiHandler', name='api'),
     Route('/listen', 'handlers.ListenHandler', name='api'),
     Route('/dashboard', 'handlers.DashboardHandler', name='dashboard'),
     Route('/edit/page/<pageid:\d+>', 'handlers.EditPageHandler', name='edit-page'),

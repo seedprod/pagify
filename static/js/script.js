@@ -31,7 +31,6 @@ case "/dashboard":
             }
         });
         $(".scroll-content-item").each(function (i) {
-           log(postMaxHeight);
            $(this).css({'height':postMaxHeight+'px','display':'block'});
         });  
     });
@@ -160,9 +159,18 @@ default:
 	    
 	    // Sort update
 	    $( "#widget-list" ).bind( "sortupdate", function(event, ui) {
+	        var pageOrder = '';
             $("#widget-list > div").each(function(index) {
-                $(this).attr('id');
+                if (pageOrder != ''){
+                    pageOrder = pageOrder + ',';
+                }
+                pageOrder = pageOrder + $(this).attr('id');
             });
+            $.post("/api/savepageorder", { pageorder: pageOrder},function(data){
+        	    if(data){
+        	        log('Saved');
+        	    };
+        	});//end ajax request
         });
     });
 }
