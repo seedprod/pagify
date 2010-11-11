@@ -38,12 +38,14 @@
 				<div id="pagify-image" style="width:500px;height:500px;background:url('{{page.header_image_url}}=s540') no-repeat";>
 				</div>
 			</div>
+			
 			<!-- Widgets -->
 			<div id="widget-list">
 				{% for w in widgets %}
-				<div id="{{w.id}}">
-					<h3><a href="#">{{w.name}}</a><button class="btn-delete">Delete</button></h3>
+				<div id="{{w.id}}" class="widget-list-item">
+					<h3><a href="#" class="inline-edit">{{w.name}}</a><button class="btn-delete">Delete</button></h3>
 					<div>Loading...</div>
+					<span class="hidden wtype">{{w.type}}</span>
 				</div>
 				{% endfor %}
 			</div>

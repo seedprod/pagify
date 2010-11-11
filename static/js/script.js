@@ -118,7 +118,7 @@ default:
 			   //get widget content
 			   $.get("/api/getwidget", {wid:wId, wtype: wType},function(data){
 			       wContents = data
-			       $('#widget-list #' + wType).replaceWith('<div id="'+wId+'"><h3><a href="#">'+wName+'</a></h3><div>'+wContents+'</div></div>');
+			       $('#widget-list #' + wType).replaceWith('<div id="'+wId+'" class="widget-list-item"><h3><a href="#" class="inline-edit">'+wName+'</a></h3><div>'+wContents+'</div><span class="hidden wtype">'+wType.replace(/wi-/g,'')+'</span></div>');
 			       var stop = false;
       				$( "#widget-list h3" ).click(function( event ) {
       					if ( stop ) {
@@ -184,11 +184,43 @@ default:
         	});//end ajax request
         	});//end fadeout
         }); // end delete
-            
+        
+        // Make Title editable
+        $('.inline-edit').live("click", function(event, ui) {
+            var oldVal = $(this).text();
+            $(this).replaceWith("<input type='text' class='inline-text' value='" + oldVal + "'/>");
+            $('.inline-text').focus();
+            $('.inline-text').bind("blur", function(event, ui) {
+                var oldVal = $(this).val();
+                var id = $(this).parents('div').attr('id');log(id);
+                $(this).replaceWith("<a href='#' class='inline-edit'>" + oldVal + "</a>");
+                saveWidget(id);
+            });
+        }); // end editable
+
+
     });
 }
 
 // Functions
+
+//Save Widget
+function saveWidget(id){
+	var wId = id;
+	var wType = $('#'+id+' .wtype').text();
+	var wName = $('#'+id+' .inline-edit').text();
+	var wContents = $('#'+id+' textarea').val();
+	var pageId = $("#page-id").html();  
+	if(wId!=''){
+	$.post("/api/savewidget", { wid: wId , wtype: wType , wname: wName, wcontents: wContents, pageid: pageId},function(data){
+	    if(data){
+	        log('Saved');
+	        $('#widget-list').trigger('sortupdate')
+	    };
+	});//end ajax request
+    }
+}
+
 function getParameterByName( name )
 {
   name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
