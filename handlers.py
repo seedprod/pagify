@@ -309,8 +309,10 @@ class AjaxApiHandler(BaseHandler):
                 widget.name = self.request.get('wname')
                 widget.contents = self.request.get('wcontents')
                 widget.last_modified_by = user
-                #logging.info(simplejson.loads(self.request.get('wcontents'));
-                
+                fields = simplejson.loads(self.request.get('wcontents'))
+                for k,v in fields.iteritems():
+                    setattr(widget, k, v)
+            
             try:
                 db.put(widget)
                 self.response.out.write('True')
