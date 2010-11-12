@@ -19,6 +19,7 @@ from google.appengine.api import urlfetch
 from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.webapp import template
 from google.appengine.runtime.apiproxy_errors import CapabilityDisabledError
+from django.utils import simplejson
 
 
 # Import Webapp2
@@ -308,6 +309,7 @@ class AjaxApiHandler(BaseHandler):
                 widget.name = self.request.get('wname')
                 widget.contents = self.request.get('wcontents')
                 widget.last_modified_by = user
+                #logging.info(simplejson.loads(self.request.get('wcontents'));
                 
             try:
                 db.put(widget)

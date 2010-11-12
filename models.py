@@ -36,7 +36,7 @@ class UploadedFiles(db.Model):
 #    user = db.ReferenceProperty(User) 
 #    page = db.ReferenceProperty(Page)
 
-class Widget(db.Model):
+class Widget(db.Expando):
     id = db.StringProperty(required=True)
     type = db.StringProperty(required=True)
     created = db.DateTimeProperty(auto_now_add=True)
@@ -46,7 +46,6 @@ class Widget(db.Model):
     page = db.ReferenceProperty(Page,collection_name='widgets')
     last_modified_by = db.ReferenceProperty(User)
     deleted = db.BooleanProperty(default=False)
-    contents= db.TextProperty()
 
     
 class Option(db.Model):

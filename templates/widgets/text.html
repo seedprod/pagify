@@ -1,9 +1,9 @@
-<textarea name="html" rows="2" cols="20" class="{{widget.id}}">
-{{widget.contents|default:"Oh Yeah me"}}
-</textarea>
+<form id="fm-{{widget.id}}">
+<textarea name="html" class="{{widget.id}}">{{widget.contents|default:"Oh Yeah me"}}</textarea>
+</form>
 
 <script>
-$('#{{widget.id}} textarea').bind("blur",function() { 
+$('.{{widget.id}}').bind("blur",function() { 
 	saveWidget('{{widget.id}}');
 });
 

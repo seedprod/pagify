@@ -209,7 +209,11 @@ function saveWidget(id){
 	var wId = id;
 	var wType = $('#'+id+' .wtype').text();
 	var wName = $('#'+id+' .inline-edit').text();
-	var wContents = $('#'+id+' textarea').val();
+	var params = {};
+    $.each($("#fm-"+id).serializeArray(), function(index,value) {
+    params[value.name] = value.value;
+    });
+	var wContents = $.toJSON(params);
 	var pageId = $("#page-id").html();  
 	if(wId!=''){
 	$.post("/api/savewidget", { wid: wId , wtype: wType , wname: wName, wcontents: wContents, pageid: pageId},function(data){
