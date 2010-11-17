@@ -9,29 +9,33 @@
 {% block body %}
 <h1>Edit</h1>
 <div id="edit" class="yui3-g">
-	<div class="yui3-u-3-4">
-	    <div id="left_column">
+	<div id="fb-wrapper" class="yui3-u-3-4">
+		<div id="fb-profile">
+	    <div id="fb-left-column">
 	        <img src="{{page.picture}}">
-	        <ul>
+	        <ul id="fb-admin-menu">
 	            <li>Edit Page</li>
 	            <li>Promote with an Ad</li>
 	            <li>Add to My Page's Favorites</li>
 	            <li>Suggest to Friends</li>
 	        </ul>
-	        <p>
+	        <p id="fb-write-something">
 	            Write something about {{page.name}}
 	        </p>
 	    </div>
-	    <div id="right_column">
-	        <h1>{{page.name}}</h1>
-	        <ul>
-	            <li>Pagify</li>
+	    <div id="fb-right-column">
+		    
+	        <h1 id="fb-title">{{page.name}}</h1>
+	        <img id="fb-like" src="/static/images/fb-like.png">
+	        <ul id="fb-tabs" class="clearfix">
+	            
 	            <li>Wall</li>
 	            <li>Info</li>
+	            <li class="fb-tab_active">Welcome!</li>
 	            <li>Photos</li>
 	            <li>Discussions</li>
 	            <li>Reviews</li>
-	            <li>+</li>
+	            <li id="fb-plus"></li>
 	        </ul>
 	        <!-- Image Header -->
 			<div id="pagify-header" class="ui-corner-all boxer">
@@ -56,6 +60,7 @@
 	            <p><a href="javascript:jQuery('#uploadify').uploadifyClearQueue()">Cancel All Uploads</a></p>
 			</div>
 	    </div>
+		</div>
 	</div>
 	<div class="yui3-u-1-4">
 		<div id="sb" >
