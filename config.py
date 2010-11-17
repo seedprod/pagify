@@ -14,14 +14,14 @@ config['facebook'] = {
 
 config['google'] = {
     'api_key': 'AIzaSyBWk2VmSTr0NZEcYvE7o11A7Rkl4gRF-LY',
-    'jquery_version': '1.4.3',
+    'jquery_version': '1.4.4',
 }
 
 config['spreedly'] = {
     'api_version': '4',
     'api_key': 'fe6f8493ee741d99708072645be6de0e5e06f0c9',
     'site_name': 'pagify-test',
-    'plan_id': '4791',
+    'plans': {"plus-1":"8023","plus-2":"8024","plus-3":"8025","plus-4":"8026","plus-5":"8027"}
 }
 
 config['extras.sessions'] = {

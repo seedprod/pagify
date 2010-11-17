@@ -10,11 +10,21 @@
 <h1>Upgrade</h1>
 <ul id="upgrade-list" class="">
     {% for p in pages %}
-        <li><img src="{{p.picture}}">{{p.name}} <input type="checkbox" id="{{p.id}}" class="btn-upgrade" /><label for="{{p.id}}">Upgrade</label></li>
+        <li><img src="{{p.picture}}">{{p.name}} <input type="checkbox" id="{{p.id}}" class="btn-upgrade" {% ifequal p.id page_id %}checked{% endifequal %}/><label for="{{p.id}}">Upgrade</label></li>
 	{% endfor %}
 </ul>
 <p><a href="{{subscribe_url}}">Subscribe</a></p>
 {% endblock %}
 {% block foot %}
 <script src="/static/js/jquery-ui-1.8.6.custom.min.js"></script>
+<script>
+var plans = "{{plans}}";
+plans = plans.split(',');
+var plansArr= new Array();
+$.each(plans, function(index, value) { 
+  val = value.split(":");
+  plansArr[parseInt(val[0])]= parseInt(val[1]);
+});
+
+</script>
 {% endblock %}

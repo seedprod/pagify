@@ -194,6 +194,7 @@ class EditPageHandler(BaseHandler):
                 page = p
                 widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
                 admin = True
+        page.picture = page.picture.replace("_s","_n")
         if admin:
             #page = Page.get_by_key_name(str(page_id))
             upload_url = blobstore.create_upload_url('/upload')
@@ -217,12 +218,21 @@ class UpgradeHandler(BaseHandler):
     @fblogin_required
     def get(self, **kwargs):  
         user =  self.current_user
-        page_id = self.request.get("p")
-        subscribe_url = 'https://spreedly.com/%s/subscribers/%s/subscribe/%s/%s' % (self.get_config('spreedly','site_name'),user.id, self.get_config('spreedly','plan_id'),urllib.quote(user.name))
-        return_url = '?return_url=' + urllib.quote(self.get_config('site','url') + '/dashboard' + '?s=1&p=' + page_id)
-        subscribe_url = subscribe_url + return_url
         pages = Page.get(user.pages)
-        self.render("upgrade.html", admin=True, subscribe_url=subscribe_url,pages=pages)
+        page_id = self.request.get("p")
+        plans = self.get_config('spreedly','plans')
+        try:
+            dom = minidom.parseString(self.current_user.subscriber_info)
+            token = dom.getElementsByTagName('token')[0].firstChild.data
+            subscribe_url = 'https://spreedly.com/%s/subscribers/%s/%s/subscribe/%s' % (self.get_config('spreedly','site_name'),user.id,token,'${plan_id}')
+        except:
+            subscribe_url = 'https://spreedly.com/%s/subscribers/%s/subscribe/%s/%s' % (self.get_config('spreedly','site_name'),user.id,'${plan_id}',urllib.quote(user.name))
+        
+        return_url = '?return_url=' + urllib.quote(self.get_config('site','url') + '/dashboard' + '?s=1&p=') + '${page_ids}'
+        subscribe_url = subscribe_url + return_url
+        
+        
+        self.render("upgrade.html", admin=True, subscribe_url=subscribe_url,pages=pages, page_id=page_id, plans=plans)
         
 class AjaxApiHandler(BaseHandler):
     @fblogin_required

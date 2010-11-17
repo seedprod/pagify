@@ -165,7 +165,8 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-de
     
 #index #branding{padding:0;}
 #index #site-title{font-size:500%;margin:50px auto 30px;font-weight:normal;text-align:center;}
-#index #site-description,#index #wrapper-features h3{font-size:197%; }
+#index #site-description{font-size:197%;text-align:center; }
+#index #wrapper-features h3{font-size:197%;}
 #index p{}
 /* 2.4 Content */
 #content{padding:0 0 40px;}
@@ -177,7 +178,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-de
     }
 #find-us-on-facebook {margin:0 auto;display:block;}
 #wrapper-sign-in {text-align:center;margin:40px 0;}
-#sign-in{font-size:197%; padding:0 20px;color:#333;font-weight: bold;
+#sign-in{font-size:138.5%; padding:0 20px;color:#333;font-weight: bold;
     text-shadow: white 0px 1px 0px;
     }
 #fb-like-btn{display: inline-block;vertical-align: text-bottom;}
@@ -208,6 +209,9 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-de
 .admin #site-description{display:none;}
 .admin #access ul li{display: inline;list-style-type: none;padding:0 20px 0 0;}
 .admin #access ul li a{color:#333;}
+
+.widget {margin:0 0 20px 0;width:220px;}
+.widget h2{margin:0;padding:5px;font-size:138.5%;}
 
 
 #pages-list{margin:30px 0 0;} 

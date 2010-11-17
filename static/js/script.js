@@ -52,8 +52,8 @@ default:
 		//Scrolll Widgets
 		$(window).scroll(function()
 		{
-    		if($(window).scrollTop() == 0){
-    		    $('#sb-widgets-menu').animate({top:220+"px" },{queue: false, duration: 500});
+    		if($(window).scrollTop() < 100){
+    		    $('#sb-widgets-menu').animate({top:115+"px" },{queue: false, duration: 500});
     		}else{
     		    $('#sb-widgets-menu').animate({top:$(window).scrollTop()+50+"px" },{queue: false, duration: 500});
     		}

@@ -11,7 +11,6 @@ class User(db.Model):
     access_token = db.StringProperty(required=True)
     pages = db.ListProperty(db.Key)
     subscriber_info = db.TextProperty()
-    options = db.TextProperty()
     
 class Page(db.Model):
     id = db.StringProperty(required=True)
@@ -23,8 +22,9 @@ class Page(db.Model):
     picture = db.StringProperty()
     fan_count = db.StringProperty()
     has_added_app = db.BooleanProperty()
-    plan = db.StringProperty(choices=('free','plus'), default='free')
+    upgraded = db.StringProperty(default='0')
     header_image_url = db.StringProperty()
+    owner = db.ReferenceProperty(User)
     
 class UploadedFiles(db.Model):
     blob = blobstore.BlobReferenceProperty(required=True)
