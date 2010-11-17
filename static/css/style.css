@@ -224,7 +224,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-de
 #fb-profile{background:transparent url('/static/images/fb-bg.png') repeat-x;height:150px;}
 #fb-left-column{width:200px;float:left;text-shadow:none;margin: 20px 0 0 20px;}
 #fb-right-column{width:540px;float:left;text-shadow:none;position:relative;}
-#fb-title{font-size:123.1%; font-weight:bold;margin:26px 0 10px 0;display:inline-block;}
+#fb-title{font-size:123.1%; font-weight:bold;margin:25px 0 10px 0;display:inline-block;}
 #fb-like{margin:0 0 -5px 10px;}
 #fb-tabs{width: 100%;margin:0;}
 #fb-plus{background: url(http://static.ak.fbcdn.net/rsrc.php/zT/r/gwiXNnyPhyg.gif) no-repeat;
@@ -232,9 +232,22 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-de
     padding-right: 0px !important;
     width: 25px;
      }
-#fb-tabs li{background-color: #D8DFEA;float: left;margin: 0px 2px 0px 0px;overflow: hidden;position: relative;color:#3B5998;font-weight: bold;font-size:100%;font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+#fb-tabs li{background-color: #D8DFEA;
+    float: left;margin: 0px 2px 0px 0px;
+    overflow: hidden;position: relative;
+    color:#3B5998;
+    font-weight: bold;
+    font-size:100%;
+    font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+    border-bottom: 1px solid #D8DFEA;
 padding:3px 11px;
 margin:0 2px 0 0;
+}
+.fb-tab-active{
+background-color: #fff !important;
+border:1px #D8DFEA solid !important;
+color: #333 !important;
+border-bottom:1px #fff solid !important;
 }
 #fb-write-something{
     color:#000;
