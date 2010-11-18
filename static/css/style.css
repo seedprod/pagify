@@ -71,7 +71,9 @@ body {line-height:1.22;}
 
 /* 1.1 Defaults */
 html {-webkit-font-smoothing: antialiased;background:#fff;}
-body, select, input, textarea { color:#888;text-shadow: white 0px 1px 0px; }
+body, select, input, textarea { color:#888;
+    /*text-shadow: white 0px 1px 0px; */
+    }
 h1,h2,h3,h4,h5,h6{color:#333;}
 h1,h2,h3,h4,h5,h6{font-weight:bold;}
 h1{font-size:197%;}
@@ -170,7 +172,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-de
 #index p{}
 /* 2.4 Content */
 #content{padding:0 0 40px;}
-#content p,#content li{font-size:108%;}
+#index p,#index li{font-size:108%;}
 #pagify-example{
     margin:60px auto;
     display:block;
@@ -212,7 +214,15 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-de
 
 .widget {margin:0 0 20px 20px;width:220px;}
 .widget h2{margin:0;padding:5px;font-size:138.5%;}
-.widget-list-item{margin:0 0 10px 0;}
+#widget-list{margin:0 0 20px 0;}
+.widget-list-item{margin:0;}
+.wheader{display:block;}
+.wheader h3 {margin:0;display:inline;}
+.wheader h3 a{display:inline !important;}
+.widget > div{padding:5px;}
+#sb-widgets-menu ul,#sb-install ul{margin:0;}
+#sb-install li{list-style-type: none;}
+#sb-widgets-menu li{list-style-type: none; padding:3px;margin:5px 0 0;cursor: move;}
 
 #pages-list{margin:30px 0 0;} 
 .scroll-content-item{display:none;width:150px; float:left; margin: 0 40px 40px 0; text-align:center;}
@@ -221,7 +231,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-de
 .upgrade{display:block;margin:0 0 15px 0;}
 
 #fb-wrapper{border: 1px solid #CCC;width:796px;}
-#fb-profile{background:transparent url('/static/images/fb-bg.png') repeat-x;height:150px;}
+#fb-profile{background:transparent url('/static/images/fb-bg.png') repeat-x;height:80px;}
 #fb-left-column{width:200px;float:left;text-shadow:none;margin: 20px 0 0 20px;}
 #fb-right-column{width:540px;float:left;text-shadow:none;position:relative;}
 #fb-title{font-size:123.1%; font-weight:bold;margin:25px 0 10px 0;display:inline-block;}
@@ -272,6 +282,8 @@ border-bottom:1px #fff solid !important;
 #pagify-image{}
 #sb{position:relative;}
 #sb-widgets-menu{position:absolute;}
+
+
 .inset_shadow {
    -moz-box-shadow:inset 0 0 10px #333;
    -webkit-box-shadow:inset 0 0 10px #333;

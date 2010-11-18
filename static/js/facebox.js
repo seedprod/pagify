@@ -3,7 +3,7 @@
  * version: 1.2 (05/05/2008)
  * @requires jQuery v1.2 or later
  *
- * Examples at http://famspam.com/facebox/
+ * Examples at http://famspam.com/static/images/
  *
  * Licensed under the MIT:
  *   http://www.opensource.org/licenses/mit-license.php
@@ -79,8 +79,8 @@
     settings: {
       opacity      : 0,
       overlay      : true,
-      loadingImage : '/facebox/loading.gif',
-      closeImage   : '/facebox/closelabel.gif',
+      loadingImage : '/static/images/loading.gif',
+      closeImage   : '/static/images/closelabel.gif',
       imageTypes   : [ 'png', 'jpg', 'jpeg', 'gif' ],
       faceboxHtml  : '\
     <div id="facebox" style="display:none;"> \
@@ -97,7 +97,7 @@
                 </div> \
                 <div class="footer"> \
                   <a href="#" class="close"> \
-                    <img src="/facebox/closelabel.gif" title="close" class="close_image" /> \
+                    <img src="/static/images/closelabel.gif" title="close" class="close_image" /> \
                   </a> \
                 </div> \
               </td> \

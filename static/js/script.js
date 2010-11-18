@@ -80,7 +80,7 @@ default:
 		});
         // Prepare Widget List for accordian and sortable
         var stop = false;
-		$( "#widget-list h3" ).click(function( event ) {
+		$( "#widget-list .wheader" ).click(function( event ) {
 			if ( stop ) {
 				event.stopImmediatePropagation();
 				event.preventDefault();
@@ -89,12 +89,12 @@ default:
 		});
 		$( "#widget-list" )
 			.accordion({
-				header: "> div > h3",
+				header: "> div > .wheader",
 				autoHeight: false
 			})
 			.sortable({
 				axis: "y",
-				handle: "h3",
+				handle: ".wheader",
 				placeholder: "ui-state-highlight",
 				forcePlaceholderSize:true,
 				stop: function() {
@@ -118,9 +118,9 @@ default:
 			   //get widget content
 			   $.get("/api/getwidget", {wid:wId, wtype: wType},function(data){
 			       wContents = data
-			       $('#widget-list #' + wType).replaceWith('<div id="'+wId+'" class="widget-list-item"><h3><a href="#" class="inline-edit">'+wName+'</a></h3><div>'+wContents+'</div><span class="hidden wtype">'+wType.replace(/wi-/g,'')+'</span></div>');
+			       $('#widget-list #' + wType).replaceWith('<div id="'+wId+'" class="widget-list-item"><span class="wheader"><h3><a href="#" class="inline-edit">'+wName+'</a></h3></span><div>'+wContents+'</div><span class="hidden wtype">'+wType.replace(/wi-/g,'')+'</span></div>');
 			       var stop = false;
-      				$( "#widget-list h3" ).click(function( event ) {
+      				$( "#widget-list .wheader" ).click(function( event ) {
       					if ( stop ) {
       						event.stopImmediatePropagation();
       						event.preventDefault();
@@ -128,12 +128,12 @@ default:
       					}
       				});
    				    $( "#widget-list" ).accordion('destroy').accordion({
-   						header: "> div > h3",
+   						header: "> div > .wheader",
    						autoHeight: false
    					})
    					.sortable({
    						axis: "y",
-   						handle: "h3",
+   						handle: ".wheader",
    						stop: function() {
    							stop = true;
    						}
@@ -186,7 +186,7 @@ default:
         }); // end delete
         
         // Make Title editable
-        $('.inline-edit').live("click", function(event, ui) {
+        $('.inline-edit').live("dblclick", function(event, ui) {
             var oldVal = $(this).text();
             $(this).replaceWith("<input type='text' class='inline-text' value='" + oldVal + "'/>");
             $('.inline-text').focus();
@@ -196,6 +196,15 @@ default:
                 $(this).replaceWith("<a href='#' class='inline-edit'>" + oldVal + "</a>");
                 saveWidget(id);
             });
+            $('.inline-text').bind('keydown', function(e) {
+                    if(e.keyCode==13){
+                           var oldVal = $(this).val();
+                           var id = $(this).parents('div').attr('id');log(id);
+                           $(this).replaceWith("<a href='#' class='inline-edit'>" + oldVal + "</a>");
+                           saveWidget(id);
+                    }
+            });
+            
         }); // end editable
 
 

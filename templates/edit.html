@@ -2,6 +2,8 @@
 {% block title %}Edit - {% endblock %}
 {% block head %}
 <link rel="stylesheet" href="/static/css/cupertino/jquery-ui-1.8.5.custom.css">
+<link rel="stylesheet" href="/static/css/tipsy.css">
+<link rel="stylesheet" href="/static/css/facebox.css">
 {% endblock %}
 {% block header %}
 {% include "inc.admin.header.title.html" %}
@@ -24,7 +26,7 @@
 	        </p>
 	    </div>
 	    <div id="fb-right-column">
-		    
+		    <div id="fb-header-wrapper">
 	        <h1 id="fb-title">{{page.name}}</h1>
 	        <img id="fb-like" src="/static/images/fb-like.png">
 	        <ul id="fb-tabs" class="clearfix">
@@ -37,6 +39,7 @@
 	            <li>Reviews</li>
 	            <li id="fb-plus"></li>
 	        </ul>
+	        </div>
 	        <!-- Image Header -->
 			<div id="pagify-header" class="ui-corner-all boxer">
 				<div id="pagify-image" style="width:500px;height:500px;background:url('{{page.header_image_url}}=s540') no-repeat";>
@@ -47,7 +50,10 @@
 			<div id="widget-list">
 				{% for w in widgets %}
 				<div id="{{w.id}}" class="widget-list-item">
-					<h3><a href="#" class="inline-edit">{{w.name}}</a><button class="btn-delete">Delete</button></h3>
+					<span class="wheader">
+					<h3><a href="#" class="inline-edit">{{w.name}}</a></h3>
+					<button class="btn-delete">Delete</button>
+					</span>
 					<div>Loading...</div>
 					<span class="hidden wtype">{{w.type}}</span>
 				</div>
@@ -65,26 +71,30 @@
 	<div class="yui3-u-1-4">
 		<div id="sb" >
 		    <div id="sb-install" class="widget">
-		    <h2 class="ui-widget-header ui-corner-tl ui-corner-tr">Install</h2>
+		    <h2 class="ui-widget-header ui-corner-tl ui-corner-tr">Settings</h2>
 		    <div class="ui-widget-content ui-corner-bl ui-corner-br">
 		    <ul>
-		        <li>Add Pagify app to your Page</li>
+		        <li><a href="#fbox-install" rel="facebox">Add Pagify app to your Page</a></li>
 		    </ul>
 		    </div>
 		    </div>
 		    <div id="sb-widgets-menu" class="widget">
 		    	<h2 class="ui-widget-header ui-corner-tl ui-corner-tr">Widgets</h2>
 		    	<div class="ui-widget-content ui-corner-bl ui-corner-br">
+			    <p>You can drag & drop any of these widgets onto your page.</p>
 			    <ul>
-					<li id="wi-text" class="draggable ui-state-highlight">Text</li>
-			        <li id="wi-youtube" class="draggable ui-state-highlight">YouTube</li>
-					<li id="wi-flickr" class="draggable ui-state-highlight">Flickr</li>
-					<li id="wi-twitter" class="draggable ui-state-highlight">Twitter</li>
+					<li id="wi-text" class="draggable ui-state-highlight ui-corner-all">Text</li>
+			        <li id="wi-youtube" class="draggable ui-state-highlight ui-corner-all">YouTube</li>
+					<li id="wi-flickr" class="draggable ui-state-highlight ui-corner-all">Flickr</li>
+					<li id="wi-twitter" class="draggable ui-state-highlight ui-corner-all">Twitter</li>
 			    </ul>
 			    </div>
 		    </div>
 	</div>
 	</div>
+</div>
+<div id="fbox-install" style="display:none;">
+    <p>Install instructions.</p>
 </div>
 <span id="page-id" class="hidden">{{page.id}}</span>
 {% endblock %}
@@ -93,13 +103,20 @@
 <script src="/static/js/jquery-ui-1.8.6.custom.min.js"></script>
 <script src="/static/js/jquery.uploadify.v2.1.3.min.js"></script>
 <script src="/static/js/jquery.json-2.2.min.js"></script>
-
+<script src="/static/js/jquery.tipsy.js"></script>
+<script src="/static/js/facebox.js"></script>
 <script>
 $.ajaxSetup ({
     // Disable caching of AJAX responses */
     cache: false
 });
 $(document).ready(function() {
+	// Facebox
+	$.facebox.settings.opacity = 0.2;
+	$('a[rel*=facebox]').facebox();
+	// Tooltips
+	$('#fb-header-wrapper,#fb-left-column').tipsy({gravity: 's',fade: true,fallback: "This is just a test Facebook page so you can get an idea of what your page will look like. None of the tabs or buttons works."});
+	// Uploadify
 	var scriptUrl = '{{upload_url}}';
 	$("#uploadify").uploadify({
 		'uploader'       : '/static/swf/uploadify.swf',
