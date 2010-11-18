@@ -43,6 +43,8 @@ case "/upgrade":
   break;
 default:
     $(document).ready(function() {
+        //Globals
+        wDeleteId = '';
         // Header
         $("#pagify-image").draggable();
 		$("#pagify-header").resizable({handles: 's',alsoResize: "#pagify-image"});
@@ -174,15 +176,32 @@ default:
         }); // end sort
         
         // Delete update
+        $( "#dialog-delete-confirm" ).dialog({
+                    autoOpen: false,
+        			resizable: false,
+        			draggable:false,
+        			modal: true,
+        			buttons: {
+        				"Delete Widget": function() {
+        					$( this ).dialog( "close" );
+        					$('#'+wDeleteId).fadeOut(function() {
+                            $.post("/api/deletewidget", { wid: wDeleteId},function(data){
+                        	    if(data){
+                        	        log('Saved');
+                        	        wDeleteId = '';
+                        	    };
+                        	});//end ajax request
+                        	});//end fadeout
+        				},
+        				Cancel: function() {
+        					$( this ).dialog( "close" );
+        					wDeleteId = '';
+        				}
+        			}
+        		});
         $( ".btn-delete" ).bind( "click", function(event, ui) {
-            var wId = $(this).parents('div').attr('id');
-            $('#'+wId).fadeOut(function() {
-            $.post("/api/deletewidget", { wid: wId},function(data){
-        	    if(data){
-        	        log('Saved');
-        	    };
-        	});//end ajax request
-        	});//end fadeout
+            wDeleteId = $(this).parents('div').attr('id');
+            $( "#dialog-delete-confirm" ).dialog( "open" );
         }); // end delete
         
         // Make Title editable

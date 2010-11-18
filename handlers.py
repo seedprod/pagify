@@ -188,13 +188,16 @@ class EditPageHandler(BaseHandler):
         admin = False 
         user =  self.current_user  
         page_id = kwargs.get('pageid')
-        pages = Page.get(user.pages)
-        for p in pages:
-            if p.id == page_id:
-                page = p
-                widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
-                admin = True
-        page.picture = page.picture.replace("_s","_n")
+        try:
+            pages = Page.get(user.pages)
+            for p in pages:
+                if p.id == page_id:
+                    page = p
+                    widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
+                    admin = True
+            page.picture = page.picture.replace("_s","_n")
+        except:
+            pages = None
         if admin:
             #page = Page.get_by_key_name(str(page_id))
             upload_url = blobstore.create_upload_url('/upload')
