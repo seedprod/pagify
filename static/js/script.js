@@ -103,11 +103,14 @@ default:
 					stop = true;
 				}
 			});
+		// override accordian keydown events
+		$(".wheader").unbind('keydown');
 		$( ".draggable" ).draggable({
 			connectToSortable: "#widget-list",
 			helper: "clone",
 			revert: "invalid"
 		});
+
 		$( "ul, li" ).disableSelection();
 		// After dragged and dropped destroy and recreate accordian
 		$( ".draggable" ).draggable({
@@ -140,6 +143,7 @@ default:
    							stop = true;
    						}
    					});
+   					$(".wheader").unbind('keydown');
 			   });//end ajax request
                	
 			   } // end if
