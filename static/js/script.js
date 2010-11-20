@@ -44,13 +44,13 @@ case "/upgrade":
 default:
     $(document).ready(function() {
         //Globals
-        wDeleteId = '';
+        var wDeleteId = '';
         // Header
-        $("#pagify-image").draggable();
-		$("#pagify-header").resizable({handles: 's',alsoResize: "#pagify-image"});
-		$( "#pagify-header" ).bind( "resizestop", function(event, ui) {
-				$( "#widget-list" ).sortable( "refresh" );
-		});
+        //$("#pagify-image").draggable();
+		//$("#pagify-header").resizable({handles: 's',alsoResize: "#pagify-image"});
+		//$( "#pagify-header" ).bind( "resizestop", function(event, ui) {
+		//		$( "#widget-list" ).sortable( "refresh" );
+		//});
 		//Scrolll Widgets
 		$(window).scroll(function()
 		{
@@ -71,12 +71,12 @@ default:
 						$(".ui-dialog").position({
 						       my: 'right',
 						       at: 'right',
-						       of: "#pagify-header"
+						       of: "#pagify-image"
 						    });
 				}
 		});
 
-		$( "#pagify-header" ).click(function() {
+		$( "#pagify-image" ).click(function() {
 			$( "#upload-dialog" ).dialog( "open" );
 			return false;
 		});

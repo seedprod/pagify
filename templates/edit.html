@@ -41,10 +41,11 @@
 	        </ul>
 	        </div>
 	        <!-- Image Header -->
-			<div id="pagify-header" class="ui-corner-all boxer">
+			<!--<div id="pagify-header" class="ui-corner-all boxer">
 				<div id="pagify-image" style="width:500px;height:500px;background:url('{{page.header_image_url}}=s540') no-repeat";>
 				</div>
-			</div>
+			</div>-->
+			<img id="pagify-image" class="ui-corner-all boxer" src="{{page.header_image_url}}=s540">
 			
 			<!-- Widgets -->
 			<div id="widget-list">
@@ -139,7 +140,8 @@ $(document).ready(function() {
 							  // Grab new script url
 							  $.get("/api/scripturl", function(data){scriptUrl=data;});
 							  //Refresh Picture
-							  $.get("/api/headerimageurl", { p: "{{page.id}}"},function(data){$("#pagify-image").css('background-image','url('+data+'=s540)');});
+							  //$.get("/api/headerimageurl", { p: "{{page.id}}"},function(data){$("#pagify-image").css('background-image','url('+data+'=s540)');});
+                              $.get("/api/headerimageurl", { p: "{{page.id}}"},function(data){$("#pagify-image").attr('src',data+'=s540');});
                           });
                           return false;   
                        } else {$.get("/api/scripturl", function(data){scriptUrl=data;});}

@@ -252,6 +252,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-de
     padding-left: 0px !important;
     padding-right: 0px !important;
     width: 25px;
+    height:16px;
      }
 #fb-tabs li{background-color: #D8DFEA;
     float: left;margin: 0px 2px 0px 0px;
@@ -290,7 +291,7 @@ border-bottom:1px #fff solid !important;
 }
 
 #pagify-header{overflow: hidden;margin:20px 0;}
-#pagify-image{}
+#pagify-image{margin:20px 0;}
 #sb{position:relative;}
 #sb-widgets-menu{position:absolute;}
 
@@ -309,7 +310,9 @@ border-bottom:1px #fff solid !important;
 
 .boxer{
   border: 1px solid #DDD;
+   -moz-box-shadow: rgba(0, 0, 0, 0.296875) 0px 1px 3px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.296875) 0px 1px 3px;
+        box-shadow:rgba(0, 0, 0, 0.296875) 0px 1px 3px;
   background-color: #ffffff;
   background-image: -moz-linear-gradient(top, #ffffff, #f5f6f7); /* FF3.6 */
   background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(1, #f5f6f7)); /* Saf4+, Chrome */
