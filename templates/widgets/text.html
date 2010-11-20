@@ -1,10 +1,9 @@
-<form id="fm-{{widget.id}}">
-<textarea name="html" class="{{widget.id}}">{{widget.html|default:"Oh Yeah me"}}</textarea>
+<form id="fm-{{widget.id}}" class="widget-form">
+<textarea name="html" class="{{widget.id}}">{{widget.html|default:""}}</textarea>
 </form>
 
 <script>
 $('.{{widget.id}}').bind("blur",function() { 
 	saveWidget('{{widget.id}}');
 });
-
 </script>

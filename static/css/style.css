@@ -216,6 +216,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-de
 .widget h2{margin:0;padding:5px;font-size:138.5%;}
 #widget-list{margin:0 0 20px 0;}
 .widget-list-item{margin:0;}
+.widget-list-item textarea{width:100%;}
 .wheader{display:block;}
 .wheader h3 {margin:0;display:inline;}
 .wheader h3 a{display:inline !important;}

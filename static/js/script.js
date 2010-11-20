@@ -105,6 +105,10 @@ default:
 			});
 		// override accordian keydown events
 		$(".wheader").unbind('keydown');
+		$('.widget-form').live("submit",function() {
+          return false;
+        });
+		// Make widget list draggable
 		$( ".draggable" ).draggable({
 			connectToSortable: "#widget-list",
 			helper: "clone",
@@ -123,7 +127,7 @@ default:
 			   //get widget content
 			   $.get("/api/getwidget", {wid:wId, wtype: wType},function(data){
 			       wContents = data
-			       $('#widget-list #' + wType).replaceWith('<div id="'+wId+'" class="widget-list-item"><span class="wheader"><h3><a href="#" class="inline-edit">'+wName+'</a></h3></span><div>'+wContents+'</div><span class="hidden wtype">'+wType.replace(/wi-/g,'')+'</span></div>');
+			       $('#widget-list #' + wType).replaceWith('<div id="'+wId+'" class="widget-list-item"><span class="wheader"><h3><a href="#" class="inline-edit">'+wName+'</a></h3><span class="btn-delete"><span class="ui-icon ui-icon-trash"></span></span></span><div>'+wContents+'</div><span class="hidden wtype">'+wType.replace(/wi-/g,'')+'</span></div>');
 			       var stop = false;
       				$( "#widget-list .wheader" ).click(function( event ) {
       					if ( stop ) {
@@ -152,6 +156,7 @@ default:
 
 		// Ajax Accordian
 		$("#widget-list" ).bind('accordionchange', function(event, ui) {
+		  log('accordionchange');
 		  if($(ui.newContent).html() == 'Loading...'){
 		      $(ui.newContent).load("/api/getwidget?wid="+ encodeURIComponent($(ui.newContent).parent('div').attr('id')));
 		  }
@@ -165,6 +170,7 @@ default:
 	    
 	    // Sort update
 	    $( "#widget-list" ).bind( "sortupdate", function(event, ui) {
+	        log('sortupdate');
 	        var pageOrder = '';
             $("#widget-list > div").each(function(index) {
                 if (pageOrder != ''){
@@ -174,7 +180,7 @@ default:
             });
             $.post("/api/savepageorder", { pageorder: pageOrder},function(data){
         	    if(data){
-        	        log('Saved');
+        	        log('Saved Page Order');
         	    };
         	});//end ajax request
         }); // end sort
@@ -191,7 +197,7 @@ default:
         					$('#'+wDeleteId).fadeOut(function() {
                             $.post("/api/deletewidget", { wid: wDeleteId},function(data){
                         	    if(data){
-                        	        log('Saved');
+                        	        log('Widget Deleted');
                         	        wDeleteId = '';
                         	    };
                         	});//end ajax request
@@ -203,7 +209,7 @@ default:
         				}
         			}
         		});
-        $( ".btn-delete" ).bind( "click", function(event, ui) {
+        $( ".btn-delete" ).live( "click", function(event, ui) {
             wDeleteId = $(this).parents('div').attr('id');
             $( "#dialog-delete-confirm" ).dialog( "open" );
         }); // end delete
@@ -211,7 +217,7 @@ default:
         // Make Title editable
         $('.inline-edit').live("dblclick", function(event, ui) {
             var oldVal = $(this).text();
-            $(this).replaceWith("<input type='text' class='inline-text' value='" + oldVal + "'/>");
+            $(this).replaceWith("<input type='text' class='inline-text' value=\"" + oldVal + "\"/>");
             $('.inline-text').focus();
             $('.inline-text').bind("blur", function(event, ui) {
                 var oldVal = $(this).val();
@@ -250,7 +256,7 @@ function saveWidget(id){
 	if(wId!=''){
 	$.post("/api/savewidget", { wid: wId , wtype: wType , wname: wName, wcontents: wContents, pageid: pageId},function(data){
 	    if(data){
-	        log('Saved');
+	        log('Saved Widget');
 	        $('#widget-list').trigger('sortupdate')
 	    };
 	});//end ajax request

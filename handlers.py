@@ -40,7 +40,7 @@ def get_subscriber_changes(id):
             user.subscriber_info = response
             user.put()
     except:
-        loggin.error(id)
+        logging.error(id)
         
 
         

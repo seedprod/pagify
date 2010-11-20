@@ -1,0 +1,10 @@
+<form id="fm-{{widget.id}}" class="widget-form">
+<textarea name="flickr_html" class="{{widget.id}}">{{widget.flickr_html|default:""}}</textarea>
+<input type="text" name="flickr_username" class="{{widget.id}}" value="{{widget.flickr_username|default:""}}"></input>
+</form>
+
+<script>
+$('.{{widget.id}}').bind("blur",function() { 
+	saveWidget('{{widget.id}}');
+});
+</script>
