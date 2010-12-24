@@ -7,6 +7,7 @@ import re
 import urllib
 import spreedly
 import base64
+import webapp2 as webapp
 from xml.dom import minidom
 from utils import fblogin_required,encrypt,decrypt, xmltodict
 from models import User, Page, UploadedFiles, Widget, Option
@@ -19,10 +20,6 @@ from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.webapp import template
 from google.appengine.runtime.apiproxy_errors import CapabilityDisabledError
 from django.utils import simplejson
-
-
-# Import Webapp2
-import webapp2 as webapp
 
 # Session Extention
 import extras.extension_support

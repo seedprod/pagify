@@ -1,7 +1,6 @@
 import os
 import sys
 import config
-
 if 'lib' not in sys.path:
     # Add /lib as primary libraries directory
     sys.path[0:0] = ['lib']
