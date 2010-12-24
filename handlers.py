@@ -1,6 +1,5 @@
 import os
 import sys
-import fix_path
 import datetime
 import facebook
 import logging

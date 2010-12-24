@@ -1,5 +1,4 @@
 import sys
-import fix_path
 import base64
 import config
 import logging
