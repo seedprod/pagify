@@ -22,9 +22,9 @@ class Page(db.Model):
     picture = db.StringProperty()
     fan_count = db.StringProperty()
     has_added_app = db.BooleanProperty()
-    upgraded = db.StringProperty(default='0')
     header_image_url = db.StringProperty()
-    owner = db.ReferenceProperty(User)
+    upgraded = db.StringProperty(default='0')
+    upgraded_by = db.ReferenceProperty(User)
     
 class UploadedFiles(db.Model):
     blob = blobstore.BlobReferenceProperty(required=True)

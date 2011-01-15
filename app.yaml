@@ -15,12 +15,16 @@ skip_files: |
  (.*\.DS_Store)|
  (.*\.git)|
  (.*\.gitignore)|
- (Crypto)
+ (.*/Crypto/.*)|
+ (.*/src/.*) 
  )$
 
 builtins:
 - remote_api: on
 - datastore_admin: on
+
+inbound_services:
+- warmup
 
 handlers:
 - url: /_ah/queue/deferred
@@ -38,4 +42,4 @@ handlers:
   script: main.py
   
 error_handlers:
-- file: templates/default_gae_error.html
+- file: /templates/errors/default_gae_error.html

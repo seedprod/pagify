@@ -22,8 +22,8 @@ from google.appengine.runtime.apiproxy_errors import CapabilityDisabledError
 from django.utils import simplejson
 
 # Session Extention
-import extras.extension_support
-import extras.sessions  
+#import extras.extension_support
+#import extras.sessions  
 
 #deferred functions
 def get_subscriber_changes(id):
@@ -43,10 +43,10 @@ def get_subscriber_changes(id):
         
 #base Handler
 class BaseHandler(webapp.RequestHandler):
-    plugins = [extras.sessions.SessionPlugin()]
-    @property
-    def sessions(self):
-        return self.request.registry.get('extras.sessions.SessionStore')
+    #plugins = [extras.sessions.SessionPlugin()]
+    #@property
+    #def sessions(self):
+    #    return self.request.registry.get('extras.sessions.SessionStore')
     # Load a session. # Set a session value. session['foo'] = 'bar'
     #session = self.sessions.get_session()
     # Get flash messages. self.sessions.set_flash('some value')
@@ -100,10 +100,10 @@ class BaseHandler(webapp.RequestHandler):
     
 class PageHandler(BaseHandler):
     def get(self, **kwargs):
-        pages = ['index']
+        pages = ['app/login']
         page = kwargs.get('page')
         if page is '':
-            page = 'index'
+            page = 'app/login'
         if self.current_user and (page in pages):
             self.redirect('/dashboard')
         else:
@@ -116,13 +116,13 @@ class DashboardHandler(BaseHandler):
         if self.request.get("s") == '1':
             get_subscriber_changes(self.current_user.id)
             
-        """Get Users Pages From Facebook"""
+        '''Get Users Pages From Facebook'''
         try:
             fb_users_pages = self.graph.get_connections("me", "accounts")
             fb_page_ids = []
             for p in fb_users_pages['data']:
-                if p['category'] != 'Application':
-                    fb_page_ids.append(p["id"])
+                '''if p['category'] != 'Application':'''
+                fb_page_ids.append(p["id"])
             fb_pages = self.graph.get_objects(fb_page_ids)
             
             '''Update Pages Cache'''
@@ -152,13 +152,13 @@ class DashboardHandler(BaseHandler):
                                 link=fb_page["link"],
                                 category=category,
                                 picture=picture,
-                                fan_count=fan_count,
+                                fan_count=str(fan_count),
                                 has_added_app=has_added_app
                                 )
                     batch.append(page)
                 else:
                     page.picture = picture
-                    page.fan_count=fan_count
+                    page.fan_count=str(fan_count)
                     page.has_added_app = has_added_app
                     batch.append(page)
             if batch:                 
@@ -174,7 +174,7 @@ class DashboardHandler(BaseHandler):
         try:
             user = self.current_user
             pages = Page.get(user.pages)
-            self.render("dashboard.html", admin=True,pages=pages)    
+            self.render("app/dashboard.html", admin=True,pages=pages)    
         except:
             pass    
          
@@ -198,7 +198,7 @@ class EditPageHandler(BaseHandler):
             #page = Page.get_by_key_name(str(page_id))
             upload_url = blobstore.create_upload_url('/upload')
             page_id = encrypt(page_id).encode('hex')
-            self.render("edit.html", admin=True, page=page,upload_url=upload_url, page_id=page_id,widgets= widgets) 
+            self.render("app/edit.html", admin=True, page=page,upload_url=upload_url, page_id=page_id,widgets= widgets) 
         else:
             self.redirect('/dashboard')
             
@@ -267,7 +267,7 @@ class AjaxApiHandler(BaseHandler):
                             id=widget_id
                             )
             if widget_type:
-                self.render('widgets/'+widget_type+".html", widget=widget)
+                self.render('app/widgets/'+widget_type+".html", widget=widget)
             else:
                 self.response.out.write("This widget cannot be found.")
     def post(self, **kwargs):
@@ -369,7 +369,15 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 
         self.response.set_status(302)
         
-''' Example Code '''            
+''' Facebook FrontEnd '''  
+class fbCanvasHandler(BaseHandler):
+    def get(self, **kwargs):
+        self.render("app/fb-canvas.html", )
+
+class fbTabHandler(BaseHandler):
+    def post(self, **kwargs):
+        self.render("app/fb-tab.html", )
+         
 class WallHandler(BaseHandler):
     #@fblogin_required
     def get(self, **kwargs):

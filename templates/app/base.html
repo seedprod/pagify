@@ -10,15 +10,32 @@
     <meta name="description" content="{{config.description}}">
     <meta name="viewport" content="width=device-width; initial-scale=1.0;"> 
 	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.2.0/build/cssreset/reset-min.css&3.2.0/build/cssfonts/fonts-min.css&3.2.0/build/cssgrids/grids-min.css">
-    <link rel="stylesheet" href="/static/css/style.css?v=1">
+    <link rel="stylesheet" href="/static/css/app-style.css?v=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <script type="text/javascript" src="/static/js/modernizr-1.6.min.js"></script>
     {% block head %}{% endblock %}
 </head>
-<body class="{% if admin %}admin {% endif %}{% block body_classes %}{% endblock %}">
+<body>
+
     <div id="wrapper">
-		{% block header %}{% endblock %}
-		{% block nav %}{% endblock %}
+        <header id="branding">
+            <hgroup>
+                <h1 id="site-title"><span><a href="/" title="{{config.name}}" rel="home">{{config.name}}</a></span></h1>
+        		<h2 id="site-description">{{config.description}}</h2>
+            </hgroup>
+        </header><!-- #branding -->
+
+        <nav id="access">
+        	<h1 class="visuallyhidden">Main menu</h1>
+        	<div class="skip-link visuallyhidden"><a href="#content" title="Skip to content">Skip to content</a></div>
+        	<div class="menu">
+        	    <ul>
+        			<li class="page_item"><a href="/dashboard">Pages</a></li>
+        			<li class="page_item"><a href="javascript:void(0);" onclick="feedback_widget.show()">Help</a></li>
+        			<li class="page_item">{% include "inc/inc.fblogin.html" %}</li>
+        	    </ul>
+        	</div>
+        </nav><!-- #access -->
 	    <div id="main">
     	    <div id="primary"> 
         	    <div id="content">
