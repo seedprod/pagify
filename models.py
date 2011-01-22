@@ -19,7 +19,6 @@ class Page(db.Model):
     name = db.StringProperty(required=True)
     link = db.StringProperty(required=True)
     category = db.StringProperty()
-    picture = db.StringProperty()
     fan_count = db.StringProperty()
     has_added_app = db.BooleanProperty()
     header_image_url = db.StringProperty()

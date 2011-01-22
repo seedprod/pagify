@@ -70,7 +70,7 @@ body {line-height:1.22;}
 /*-------------------------------------------------------------------------------------------*/
 
 /* 1.1 Defaults */
-html {background:#fff;}
+html {background:transparent;}
 body, select, input, textarea { color:#888;
     /*text-shadow: white 0px 1px 0px; */
     }
@@ -141,6 +141,30 @@ h1 a, h1 a:visited, h2 a, h2 a:visited, h3 a, h3 a:visited,
 h4 a, h4 a:visited, h5 a, h5 a:visited, h6 a, h6 a:visited  { text-decoration: none; }
 h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-decoration: underline;}
 
+/*-------------------------------------------------------------------------------------------*/
+/* 2. LOGIN */
+/*-------------------------------------------------------------------------------------------*/
+#login{
+    margin: 7em auto;
+    width: 320px;
+}
+#loginform{
+    padding:40px;
+}
+#backto{
+    background: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#D7D7D7), to(#E4E4E4));
+    border-bottom: 1px #C6C6C6 solid;
+    height: 30px;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+#backto a {
+    display: block;
+    padding: 8px 0px 0px 15px;
+    text-decoration: none;
+}
 /*-------------------------------------------------------------------------------------------*/
 /* 2. SITE STRUCTURE & APPEARANCE */
 /*-------------------------------------------------------------------------------------------*/
@@ -237,7 +261,7 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-de
 
 #pages-list{margin:30px 0 0;} 
 .scroll-content-item{display:none;width:150px; float:left; margin: 0 40px 40px 0; text-align:center;}
-.scroll-content-item img{margin:15px 15px 0;width:100px;}
+.scroll-content-item img{margin:15px 15px 0;}
 .page-title{display:block;font-size:123.1%;font-weight:bold;margin:10px;}
 .upgrade{display:block;margin:0 0 15px 0;}
 

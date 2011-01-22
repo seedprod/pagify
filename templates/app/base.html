@@ -8,8 +8,8 @@
     <meta charset="utf-8"> 
     <title>{% block title %}{% endblock %}{{config.name}}</title>
     <meta name="description" content="{{config.description}}">
-    <meta name="viewport" content="width=device-width; initial-scale=1.0;"> 
-	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.2.0/build/cssreset/reset-min.css&3.2.0/build/cssfonts/fonts-min.css&3.2.0/build/cssgrids/grids-min.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.3.0/build/cssreset/reset-min.css&3.3.0/build/cssfonts/fonts-min.css&3.3.0/build/cssgrids/grids-min.css">
     <link rel="stylesheet" href="/static/css/app-style.css?v=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <script type="text/javascript" src="/static/js/modernizr-1.6.min.js"></script>
@@ -48,12 +48,12 @@
         <footer id="colophon">
 	        <div id="footer-nav">
 				<ul>
-					<li><span id="fb-likeinline-block"><fb:like href="http://pagifyapp.com" layout="button_count" width="75" font="lucida grande"></fb:like></span></li>
+					<li><span id="fb-likeinline-block"><fb:like href="http://www.facebook.com/apps/application.php?id=141947329155355" layout="button_count" width="75" font="lucida grande"></fb:like></span></li>
 					<li><a href="/terms">Terms</a></li>
 					<li><span class="divider">|</span></li>
 					<li><a href="/privacy">Privacy</a></li>
 					<li><span class="divider">|</span></li>
-					<li><a href="javascript:void(0);" onclick="feedback_widget.show()">Support</a></li>
+					<li><a href="javascript:void(0);">Support</a></li>
 					<li><span class="divider">|</span></li>
 					<li><a href="http://twitter.com/pagifyapp">Follow us on Twitter</a></li>
 				</ul>
@@ -72,6 +72,7 @@
     <script src="/static/js/script.js?v=1"></script>
     <!--[if lt IE 7 ]>
     <script type="text/javascript" src="/static/js/dd_belatedpng.js?v=1"></script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
     <![endif]-->
     {% if config.google_analytics_id and not is_admin %}
     <!-- Google Analytics -->
@@ -89,20 +90,21 @@
 	</script>
     {% endif %}
     <!-- Get Satisfaction -->
-	<script>
-	  var is_ssl = ("https:" == document.location.protocol);
-	  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
-	  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	<script>
-	  var feedback_widget_options = {};
-	  feedback_widget_options.display = "overlay";  
-	  feedback_widget_options.company = "tweetc";
-	  feedback_widget_options.placement = "hidden";
-	  feedback_widget_options.color = "#222";
-	  feedback_widget_options.style = "question";
-	  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
-	</script>
+    <script type="text/javascript" charset="utf-8">
+      var is_ssl = ("https:" == document.location.protocol);
+      var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+      document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+      var feedback_widget_options = {};
+      feedback_widget_options.display = "overlay";  
+      feedback_widget_options.company = "pagifyapp";
+      feedback_widget_options.placement = "left";
+      feedback_widget_options.color = "#222";
+      feedback_widget_options.style = "question";
+      var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+    </script>
 	{% block foot %}{% endblock %}
 </body>
 </html>

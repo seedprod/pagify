@@ -47,8 +47,8 @@ app = webapp.WSGIApplication([
     Route('/api/<method:(scripturl|headerimageurl|getwidget|savewidget|savepageorder|deletewidget)>', 'handlers.AjaxApiHandler', name='api'),
     Route('/listen', 'handlers.ListenHandler', name='api'),
     #Facebook Routes
-    Route('/canvas.html', 'handlers.fbCanvasHandler', name='fb-canvas'),
-    Route('/tab.html', 'handlers.fbTabHandler', name='fb-tab')
+    Route('/canvas/', 'handlers.fbCanvasHandler', name='fb-canvas'),
+    Route('/canvas/tab/', 'handlers.fbTabHandler', name='fb-tab')
     ],config=config.config,debug=debug)
 
 # Error Handlers

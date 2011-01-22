@@ -1,33 +1,55 @@
-{% extends "base.html" %}
-{% block body %}
-<div id="index" class="yui3-g">
-	<div class="yui3-u-1-2">
-	<h1 id="site-title">Pagify</h1>
-	<h2 id="site-description">Create Custom<br/>Facebook Business Pages</h2>
-	<p>
-	Do you really want visitors to your Facebook page landing on your wall? Pagify allows you to easily create a 
-	cool custom Facebook page tab that you can set as your landing page. Upload custom images and select from a 
-	number of widgets such as Twitter, Flickr, and YouTube to help drive your branding strategy or promotional campaigns.
-	Pagify is also perfect for small businesses that don't have a web site and want to use
-	 Facebook pages as their main web presence.
-	
-	<br><br>
-
-	<div id="wrapper-sign-in">
-	    <span id="sign-in">Sign in to get started for free &raquo</span><span id="fb-like-btn">{% include "inc/inc.fblogin.html" %}</span>
-	</div>
-	<div id="wrapper-features">
-		<h3>Available Widgets</h3>
-		<ol>
-			<li>Super simple and easy to use.</li>
-			<li>Free for non profits.</li>
-			<li>Tons of Widgets</li>
-		</ol>
-	</div>
-	</div>
-	<div class="yui3-u-1-2">
-		<img id="pagify-example" src="/static/images/pagify-example.png" alt="Pagify Example">
-		<a href="http://www.facebook.com/pages/Pagify/117299828329966"><img id="find-us-on-facebook" src="/static/images/find-us-on-facebook.png" alt="Find Pagify on Facebook"></a>
-	</div>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="ui-widget-content no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8"> 
+    <title>{% block title %}{% endblock %}{{config.name}}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="description" content="{{config.description}}"> 
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.3.0/build/cssreset/reset-min.css&3.3.0/build/cssfonts/fonts-min.css&3.3.0/build/cssgrids/grids-min.css">
+    <link rel="stylesheet" href="/static/css/app-style.css?v=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script type="text/javascript" src="/static/js/modernizr-1.6.min.js"></script>
+</head>
+<body>
+    <div id="login">
+        <h1><a href="http://pagifyapp.com" title="Powered by Pagify">Pagify</a></h1>
+        <div id="loginform" class="inset_shadow ui-widget-content">
+            <fb:login-button autologoutlink="true" size="large" perms="read_stream,publish_stream,offline_access,email">Login with Facebook</fb:login-button>
+        </div>
+    </div>
+    <p id="backto" class="ui-widget-header"><a href="http://pagifyapp.com/" title="Are you lost?">&larr; Back to Pagify</a></p>
+    {% include "inc/inc.fbjssdk.html" %}
+    <!-- Google API's -->
+    <script src="http://www.google.com/jsapi?key={{google.api_key}}"></script>
+    <script>
+        google.load("jquery", "{{google.jquery_version}}");
+    </script>
+    <!-- My Scripts -->
+    <script src="/static/js/plugins.js?v=1"></script>
+    <script src="/static/js/script.js?v=1"></script>
+    <!--[if lt IE 7 ]>
+    <script type="text/javascript" src="/static/js/dd_belatedpng.js?v=1"></script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+    <![endif]-->
+    {% if config.google_analytics_id %}
+    <!-- Google Analytics -->
+    <script>
+        //<![CDATA[
+    	var _gaq = _gaq || [];
+    	_gaq.push(['_setAccount','{{config.google_analytics_id}}']);
+    	_gaq.push(['_trackPageview']);
+    	(function() {
+    		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    	})();
+    	//]]>
+	</script>
+    {% endif %}
+</body>
+</html>

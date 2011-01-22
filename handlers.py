@@ -121,8 +121,8 @@ class DashboardHandler(BaseHandler):
             fb_users_pages = self.graph.get_connections("me", "accounts")
             fb_page_ids = []
             for p in fb_users_pages['data']:
-                '''if p['category'] != 'Application':'''
-                fb_page_ids.append(p["id"])
+                if p['category'] != 'Application' or p['id'] == '141947329155355':
+                  fb_page_ids.append(p["id"])
             fb_pages = self.graph.get_objects(fb_page_ids)
             
             '''Update Pages Cache'''
@@ -373,8 +373,12 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 class fbCanvasHandler(BaseHandler):
     def get(self, **kwargs):
         self.render("app/fb-canvas.html", )
+    def post(self, **kwargs):
+        self.render("app/fb-canvas.html", )
 
 class fbTabHandler(BaseHandler):
+    def get(self, **kwargs):
+        self.render("app/fb-tab.html", )
     def post(self, **kwargs):
         self.render("app/fb-tab.html", )
          
