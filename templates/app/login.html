@@ -3,7 +3,7 @@
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="ui-widget-content no-js"> <!--<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="utf-8"> 
     <title>{% block title %}{% endblock %}{{config.name}}</title>
@@ -12,17 +12,18 @@
     <meta name="description" content="{{config.description}}"> 
 	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.3.0/build/cssreset/reset-min.css&3.3.0/build/cssfonts/fonts-min.css&3.3.0/build/cssgrids/grids-min.css">
     <link rel="stylesheet" href="/static/css/app-style.css?v=1">
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="/favicon.ico">
     <script type="text/javascript" src="/static/js/modernizr-1.6.min.js"></script>
 </head>
 <body>
     <div id="login">
         <h1><a href="http://pagifyapp.com" title="Powered by Pagify">Pagify</a></h1>
-        <div id="loginform" class="inset_shadow ui-widget-content">
+        <div id="loginform" class="box_round_4 box_shadow">
             <fb:login-button autologoutlink="true" size="large" perms="read_stream,publish_stream,offline_access,email">Login with Facebook</fb:login-button>
         </div>
     </div>
-    <p id="backto" class="ui-widget-header"><a href="http://pagifyapp.com/" title="Are you lost?">&larr; Back to Pagify</a></p>
+    <p id="backto" class="header_box_gradient box_shadow"><a href="http://pagifyapp.com/" title="Are you lost?">&larr; Back to Pagify</a></p>
     {% include "inc/inc.fbjssdk.html" %}
     <!-- Google API's -->
     <script src="http://www.google.com/jsapi?key={{google.api_key}}"></script>

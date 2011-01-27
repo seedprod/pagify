@@ -8,7 +8,7 @@ switch(location.pathname)
 case "/dashboard":
     $(document).ready(function() {
         // Set hover state for Pages list
-        $(".scroll-content-item").hover(
+        $(".fbpage-item").hover(
             function () {
                 $(this).addClass("ui-state-hover hand");
               },
@@ -17,20 +17,20 @@ case "/dashboard":
               }
         ).click(
             function () {
-                window.location = $(".page-title a",this).attr('href');
+                window.location = $(".fbpage-title a",this).attr('href');
               }
         );
     });
     $(window).load(function() {
         //Resize Pages to match max height
         var postMaxHeight = 0;
-        $(".scroll-content-item").each(function (i) {
+        $(".fbpage-item").each(function (i) {
             var elHeight = $(this).height();
             if(parseInt(elHeight) > postMaxHeight){
                 postMaxHeight = parseInt(elHeight);
             }
         });
-        $(".scroll-content-item").each(function (i) {
+        $(".fbpage-item").each(function (i) {
            $(this).css({'height':postMaxHeight+'px','display':'block'});
         });  
     });
@@ -43,6 +43,22 @@ case "/upgrade":
   break;
 default:
     $(document).ready(function() {
+        //Float widget menu
+        var topwin = $('#sb-widgets-menu').offset().top - parseFloat($('#sb-widgets-menu').css('marginTop').replace(/auto/, 0));
+
+        $(window).scroll(function (event) {
+          // what the y position of the scroll is
+          var y = $(this).scrollTop();
+          
+          // whether that's below the form
+          if (y >= topwin) {
+            // if so, ad the fixed class
+            $('#sb-widgets-menu').addClass('fixed');
+          } else {
+            // otherwise remove it
+            $('#sb-widgets-menu').removeClass('fixed');
+          }
+        });
         //Globals
         var wDeleteId = '';
         // Header
@@ -52,14 +68,14 @@ default:
 		//		$( "#widget-list" ).sortable( "refresh" );
 		//});
 		//Scrolll Widgets
-		$(window).scroll(function()
+		/*$(window).scroll(function()
 		{
     		if($(window).scrollTop() < 100){
     		    $('#sb-widgets-menu').animate({top:115+"px" },{queue: false, duration: 500});
     		}else{
     		    $('#sb-widgets-menu').animate({top:$(window).scrollTop()+50+"px" },{queue: false, duration: 500});
     		}
-		});
+		});*/
 		//Dialogs
 		var left= 20;
 		var top= 20;

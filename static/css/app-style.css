@@ -63,7 +63,7 @@ hgroup, nav, section { display:block; }
 
 
 /* 0.2 fonts */
-body {line-height:1.22;}
+body {line-height:1.22;background:#DDE3E5 url(/static/images/bg.png) repeat;}
 
 /*-------------------------------------------------------------------------------------------*/
 /* 1. SETUP */
@@ -71,9 +71,7 @@ body {line-height:1.22;}
 
 /* 1.1 Defaults */
 html {background:transparent;}
-body, select, input, textarea { color:#888;
-    /*text-shadow: white 0px 1px 0px; */
-    }
+body, select, input, textarea { color:#888; text-shadow: white 0px 1px 0px;  }
 h1,h2,h3,h4,h5,h6{color:#333;}
 h1,h2,h3,h4,h5,h6{font-weight:bold;}
 h1{font-size:197%;}
@@ -134,9 +132,6 @@ footer a,footer a:visited,footer a:active{color: #999;}
 a:hover { text-decoration:underline; }
 /* Accessible focus treatment: people.opera.com/patrickl/experiments/keyboard/test */
 a:hover, a:active { outline: none; }
-
-#site-title a,#site-title a:visited,#site-title a:active{ color: #000; }
-
 h1 a, h1 a:visited, h2 a, h2 a:visited, h3 a, h3 a:visited,
 h4 a, h4 a:visited, h5 a, h5 a:visited, h6 a, h6 a:visited  { text-decoration: none; }
 h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-decoration: underline;}
@@ -149,11 +144,24 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-de
     width: 320px;
 }
 #loginform{
-    padding:40px;
+    background: #DEE4EA;
+    border: 1px solid #999;
+    padding: 40px;
+    text-align: center;
 }
+
+#login h1 a {
+background: url(/static/images/pagify.png) no-repeat 50% 0%;
+display: block;
+height: 67px;
+overflow: hidden;
+padding-bottom: 15px;
+text-indent: -9999px;
+width: 326px;
+}
+
 #backto{
-    background: -webkit-gradient(linear, 0% 100%, 0% 0%, from(#D7D7D7), to(#E4E4E4));
-    border-bottom: 1px #C6C6C6 solid;
+    border-bottom: 1px #999 solid;
     height: 30px;
     left: 0px;
     position: absolute;
@@ -165,87 +173,111 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-de
     padding: 8px 0px 0px 15px;
     text-decoration: none;
 }
+
+
 /*-------------------------------------------------------------------------------------------*/
 /* 2. SITE STRUCTURE & APPEARANCE */
 /*-------------------------------------------------------------------------------------------*/
 
 /* 2.1 Layout */
-#wrapper{
-    width:960px;
-    margin:0 auto; 
-    font-family:'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;
-    }
-#primary{width: 100%;}
-#content {margin:0;}
-#secondary {float: right;overflow: hidden;width: 200px;}
-#colophon {width: 100%;}
-
-/* 2.2 Navigation */
-#access{}
-
-/* 2.2.1 Drop-down menus */
+html, body {    
+   height: 100%; 
+}
+#wrapper{font-size:108%;line-height:1.6em;font-family: 'Droid Sans', arial, serif;
+   min-height: 100%;
+   height: auto !important;
+   height: 100%;
+   margin: 0 auto -155px; /* the bottom margin is the negative value of the footer's height */
+   }
+/*font-family:'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;*/
+#main{margin:0 auto;padding:40px 40px 0;}
+#primary{float: left;margin: 0 -250px 0 0;width: 100%;}
+.full-col{float:none !important;margin:0 !important;}
+.full-col #content{margin:0 !important;}
+#content {margin: 0 250px 0 0;}
+#secondary {float: right;overflow: hidden;width: 250px;}
+#colophon {clear: both;width: 100%;background: #282828;}
 
 /* 2.3 Header */
-#site-title{font-size:300%;margin:0;font-weight:normal;font-family:Georgia, serif;}
-#site-description{color:#111;margin:0 0 1.5em 0;font-weight:bold;}
+#header-wrapper{height:55px;}
+#branding{float:left;width:30%;position:relative;}
+#fb-like{position:absolute;display:block;top:18px;left:110px;}
+.menu{float:right;}
+#branding h1 a {
+background: url(/static/images/pagify2-s.png) no-repeat 50% 0%;
+display: block;
+height: 50px;
+overflow: hidden;
+text-indent: -9999px;
+width: 100px;
+}
+#site-title{margin:5px 0 0;}
+#access{float:right;width:70%;height:55px;}
+.menu li {
+display: inline;
+list-style: none;
+padding: 0px 0 0px 25px;
+}
+.header_box_gradient {
+  background-color: #d9d9d9;
+  background-image: -moz-linear-gradient(top, #F4F4F4, #d9d9d9); /* FF3.6 */
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #F4F4F4),color-stop(1, #d9d9d9)); /* Saf4+, Chrome */
+  background-image: linear-gradient(top, #F4F4F4, #a8a8a8);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#F4F4F4', EndColorStr='#d9d9d9'); /* IE6–IE9 */
+}
     
-#index #branding{padding:0;}
-#index #site-title{font-size:500%;margin:50px auto 30px;font-weight:normal;text-align:center;}
-#index #site-description{font-size:197%;text-align:center; }
-#index #wrapper-features h3{font-size:197%;}
-#index p{}
+
 /* 2.4 Content */
-#content{padding:0 0 40px;}
-#index p,#index li{font-size:108%;}
-#pagify-example{
-    margin:60px auto;
-    display:block;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.296875) 0px 1px 3px;
-    }
-#find-us-on-facebook {margin:0 auto;display:block;}
-#wrapper-sign-in {text-align:center;margin:40px 0;}
-#sign-in{font-size:138.5%; padding:0 20px;color:#333;font-weight: bold;
-    text-shadow: white 0px 1px 0px;
-    }
-#fb-like-btn{display: inline-block;vertical-align: text-bottom;}
-#index p, #index li{line-height:1.66;}
+#content{padding:0;font-family: 'Droid Sans', arial, serif;}
 
 /* 2.5 Sidebar */
 #sidebar{overflow:hidden;margin:80px 0 0;}
 
 /* 2.6 Footer */
-#footer-nav ul{margin:20px auto;text-align:center;}
-#footer-nav ul li{display:inline;list-style: none;padding: 0px 15px 0px 0px;font-size:93%}
-.divider{color:#D0D0D0;}
+#colophon,.push {
+   height: 155px; /* .push must be the same height as .footer */
+}
+#footer{width:960px;margin:0 auto;font-family: 'Droid Sans', arial, serif}
+#copyright{float:left;}
+#credit{float:right;}
+.ft-list1{
+float:left;
+margin-right:40px;
+color:#999999;
+text-shadow: #000 1px 1px 0;
+font-size:13px;
+}
+.ft-list2{
+float:right;
+color:#999999;
+text-shadow: #000 1px 1px 0;
+font-size:13px;
+}
+.ft-header{
+color:#ccc;
+text-shadow: #000 1px 1px 0;
+font-size:13px;
+}
+.ft-list1 li,.ft-list2 li{padding-bottom:7px;list-style:none;}
+.ft-list2 img{
+margin:10px 0 0;
+}
 
-/*-------------------------------------------------------------------------------------------*/
-/* 6. ADMIN */
-/*-------------------------------------------------------------------------------------------*/
-
-/* 6.1 General */
-
-/* 2.1 Layout */
-//.admin{min-width:600px;}
-
-.admin #wrapper{width:100%;}
-.admin #site-title{font-size:200%; margin:8px 0 0 20px;}
-.admin #site-title a{}
-.menu{text-align:right;}
-.admin #content{width:90%;margin:30px 40px 0;padding:0;}
-.admin #site-description{display:none;}
-.admin #access ul li{display: inline;list-style-type: none;padding:0 20px 0 0;}
-.admin #access ul li a{color:#333;}
-
-.widget {margin:0 0 20px 20px;width:220px;}
-.widget h2{margin:0;padding:5px;font-size:138.5%;}
-#widget-list{margin:0 0 20px 0;}
-.widget-list-item{margin:0;}
-.widget-list-item textarea{width:100%;}
-.wheader{display:block;}
-.wheader h3 {margin:0;display:inline;}
-.wheader h3 a{display:inline !important;}
-.widget > div{padding:5px;}
-.inline-text{margin-left: 2.2em;}
+/* Dashboard */
+#pages-list{margin:30px 0 0;} 
+.fbpage-item{display:none;width:150px; float:left; margin: 0 40px 40px 0; text-align:center;}
+.fbpage-item img{border: 1px solid #E5E5E5;
+margin: 0 15px 20px;
+padding: 3px;
+-webkit-box-reflect:
+  below 0px 
+-webkit-gradient(linear, left top, left bottom, from(transparent), 
+  color-stop(0.7, transparent), 
+  to(rgba(255, 255, 255, 0.3)));
+}
+.fbpage-title-wrapper{height: 90px;}
+.fbpage-title{display:block;font-size:123.1%;font-weight:bold;margin:10px;}
+.upgrade{display:block;margin:0 0 15px 0;}
 .btn-delete{
     cursor: pointer;
     float: right;
@@ -255,70 +287,22 @@ h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover  {text-de
 }
 .btn-delete .ui-icon{position:relative !important;}
 
-#sb-widgets-menu ul,#sb-install ul{margin:0;}
-#sb-install li{list-style-type: none;}
-#sb-widgets-menu li{list-style-type: none; padding:3px;margin:5px 0 0;cursor: move;}
-
-#pages-list{margin:30px 0 0;} 
-.scroll-content-item{display:none;width:150px; float:left; margin: 0 40px 40px 0; text-align:center;}
-.scroll-content-item img{margin:15px 15px 0;}
-.page-title{display:block;font-size:123.1%;font-weight:bold;margin:10px;}
-.upgrade{display:block;margin:0 0 15px 0;}
-
-#fb-wrapper{border: 1px solid #CCC;width:796px;}
-#fb-profile{background:transparent url('/static/images/fb-bg.png') repeat-x;height:80px;}
-#fb-left-column{width:200px;float:left;text-shadow:none;margin: 20px 0 0 20px;}
-#fb-right-column{width:540px;float:left;text-shadow:none;position:relative;}
-#fb-title{font-size:123.1%; font-weight:bold;margin:25px 0 10px 0;display:inline-block;}
-#fb-like{margin:0 0 -5px 10px;}
-#fb-tabs{width: 100%;margin:0;}
-#fb-plus{background: url(http://static.ak.fbcdn.net/rsrc.php/zT/r/gwiXNnyPhyg.gif) no-repeat;
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-    width: 25px;
-    height:16px;
-     }
-#fb-tabs li{background-color: #D8DFEA;
-    float: left;margin: 0px 2px 0px 0px;
-    overflow: hidden;position: relative;
-    color:#3B5998;
-    font-weight: bold;
-    font-size:100%;
-    font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
-    border-bottom: 1px solid #D8DFEA;
-padding:3px 11px;
-margin:0 2px 0 0;
+/* General */
+.box_shadow{
+     -moz-box-shadow: 0px 0px 4px #666; /* FF3.5+ */
+  -webkit-box-shadow: 0px 0px 4px #666; /* Saf3.0+, Chrome */
+          box-shadow: 0px 0px 4px #666; /* Opera 10.5, IE9 */
 }
-.fb-tab-active{
-background-color: #fff !important;
-border:1px #D8DFEA solid !important;
-color: #333 !important;
-border-bottom:1px #fff solid !important;
+.box_round_4 {
+     -moz-border-radius: 4px; /* FF1+ */
+  -webkit-border-radius: 4px; /* Saf3-4 */
+          border-radius: 4px; /* Opera 10.5, IE9, Saf5, Chrome */
 }
-#fb-write-something{
-    color:#000;
-    padding:7px;
-    border: 1px solid #D8DFEA;
-    margin: 0 20px 20px 0;
-    font-size:85% !important;
+.box_round_10 {
+     -moz-border-radius: 10px; /* FF1+ */
+  -webkit-border-radius: 10px; /* Saf3-4 */
+          border-radius: 10px; /* Opera 10.5, IE9, Saf5, Chrome */
 }
-#fb-admin-menu{margin:0 0 20px 0;}
-#fb-admin-menu ul{margin:0;}
-#fb-admin-menu li{
-    border-bottom: 1px solid #D8DFEA;
-    display: block;
-    padding: 3px 8px;
-    color: #3B5998;
-    list-style-type:none;
-    font-size:85%;
-    margin: 0px 20px 0px 0px;
-}
-
-#pagify-header{overflow: hidden;margin:20px 0;}
-#pagify-image{margin:20px 0;}
-#sb{position:relative;}
-#sb-widgets-menu{position:absolute;}
-
 
 .inset_shadow {
    -moz-box-shadow:inset 0 0 10px #333;
@@ -338,11 +322,49 @@ border-bottom:1px #fff solid !important;
   -webkit-box-shadow: rgba(0, 0, 0, 0.296875) 0px 1px 3px;
         box-shadow:rgba(0, 0, 0, 0.296875) 0px 1px 3px;
   background-color: #ffffff;
-  background-image: -moz-linear-gradient(top, #ffffff, #f5f6f7); /* FF3.6 */
-  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ffffff),color-stop(1, #f5f6f7)); /* Saf4+, Chrome */
-            filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#f5f6f7'); /* IE6,IE7 */
-        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#f5f6f7')"; /* IE8 */
+  background-image: -moz-linear-gradient(top, #eee, #fff); /* FF3.6 */
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #eee),color-stop(1, #fff)) !important; /* Saf4+, Chrome */
+            filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#eee', EndColorStr='#fff'); /* IE6,IE7 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eee', EndColorStr='#fff')"; /* IE8 */
 }
+
+.fixed {
+  position: fixed !important;
+  top: 0;
+}
+
+/* Edit */
+
+#fb-profile{border: 1px solid #CCC;width:776px;background:#fff url(/static/images/facebook-page-b.png) no-repeat;margin-bottom: 40px;text-shadow:none;}
+#fb-left-column{width:220px;}
+#fb-left-column img {margin: 20px 0px 20px 12px;}
+#facebook-page-sidebar{margin-left: 10px;background:#fff url(/static/images/facebook-page-sidebar-b.png) no-repeat; width:207px ;height:499px;}
+#fb-right-column{width:520px;margin: 75px 0px 0px 11px;position:relative;}
+#fb-title{position:absolute;top:-55px;left:0;font-size:123.1%; font-weight:bold;}
+#pagify-header{overflow: hidden;margin:20px 0;}
+#pagify-image{margin:20px 0;}
+
+.widget {margin:0 0 20px 20px;width:220px;}
+.widget h2{margin:0;padding:5px;font-size:138.5%;}
+#widget-list{margin:0 0 20px 0;}
+.widget-list-item{margin:0;}
+.widget-list-item textarea{width:100%;}
+.wheader{display:block;}
+.wheader h3 {margin:0;display:inline;}
+.wheader h3 a{display:inline !important;}
+.widget > div{padding:5px;}
+.inline-text{margin-left: 2.2em;}
+
+#sb,.tipsy{text-shadow:none;}
+#sb{}
+#sb-widgets-menu{margin: 42px 0px 0px;}
+#sb-widgets-menu ul,#sb-install ul{margin:0;}
+#sb-install li{list-style-type: none;}
+#sb-widgets-menu li{list-style-type: none; padding:3px;margin:5px 0 0;cursor: move;}
+
+
+
+
 
 
 /* 2.2 Uploader */

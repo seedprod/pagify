@@ -9,9 +9,9 @@
     <title>{% block title %}{% endblock %}{{config.name}}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="{{config.description}}">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.3.0/build/cssreset/reset-min.css&3.3.0/build/cssfonts/fonts-min.css&3.3.0/build/cssgrids/grids-min.css">
     <link rel="stylesheet" href="/static/css/app-style.css?v=1">
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="/favicon.ico">
     <script type="text/javascript" src="/static/js/modernizr-1.6.min.js"></script>
     {% block head %}{% endblock %}
@@ -19,11 +19,12 @@
 <body>
 
     <div id="wrapper">
+	<div id="header-wrapper" class="header_box_gradient box_shadow">
         <header id="branding">
             <hgroup>
-                <h1 id="site-title"><span><a href="/" title="{{config.name}}" rel="home">{{config.name}}</a></span></h1>
-        		<h2 id="site-description">{{config.description}}</h2>
+                <h1 id="site-title"><a href="/" title="{{config.name}}" rel="home">{{config.name}}</a></h1>
             </hgroup>
+			<span id="fb-like"><fb:like href="http://www.facebook.com/apps/application.php?id=141947329155355" layout="button_count" width="75" font="lucida grande"></fb:like></span>
         </header><!-- #branding -->
 
         <nav id="access">
@@ -37,31 +38,39 @@
         	    </ul>
         	</div>
         </nav><!-- #access -->
+		</div>
 	    <div id="main">
-    	    <div id="primary"> 
-        	    <div id="content">
-        	        {% block body %}{% endblock %}
-        	    </div><!-- #content -->
-        	</div><!-- #primary -->
-        	{% block sidebar %}{% endblock %}
+        	 {% block body %}{% endblock %}
         </div><!-- #main -->
-        
+		<div class="push"></div> 
+     </div><!-- #wrapper -->
         <footer id="colophon">
-	        <div id="footer-nav">
-				<ul>
-					<li><span id="fb-likeinline-block"><fb:like href="http://www.facebook.com/apps/application.php?id=141947329155355" layout="button_count" width="75" font="lucida grande"></fb:like></span></li>
-					<li><a href="/terms">Terms</a></li>
-					<li><span class="divider">|</span></li>
-					<li><a href="/privacy">Privacy</a></li>
-					<li><span class="divider">|</span></li>
-					<li><a href="javascript:void(0);">Support</a></li>
-					<li><span class="divider">|</span></li>
-					<li><a href="http://twitter.com/pagifyapp">Follow us on Twitter</a></li>
+	        <div id="footer">
+				<div id="copyright" class="col-left">
+				<ul class="ft-list1">
+				<li class="ft-header">Pagify</li>
+				<!--<li><a href="http://getsatisfaction.com/pagifyapp">Get Support via Get Satisfaction</a></li>-->
+				<li><a href="/contact/">Contact Us</a></li><a href="/contact/">
+				</a><li><a href="/contact/"></a><a href="/privacy-policy/">Privacy Policy</a></li>
+				<li><a href="/terms-conditions/">Terms &amp; Conditions</a></li>
 				</ul>
+				<ul class="ft-list1">
+				<li class="ft-header">News and Updates</li>
+				<!--<li><a href="/blog/">Blog</a></li>-->
+				<li><a href="http://twitter.com/pagifyapp">Follow us on Twitter</a></li>
+				<li><a href="http://www.facebook.com/apps/application.php?id=141947329155355">Find us on Facebook</a></li>
+				</ul> </div>
+				<div id="credit" class="col-right">
+				<ul class="ft-list2">
+				<li class="ft-header">Create custom Facebook Fan Pages.</li>
+				<li>Copyright &copy; 2011 Pagify. All Rights Reserved.</li>
+				<li>Pagify is Part of <a href="http://www.seedprod.com">SeedProd</a>.</li>
+				<li><img src="http://pagifyapp.com/wp-content/uploads/2011/01/pagify-logo-ft.png"></li>
+				</ul> </div>
             </div>
         </footer>
         
-    </div><!-- #wrapper -->
+    
     {% include "inc/inc.fbjssdk.html" %}
     <!-- Google API's -->
     <script src="http://www.google.com/jsapi?key={{google.api_key}}"></script>
@@ -102,7 +111,7 @@
       feedback_widget_options.display = "overlay";  
       feedback_widget_options.company = "pagifyapp";
       feedback_widget_options.placement = "left";
-      feedback_widget_options.color = "#222";
+      feedback_widget_options.color = "#333";
       feedback_widget_options.style = "question";
       var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
     </script>

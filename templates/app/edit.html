@@ -6,86 +6,63 @@
 <link rel="stylesheet" href="/static/css/facebox.css">
 {% endblock %}
 {% block body %}
-<h1>Edit</h1>
-<div id="edit" class="yui3-g">
-	<div id="fb-wrapper" class="yui3-u-3-4">
-		<div id="fb-profile">
-	    <div id="fb-left-column">
-	        <img src="{{page.picture}}">
-	        <ul id="fb-admin-menu">
-	            <li>Edit Page</li>
-	            <li>Promote with an Ad</li>
-	            <li>Add to My Page's Favorites</li>
-	            <li>Suggest to Friends</li>
-	        </ul>
-	        <p id="fb-write-something">
-	            Write something about {{page.name}}
-	        </p>
-	    </div>
-	    <div id="fb-right-column">
-		    <div id="fb-header-wrapper">
-	        <h1 id="fb-title">{{page.name}}</h1>
-	        <img id="fb-like" src="/static/images/fb-like.png">
-	        <ul id="fb-tabs" class="clearfix">
-	            
-	            <li>Wall</li>
-	            <li>Info</li>
-	            <li class="fb-tab-active">Welcome!</li>
-	            <li>Photos</li>
-	            <li>Discussions</li>
-	            <li>Reviews</li>
-	            <li id="fb-plus"></li>
-	        </ul>
-	        </div>
-	        <!-- Image Header -->
-			<!--<div id="pagify-header" class="ui-corner-all boxer">
-				<div id="pagify-image" style="width:500px;height:500px;background:url('{{page.header_image_url}}=s540') no-repeat";>
+<div id="primary"> 
+    <div id="content">
+	<h1>Edit</h1>
+		<div id="fb-profile" class="yui3-g">
+		    <div id="fb-left-column" class="yui3-u">
+		        <img src="http://graph.facebook.com/{{page.id}}/picture?type=large"/>
+				<div id="facebook-page-sidebar">
 				</div>
-			</div>-->
-			<img id="pagify-image" class="ui-corner-all boxer" src="{{page.header_image_url}}=s540">
+		    </div>
+			<div id="fb-right-column" class="yui3-u">
+				<h1 id="fb-title">{{page.name}}</h1>
+		        <!-- Image Header -->
+				<!--<div id="pagify-header" class="ui-corner-all boxer">
+					<div id="pagify-image" style="width:500px;height:500px;background:url('{{page.header_image_url}}=s540') no-repeat";>
+					</div>
+				</div>-->
+				<img id="pagify-image" class="ui-corner-all boxer" src="{{page.header_image_url}}=s520">
 			
-			<!-- Widgets -->
-			<div id="widget-list">
-				{% for w in widgets %}
-				<div id="{{w.id}}" class="widget-list-item">
-					<span class="wheader">
-					<h3><a href="#" class="inline-edit">{{w.name}}</a></h3>
-					<span class="btn-delete"><span class="ui-icon ui-icon-trash"></span></span>
-					</span>
-					<div>Loading...</div>
-					<span class="hidden wtype">{{w.type}}</span>
+				<!-- Widgets -->
+				<div id="widget-list">
+					{% for w in widgets %}
+					<div id="{{w.id}}" class="widget-list-item">
+						<span class="wheader">
+						<h3><a href="#" class="inline-edit">{{w.name}}</a></h3>
+						<span class="btn-delete"><span class="ui-icon ui-icon-trash"></span></span>
+						</span>
+						<div>Loading...</div>
+						<span class="hidden wtype">{{w.type}}</span>
+					</div>
+					{% endfor %}
 				</div>
-				{% endfor %}
 			</div>
-	    </div>
-		</div>
-	</div>
-	<div class="yui3-u-1-4">
-		<div id="sb" >
-		    <div id="sb-install" class="widget">
-		    <h2 class="ui-widget-header ui-corner-tl ui-corner-tr">Settings</h2>
-		    <div class="ui-widget-content ui-corner-bl ui-corner-br">
+        </div><!-- #fb-profile-->
+    </div><!-- #content -->
+</div><!-- #primary -->
+
+<div id="secondary" class="widget-area">
+	<div id="sb" >
+	    <div id="sb-widgets-menu" class="widget">
+	    	<h2 class="ui-widget-header ui-corner-tl ui-corner-tr">Widgets</h2>
+	    	<div class="ui-widget-content ui-corner-bl ui-corner-br">
+		    <p>Drag &amp; drop or add any of these widgets in the widgets-area on your page.</p>
 		    <ul>
-		        <li><a href="#fbox-install" rel="facebox">Add Pagify app to your Page</a></li>
+				<li id="wi-text" class="draggable ui-state-active ui-corner-all">Text</li>
+				<li id="wi-twitter" class="draggable ui-state-active ui-corner-all">Twitter</li>
+				<li id="wi-flickr" class="draggable ui-state-active ui-corner-all">Flickr</li>
+		        <li id="wi-youtube" class="draggable ui-state-active ui-corner-all">YouTube</li>
+				<li id="wi-googlemaps" class="draggable ui-state-active ui-corner-all">Google Maps</li>
 		    </ul>
 		    </div>
-		    </div>
-		    <div id="sb-widgets-menu" class="widget">
-		    	<h2 class="ui-widget-header ui-corner-tl ui-corner-tr">Widgets</h2>
-		    	<div class="ui-widget-content ui-corner-bl ui-corner-br">
-			    <p>You can drag &amp; drop any of these widgets onto your page.</p>
-			    <ul>
-					<li id="wi-text" class="draggable ui-state-active ui-corner-all">Text</li>
-					<li id="wi-twitter" class="draggable ui-state-active ui-corner-all">Twitter</li>
-					<li id="wi-flickr" class="draggable ui-state-active ui-corner-all">Flickr</li>
-			        <li id="wi-youtube" class="draggable ui-state-active ui-corner-all">YouTube</li>
-					<li id="wi-googlemaps" class="draggable ui-state-active ui-corner-all">Google Maps</li>
-			    </ul>
-			    </div>
-		    </div>
+	    </div>
 	</div>
-	</div>
-</div>
+</div> <!-- #secondary -->
+
+
+
+
 <!-- Dialogs -->
 <div id="upload-dialog" title="upload">
     <div id="fileQueue"></div>
@@ -117,7 +94,7 @@ $(document).ready(function() {
 	$.facebox.settings.opacity = 0.2;
 	$('a[rel*=facebox]').facebox();
 	// Tooltips
-	$('#fb-header-wrapper,#fb-left-column').tipsy({gravity: 's',fade: true,fallback: "This is just a test Facebook page so you can get an idea of what your page will look like. None of the tabs or buttons works."});
+	$('#fb-header-wrapper,#fb-left-column').tipsy({gravity: 's',fade: true,fallback: "This is just a test Facebook Page so you can get an idea of what your page will look like after you publish it."});
 	// Uploadify
 	var scriptUrl = '{{upload_url}}';
 	$("#uploadify").uploadify({
