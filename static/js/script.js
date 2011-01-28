@@ -251,7 +251,14 @@ default:
             });
             
         }); // end editable
-
+        
+        // Empty widget list message.
+        $( "#widget-list" ).bind( "create sortupdate", function(event, ui) {
+        var widgeList = $("#widget-list").html().trim();
+        if(widgeList == ''){
+            $("#widget-list").html("<img src='/static/images/box_download.png'> Drag & Drop your widgets into this area.");
+        }
+        });
 
     });
 }

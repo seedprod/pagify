@@ -7,7 +7,7 @@
 <div id="primary" class="full-col"> 
     <div id="content">
 		<h1>Pages</h1>
-		<p>Hi <fb:name uid="loggedinuser" use-you="no"></fb:name>, these are the pages you have admin rights to. Click on a Page to manage.
+		<p>Hi <fb:name uid="loggedinuser" use-you="no"></fb:name>, {% if pages %}these are the pages you have admin rights to. Click on a Page to manage.{% else %}looks like you don't have any Facebook Pages yet? <a href="http://www.facebook.com/pages/create.php">Go create a Facebook Page!</a> Use the right hand option "Official Page".{% endif %}
 		<!--<fb:profile-pic uid="loggedinuser" size="square" facebook-logo="true"></fb:profile-pic>-->
 		<div id="pages-list" class="clearfix">
 		    {% for p in pages %}

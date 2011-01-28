@@ -103,7 +103,7 @@ input[type="checkbox"] { vertical-align: bottom; *vertical-align: baseline; }
 .ie6 input { vertical-align: text-bottom; }
 /* hand cursor on clickable input elements */
 label, input[type=button], input[type=submit], button { cursor: pointer; }
-.hand{cursor: pointer;}
+.hand{cursor: pointer; cursor:hand;}
 /* always force a scrollbar in non-IE */
 html { overflow-y: scroll; }
 /* make buttons play nice in IE: www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
@@ -187,10 +187,10 @@ html, body {
    min-height: 100%;
    height: auto !important;
    height: 100%;
-   margin: 0 auto -155px; /* the bottom margin is the negative value of the footer's height */
+   margin: 0 auto -175px; /* the bottom margin is the negative value of the footer's height */
    }
 /*font-family:'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;*/
-#main{margin:0 auto;padding:40px 40px 0;}
+#main{margin:0 auto;padding: 40px 0 0 40px;}
 #primary{float: left;margin: 0 -250px 0 0;width: 100%;}
 .full-col{float:none !important;margin:0 !important;}
 .full-col #content{margin:0 !important;}
@@ -235,7 +235,7 @@ padding: 0px 0 0px 25px;
 
 /* 2.6 Footer */
 #colophon,.push {
-   height: 155px; /* .push must be the same height as .footer */
+   height: 175px; /* .push must be the same height as .footer */
 }
 #footer{width:960px;margin:0 auto;font-family: 'Droid Sans', arial, serif}
 #copyright{float:left;}
@@ -288,7 +288,7 @@ padding: 3px;
 .btn-delete .ui-icon{position:relative !important;}
 
 /* General */
-.box_shadow{
+.box_shadow_666{
      -moz-box-shadow: 0px 0px 4px #666; /* FF3.5+ */
   -webkit-box-shadow: 0px 0px 4px #666; /* Saf3.0+, Chrome */
           box-shadow: 0px 0px 4px #666; /* Opera 10.5, IE9 */
@@ -333,6 +333,16 @@ padding: 3px;
   top: 0;
 }
 
+.relative{
+  position: relative;
+  top: 0;
+}
+
+.absolute{
+  position: absolute;
+  top: 0;
+}
+
 /* Edit */
 
 #fb-profile{border: 1px solid #CCC;width:776px;background:#fff url(/static/images/facebook-page-b.png) no-repeat;margin-bottom: 40px;text-shadow:none;}
@@ -342,12 +352,20 @@ padding: 3px;
 #fb-right-column{width:520px;margin: 75px 0px 0px 11px;position:relative;}
 #fb-title{position:absolute;top:-55px;left:0;font-size:123.1%; font-weight:bold;}
 #pagify-header{overflow: hidden;margin:20px 0;}
-#pagify-image{margin:20px 0;}
+#pagify-image{margin:20px 0;position: relative;
+    z-index: 0;}
 
 .widget {margin:0 0 20px 20px;width:220px;}
 .widget h2{margin:0;padding:5px;font-size:138.5%;}
-#widget-list{margin:0 0 20px 0;}
-.widget-list-item{margin:0;}
+#widget-list{margin:0 0 20px 0;
+    background-color:#fef7d5;
+    border:1px dashed #efe3ae;
+    min-height:200px;
+      height:auto !important;
+      height:200px;
+
+    }
+.widget-list-item{margin:10px 0;}
 .widget-list-item textarea{width:100%;}
 .wheader{display:block;}
 .wheader h3 {margin:0;display:inline;}
@@ -357,7 +375,7 @@ padding: 3px;
 
 #sb,.tipsy{text-shadow:none;}
 #sb{}
-#sb-widgets-menu{margin: 42px 0px 0px;}
+#sb-widgets-menu{margin: 42px 0px 0px;z-index:999;position:relative;}
 #sb-widgets-menu ul,#sb-install ul{margin:0;}
 #sb-install li{list-style-type: none;}
 #sb-widgets-menu li{list-style-type: none; padding:3px;margin:5px 0 0;cursor: move;}

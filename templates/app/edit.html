@@ -22,7 +22,7 @@
 					<div id="pagify-image" style="width:500px;height:500px;background:url('{{page.header_image_url}}=s540') no-repeat";>
 					</div>
 				</div>-->
-				<img id="pagify-image" class="ui-corner-all boxer" src="{{page.header_image_url}}=s520">
+				<img id="pagify-image" class="hand" src="{{page.header_image_url|default_if_none:"/static/images/no-fb-image.png?"}}=s520">
 			
 				<!-- Widgets -->
 				<div id="widget-list">
