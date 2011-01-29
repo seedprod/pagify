@@ -43,20 +43,21 @@ case "/upgrade":
   break;
 default:
     $(document).ready(function() {
-        //Float widget menu
+        
         var topwin = $('#sb-widgets-menu').offset().top - parseFloat($('#sb-widgets-menu').css('marginTop').replace(/auto/, 0));
-
         $(window).scroll(function (event) {
-          // what the y position of the scroll is
-          var y = $(this).scrollTop();
-          
-          // whether that's below the form
-          if (y >= topwin) {
-            // if so, ad the fixed class
-            $('#sb-widgets-menu').addClass('fixed');
-          } else {
-            // otherwise remove it
-            $('#sb-widgets-menu').removeClass('fixed');
+            log(parseFloat($('#sb-widgets-menu').css('left')) );
+          if(parseFloat($('#sb-widgets-menu').css('left')) == 840){
+              var y = $(this).scrollTop();
+              if (y >= topwin) {
+                $('#sb-widgets-menu').addClass('fixed');
+                $('#sb-widgets-menu').css('top',0);
+              } else {
+                $('#sb-widgets-menu').removeClass('fixed');
+                $('#sb-widgets-menu').css('top',120);
+              }
+          }else{
+             $('#sb-widgets-menu').addClass('fixed'); 
           }
         });
         //Globals
@@ -259,6 +260,9 @@ default:
             $("#widget-list").html("<img src='/static/images/box_download.png'> Drag & Drop your widgets into this area.");
         }
         });
+        
+        //Float widget menu
+        $( "#sb-widgets-menu" ).draggable({handle:".ui-widget-header", opacity:0.7});
 
     });
 }

@@ -355,7 +355,7 @@ padding: 3px;
 #pagify-image{margin:20px 0;position: relative;
     z-index: 0;}
 
-.widget {margin:0 0 20px 20px;width:220px;}
+
 .widget h2{margin:0;padding:5px;font-size:138.5%;}
 #widget-list{margin:0 0 20px 0;
     background-color:#fef7d5;
@@ -373,9 +373,8 @@ padding: 3px;
 .widget > div{padding:5px;}
 .inline-text{margin-left: 2.2em;}
 
-#sb,.tipsy{text-shadow:none;}
-#sb{}
-#sb-widgets-menu{margin: 42px 0px 0px;z-index:999;position:relative;}
+#sb-widgets-menu,.tipsy{text-shadow:none;}
+#sb-widgets-menu{margin: 20px 0px 0px;z-index:999;position:absolute; top:120px; left:840px;width:245px;height:400px;}
 #sb-widgets-menu ul,#sb-install ul{margin:0;}
 #sb-install li{list-style-type: none;}
 #sb-widgets-menu li{list-style-type: none; padding:3px;margin:5px 0 0;cursor: move;}
