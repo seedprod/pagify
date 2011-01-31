@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 {% block title %}Dashboard - {% endblock %}
 {% block head %}
-<link rel="stylesheet" href="/static/css/cupertino/jquery-ui-1.8.5.custom.css">
+<link rel="stylesheet" href="/static/css/man-in-black/jquery-ui-{{google.jquery_ui_version}}.custom.css">
 {% endblock %}
 {% block body %}
 <div id="primary" class="full-col"> 
     <div id="content">
 		<h1>Pages</h1>
 		<p>Hi <fb:name uid="loggedinuser" use-you="no"></fb:name>, {% if pages %}these are the pages you have admin rights to. Click on a Page to manage.{% else %}looks like you don't have any Facebook Pages yet? <a href="http://www.facebook.com/pages/create.php">Go create a Facebook Page!</a> Use the right hand option "Official Page".{% endif %}
-		<!--<fb:profile-pic uid="loggedinuser" size="square" facebook-logo="true"></fb:profile-pic>-->
 		<div id="pages-list" class="clearfix">
 		    {% for p in pages %}
 				<div class="fbpage-item boxer ui-corner-all">
@@ -35,5 +34,5 @@
 </div>  #secondary -->
 {% endblock %}
 {% block foot %}
-<script src="/static/js/jquery-ui-1.8.6.custom.min.js"></script>
+<script src="/static/js/jquery-ui-{{google.jquery_ui_version}}.custom.min.js"></script>
 {% endblock %}

@@ -15,6 +15,7 @@ config['facebook'] = {
 config['google'] = {
     'api_key': 'AIzaSyBWk2VmSTr0NZEcYvE7o11A7Rkl4gRF-LY',
     'jquery_version': '1.4.4',
+    'jquery_ui_version': '1.8.9',
 }
 
 config['spreedly'] = {

@@ -46,7 +46,6 @@ default:
         
         var topwin = $('#sb-widgets-menu').offset().top - parseFloat($('#sb-widgets-menu').css('marginTop').replace(/auto/, 0));
         $(window).scroll(function (event) {
-            log(parseFloat($('#sb-widgets-menu').css('left')) );
           if(parseFloat($('#sb-widgets-menu').css('left')) == 840){
               var y = $(this).scrollTop();
               if (y >= topwin) {
@@ -78,19 +77,18 @@ default:
     		}
 		});*/
 		//Dialogs
-		var left= 20;
-		var top= 20;
 		$( "#upload-dialog" ).dialog({
 			autoOpen: false,
 			show: "fade",
 			hide: "fade",
-			open: function() { 
+			modal: true
+			/*open: function() { 
 						$(".ui-dialog").position({
 						       my: 'right',
 						       at: 'right',
 						       of: "#pagify-image"
 						    });
-				}
+				}*/
 		});
 
 		$( "#pagify-image" ).click(function() {
@@ -207,6 +205,8 @@ default:
                     autoOpen: false,
         			resizable: false,
         			draggable:false,
+        			show: "fade",
+        			hide: "fade",
         			modal: true,
         			buttons: {
         				"Delete Widget": function() {
@@ -261,8 +261,9 @@ default:
         }
         });
         
-        //Float widget menu
+        //Controller Tabs
         $( "#sb-widgets-menu" ).draggable({handle:".ui-widget-header", opacity:0.7});
+        $( "#controller-tabs" ).tabs();
 
     });
 }

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Edit - {% endblock %}
 {% block head %}
-<link rel="stylesheet" href="/static/css/cupertino/jquery-ui-1.8.5.custom.css">
+<link rel="stylesheet" href="/static/css/man-in-black/jquery-ui-{{google.jquery_ui_version}}.custom.css">
 <link rel="stylesheet" href="/static/css/tipsy.css">
 <link rel="stylesheet" href="/static/css/facebox.css">
 {% endblock %}
@@ -25,7 +25,7 @@
 				<img id="pagify-image" class="hand" src="{{page.header_image_url|default_if_none:"/static/images/no-fb-image.png?"}}=s520">
 			
 				<!-- Widgets -->
-				<div id="widget-list">
+				<div id="widget-list" class="">
 					{% for w in widgets %}
 					<div id="{{w.id}}" class="widget-list-item">
 						<span class="wheader">
@@ -43,18 +43,44 @@
 </div><!-- #primary -->
 
 
-    <div id="sb-widgets-menu" class="widget">
-    	<h2 class="ui-widget-header ui-corner-tl ui-corner-tr">Widgets</h2>
-    	<div class="ui-widget-content ui-corner-bl ui-corner-br">
-	    <p>Drag &amp; drop or add any of these widgets in the widgets-area on your page.</p>
-	    <ul>
-			<li id="wi-text" class="draggable ui-state-active ui-corner-all">Text</li>
-			<li id="wi-twitter" class="draggable ui-state-active ui-corner-all">Twitter</li>
-			<li id="wi-flickr" class="draggable ui-state-active ui-corner-all">Flickr</li>
-	        <li id="wi-youtube" class="draggable ui-state-active ui-corner-all">YouTube</li>
-			<li id="wi-googlemaps" class="draggable ui-state-active ui-corner-all">Google Maps</li>
-	    </ul>
-	    </div>
+    <div id="sb-widgets-menu" class="widget box_round_6">
+        <div id="sb-widgets-header">
+    	<fb:profile-pic uid="loggedinuser" size="square" facebook-logo="true"></fb:profile-pic>
+    	</div>
+    	<div id="controller-tabs">
+        	<ul>
+        		<li><a href="#tabs-1">Widgets</a></li>
+        		<li><a href="#tabs-2">Settings</a></li>
+        	</ul>
+        	<div id="tabs-1">
+        		<p>Drag &amp; drop widgets in the widgets-area on your page.</p>
+        		<div class="yui3-g">
+        	    <ul class="yui3-u-1-2">
+        			<li id="wi-text" class="draggable ui-state-default ui-corner-all">Text</li>
+        			<li id="wi-twitter" class="draggable ui-state-default ui-corner-all">Twitter</li>
+        			<li id="wi-flickr" class="draggable ui-state-default ui-corner-all">Flickr</li>
+        	        <li id="wi-youtube" class="draggable ui-state-default ui-corner-all">YouTube</li>
+        			<li id="wi-googlemaps" class="draggable ui-state-default ui-corner-all">Google Maps</li>
+        	    </ul>
+        	    <ul class="yui3-u-1-2">
+        			<li id="wi-facebookwall" class="draggable ui-state-default ui-corner-all">Facebook Wall</li>
+        			<li id="wi-feed" class="draggable ui-state-default ui-corner-all">Feed</li>
+        			<li id="wi-wufoo" class="draggable ui-state-default ui-corner-all">WuFoo</li>
+        	        <li id="wi-mailchimp" class="draggable ui-state-default ui-corner-all">MailChimp</li>
+        	        <li id="wi-embedly" class="draggable ui-state-default ui-corner-all">Embedly</li>
+        	    </ul>
+        	    </div>
+        	</div>
+        	<div id="tabs-2">
+        	    <div id="options_ga" class="gray_boxer">
+            		<h3>Google Analytics</h3>
+            		<p>Get analytics on your site. Simply give us your Google Analytics Domain ID (something like UA-123456-1) and we'll add it to your page. Leave blank if none.</p>
+            		<div>
+            		    <input type="text" id="google_analytics" name="google_analytics" value=""></input>
+            		</div>
+        		</div>
+        	</div>
+        </div>
     </div>
 
 
@@ -62,7 +88,7 @@
 
 
 <!-- Dialogs -->
-<div id="upload-dialog" title="upload">
+<div id="upload-dialog" title="Upload Image">
     <div id="fileQueue"></div>
     <input type="file" name="uploadify" id="uploadify" />
     <p><a href="javascript:jQuery('#uploadify').uploadifyClearQueue()">Cancel All Uploads</a></p>
@@ -77,7 +103,7 @@
 {% endblock %}
 {% block foot %}
 <script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
-<script src="/static/js/jquery-ui-1.8.6.custom.min.js"></script>
+<script src="/static/js/jquery-ui-{{google.jquery_ui_version}}.custom.min.js"></script>
 <script src="/static/js/jquery.uploadify.v2.1.3.min.js"></script>
 <script src="/static/js/jquery.json-2.2.min.js"></script>
 <script src="/static/js/jquery.tipsy.js"></script>
