@@ -43,7 +43,12 @@ case "/upgrade":
   break;
 default:
     $(document).ready(function() {
-        
+        // Facebox
+    	$.facebox.settings.opacity = 0.2;
+    	$('a[rel*=facebox]').facebox();
+    	// Tooltips
+    	$('#fb-left-column').tipsy({content: "This is just a test Facebook Page so you can get an idea of what your page will look like after you publish it."});
+        // Scroll Controller
         var topwin = $('#sb-widgets-menu').offset().top - parseFloat($('#sb-widgets-menu').css('marginTop').replace(/auto/, 0));
         $(window).scroll(function (event) {
           if(parseFloat($('#sb-widgets-menu').css('left')) == 840){
@@ -91,13 +96,13 @@ default:
 				}*/
 		});
 
-		$( "#pagify-image" ).click(function() {
+		$( "#pagify-image" ).bind('click',function() {
 			$( "#upload-dialog" ).dialog( "open" );
 			return false;
 		});
         // Prepare Widget List for accordian and sortable
         var stop = false;
-		$( "#widget-list .wheader" ).click(function( event ) {
+		$( "#widget-list .wheader" ).bind('click',function( event ) {
 			if ( stop ) {
 				event.stopImmediatePropagation();
 				event.preventDefault();
@@ -123,7 +128,7 @@ default:
 		$('.widget-form').live("submit",function() {
           return false;
         });
-		// Make widget list draggable
+		// Make Controller list draggable
 		$( ".draggable" ).draggable({
 			connectToSortable: "#widget-list",
 			helper: "clone",
@@ -232,9 +237,17 @@ default:
         }); // end delete
         
         // Make Title editable
-        $('.inline-edit').live("dblclick", function(event, ui) {
+        $('.inline-edit').hover(
+          function () {
+            $(this).addClass("ui-state-highlight");
+          },
+          function () {
+            $(this).removeClass("ui-state-highlight");
+          }
+        );
+        $('.inline-edit').live("click", function(event, ui) {
             var oldVal = $(this).text();
-            $(this).replaceWith("<input type='text' class='inline-text' value=\"" + oldVal + "\"/>");
+            $(this).replaceWith("<input type='text' class='inline-text ui-state-highlight' value=\"" + oldVal + "\"/>");
             $('.inline-text').focus();
             $('.inline-text').bind("blur", function(event, ui) {
                 var oldVal = $(this).val();

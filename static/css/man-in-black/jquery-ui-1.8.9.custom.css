@@ -76,7 +76,7 @@
 
 /* Interaction Cues
 ----------------------------------*/
-.man-in-black .ui-state-highlight, .man-in-black .ui-widget-content .ui-state-highlight, .man-in-black .ui-widget-header .ui-state-highlight  {border: 1px solid #efe3ae; background: #fef6d2 url(images/ui-bg_glass_55_fef6d2_1x400.png) 50% 50% repeat-x; color: #333333; }
+.man-in-black .ui-state-highlight, .man-in-black .ui-widget-content .ui-state-highlight, .man-in-black .ui-widget-header .ui-state-highlight  {border: 1px solid #f9dd34; background: #ffef8f; color: #000 !important; }
 .man-in-black .ui-state-highlight a, .man-in-black .ui-widget-content .ui-state-highlight a,.ui-widget-header .ui-state-highlight a { color: #333333; }
 .man-in-black .ui-state-error, .man-in-black .ui-widget-content .ui-state-error, .man-in-black .ui-widget-header .ui-state-error {border: 1px solid #f0baa2; background: #ffd9c8 url(images/ui-bg_inset-soft_95_ffd9c8_1x100.png) 50% bottom repeat-x; color: #333333; }
 .man-in-black .ui-state-error a, .man-in-black .ui-widget-content .ui-state-error a, .man-in-black .ui-widget-header .ui-state-error a { color: #333333; }
