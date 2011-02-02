@@ -10,14 +10,19 @@ case "/dashboard":
         // Set hover state for Pages list
         $(".fbpage-item").hover(
             function () {
-                $(this).addClass("ui-state-hover hand");
+                $(this).addClass("boxer-hover");
               },
               function () {
-                $(this).removeClass("ui-state-hover hand");
+                $(this).removeClass("boxer-hover");
               }
         ).click(
             function () {
                 window.location = $(".fbpage-title a",this).attr('href');
+              }
+        );
+        $(".upgrade-ribbon").click(
+            function () {
+                window.location = $("a",this).attr('href');
               }
         );
     });
@@ -47,7 +52,7 @@ default:
     	$.facebox.settings.opacity = 0.2;
     	$('a[rel*=facebox]').facebox();
     	// Tooltips
-    	$('#fb-left-column').tipsy({content: "This is just a test Facebook Page so you can get an idea of what your page will look like after you publish it."});
+    	$('#fb-left-column').tipTip({content: "This is just a test Facebook Page so you can get an idea of what your page will look like after you publish it."});
         // Scroll Controller
         var topwin = $('#sb-widgets-menu').offset().top - parseFloat($('#sb-widgets-menu').css('marginTop').replace(/auto/, 0));
         $(window).scroll(function (event) {
