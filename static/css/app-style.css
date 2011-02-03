@@ -455,14 +455,15 @@ z-index:999;}
 /* jqury ui */
 .ui-dialog{background:#fff !important;border:10px solid #76756C !important;}
 .ui-dialog .ui-widget-header {background-image:none !important; background-color:#333 !important;
-    -moz-border-radius:none !important;
-    -webkit-border-radius:none !important;
-    border-radius:none !important;
+    -moz-border-radius:0 !important;
+    -webkit-border-radius:0 !important;
+    border-radius:0 !important;
     color:#fff !important;
     }
-.ui-dialog .ui-dialog-buttonpane{background-color:#333 !important; background:none !important;}
+.ui-dialog .ui-dialog-buttonpane{background-color:#333 !important; background:none !important;border-color:#ccc !important;}
 .ui-dialog .ui-button, .ui-dialog .ui-dialog-titlebar-close {border-color:#ccc !important;}
-.ui-dialog-content{color:#333 !important;}
+.ui-dialog-content, .ui-dialog-content a {color:#333 !important;}
+
 #widget-list .ui-icon-triangle-1-s{display:inline-block;}
 #widget-list .ui-state-active ,#widget-list .ui-accordion-content-active{background:#333 !important;border:1px solid #333 !important;}
 
