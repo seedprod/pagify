@@ -22,6 +22,7 @@ case "/dashboard":
         );
         $(".upgrade-ribbon").click(
             function () {
+                $(".fbpage-item").unbind('click');
                 window.location = $("a",this).attr('href');
               }
         );
@@ -52,7 +53,7 @@ default:
     	$.facebox.settings.opacity = 0.2;
     	$('a[rel*=facebox]').facebox();
     	// Tooltips
-    	$('#fb-left-column').tipTip({content: "This is just a test Facebook Page so you can get an idea of what your page will look like after you publish it."});
+    	$('#fb-left-column').tipTip({defaultPosition:'top',content: "This is just a test Facebook Page so you can get an idea of what your page will look like after you publish it."});
         // Scroll Controller
         var topwin = $('#sb-widgets-menu').offset().top - parseFloat($('#sb-widgets-menu').css('marginTop').replace(/auto/, 0));
         $(window).scroll(function (event) {
@@ -224,6 +225,7 @@ default:
         					$('#'+wDeleteId).fadeOut(function() {
                             $.post("/api/deletewidget", { wid: wDeleteId},function(data){
                         	    if(data){
+                        	        $('#'+wDeleteId).remove();
                         	        log('Widget Deleted');
                         	        wDeleteId = '';
                         	    };
@@ -272,17 +274,19 @@ default:
         }); // end editable
         
         // Empty widget list message.
-        $( "#widget-list" ).bind( "create sortupdate", function(event, ui) {
-        var widgeList = $("#widget-list").html().trim();
-        if(widgeList == ''){
-            $("#widget-list").html("<img src='/static/images/box_download.png'> Drag & Drop your widgets into this area.");
-        }
-        });
+        /*$( "#widget-list" ).bind( "sortcreate sortupdate", function(event, ui) {
+            var size = $("#widget-list > .widget-list-item").size();
+            if(size > 0){
+                $( "#widget-list" ).css("background-image","none");
+            } else {
+                $( "#widget-list" ).css("background","#fef7d5 url(/static/images/widget-area.png) no-repeat 165px 85px");
+            }
+        });*/
         
         //Controller Tabs
         $( "#sb-widgets-menu" ).draggable({handle:".ui-widget-header", opacity:0.7});
         $( "#controller-tabs" ).tabs();
-
+        $( "#controller-tabs" ).fadeIn();
     });
 }
 

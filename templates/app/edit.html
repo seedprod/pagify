@@ -46,8 +46,8 @@
 
     <div id="sb-widgets-menu" class="widget box_round_6">
         <div id="sb-widgets-header">
-            <div id="facebook-publish" class="hand">
-            </div>
+            <a href="#fbox-install" rel="facebox"><div id="facebook-publish" class="hand">
+            </div></a>
     	</div>
     	<div id="controller-tabs">
         	<ul>
@@ -116,7 +116,9 @@ $.ajaxSetup ({
     cache: false
 });
 $(document).ready(function() {
-	
+	 // Facebox
+    	$.facebox.settings.opacity = 0.2;
+    	$('a[rel*=facebox]').facebox();
 	// Uploadify
 	var scriptUrl = '{{upload_url}}';
 	$("#uploadify").uploadify({
