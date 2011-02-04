@@ -71,7 +71,7 @@ body {line-height:1.22;background:#DDE3E5 url(/static/images/bg.png) repeat;}
 
 /* 1.1 Defaults */
 html {background:transparent;}
-body, select, input, textarea { color:#888; text-shadow: white 0px 1px 0px;  }
+body, select, input, textarea { color:#000; text-shadow: white 0px 1px 0px;  }
 h1,h2,h3,h4,h5,h6{color:#333;}
 h1,h2,h3,h4,h5,h6{font-weight:bold;}
 h1{font-size:197%;}
@@ -466,7 +466,7 @@ z-index:999;}
 
 #widget-list .ui-icon-triangle-1-s{display:inline-block;}
 #widget-list .ui-state-active ,#widget-list .ui-accordion-content-active{background:#333 !important;border:1px solid #333 !important;}
-
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight  {border: 1px solid #f9dd34 !important; background: #ffef8f !important; color: #333333; }
 /*#widget-list .ui-accordion-content form{margin:7px;}*/
 
 #wi-text{background:#e5e5e5 url(/static/images/text_16.png) no-repeat 2px 2px;padding-left:20px !important;color:#000;}
@@ -480,7 +480,8 @@ z-index:999;}
 #wi-wufoo{background:#BF423A url(/static/images/wufoo_16.png) no-repeat 2px 2px;padding-left:20px !important;color:#fff;}
 #wi-embedly{background:#F26627 url(/static/images/embedly_16.png) no-repeat 2px 2px;padding-left:20px !important;color:#fff;}
 #options_ga h3{background:transparent url(/static/images/googleanalytics_16.png) no-repeat 2px 0px;padding-left:20px !important;font-weight:normal;}
-
+.widget-form{font-size:93%;}
+.widget-form input{width:100%;}
 
 /* 2.2 Uploader */
 .uploadifyQueueItem {

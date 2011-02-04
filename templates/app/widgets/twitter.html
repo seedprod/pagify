@@ -1,0 +1,10 @@
+<form id="fm-{{widget.id}}" class="widget-form">
+    Twitter Username:<br/>
+    <input type="text" name="twitter_username" class="{{widget.id}}" value="{{widget.twitter_username|default:""}}"></input>
+</form>
+
+<script>
+$('.{{widget.id}}').bind("blur",function() { 
+	saveWidget('{{widget.id}}');
+});
+</script>

@@ -1,1 +1,10 @@
-Coming Soon!
+<img id="pagify-image" class="" src="{{page.header_image_url|default_if_none:"#"}}=s520"/>
+
+<div id="widget-list" class="">
+	{% for w in widgets %}
+	<div id="{{w.id}}" class="widget-list-item">
+		<h3><a href="#">{{w.name}}</a></h3>
+		<div>{{w.contents}}</div>
+	</div>
+	{% endfor %}
+</div>

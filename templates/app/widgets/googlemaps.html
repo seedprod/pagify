@@ -1,0 +1,10 @@
+<form id="fm-{{widget.id}}" class="widget-form">
+Google Maps Link:<br/>
+<input type="text" name="googlemaps_link" class="{{widget.id}}" value="{{widget.googlemaps_link|default:""}}"></input>
+</form>
+
+<script>
+$('.{{widget.id}}').bind("blur",function() { 
+	saveWidget('{{widget.id}}');
+});
+</script>

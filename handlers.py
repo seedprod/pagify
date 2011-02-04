@@ -191,9 +191,9 @@ class EditPageHandler(BaseHandler):
                     page = p
                     widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
                     admin = True
-            page.picture = page.picture.replace("_s","_n")
         except:
-            pages = None
+            page = None
+            widgets = None
         if admin:
             #page = Page.get_by_key_name(str(page_id))
             upload_url = blobstore.create_upload_url('/upload')
@@ -314,6 +314,9 @@ class AjaxApiHandler(BaseHandler):
                                 contents = self.request.get('wcontents'),
                                 last_modified_by = user
                                )
+                fields = simplejson.loads(self.request.get('wcontents'))
+                for k,v in fields.iteritems():
+                    setattr(widget, k, v)
             else:
                 widget.name = self.request.get('wname')
                 widget.contents = self.request.get('wcontents')
@@ -378,9 +381,15 @@ class fbCanvasHandler(BaseHandler):
 
 class fbTabHandler(BaseHandler):
     def get(self, **kwargs):
-        self.render("app/fb-tab.html", )
+        self.render("app/fb-tab.html", post=self.request.get('fb_sig_page_id'),method='get')
     def post(self, **kwargs):
-        self.render("app/fb-tab.html", )
+        page_id = self.request.get('fb_sig_page_id')
+        try:
+            page = Page.get_by_key_name(page_id)
+            widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
+        except:
+            widgets=None
+        self.render("app/fb-tab.html", page=page,widgets=widgets)
          
 class WallHandler(BaseHandler):
     #@fblogin_required
