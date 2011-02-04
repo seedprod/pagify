@@ -196,6 +196,7 @@ class EditPageHandler(BaseHandler):
             widgets = None
         if admin:
             #page = Page.get_by_key_name(str(page_id))
+            add_app_url = 'https://www.facebook.com/add.php?api_key=a284fdd504b5191923362afabc0ea6c7&pages=1&page=141947329155355'
             upload_url = blobstore.create_upload_url('/upload')
             page_id = encrypt(page_id).encode('hex')
             self.render("app/edit.html", admin=True, page=page,upload_url=upload_url, page_id=page_id,widgets= widgets) 

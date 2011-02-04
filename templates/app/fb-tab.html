@@ -1,4 +1,6 @@
-<img id="pagify-image" class="" src="{{page.header_image_url|default_if_none:"#"}}=s520"/>
+{% if page.header_image_url %}
+<img id="pagify-image" class="" src="{{page.header_image_url}}=s520"/>
+{% endif %}
 
 <div id="widget-list" class="">
 	{% for w in widgets %}
