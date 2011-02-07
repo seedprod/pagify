@@ -450,6 +450,7 @@ z-index:999;}
     height: 22px;
     margin: 7px auto;
     width: 150px;
+    display:block;
 }
 
 /* jqury ui */

@@ -8,7 +8,8 @@ if 'lib' not in sys.path:
 # Import Webapp2
 import webapp2 as webapp
 from webapp2 import RedirectHandler, Route
-
+from google.appengine.dist import use_library
+use_library('django', '1.1')
 from google.appengine.ext.webapp import template
 
 # Error Handlers    
@@ -19,7 +20,7 @@ class Handle404(webapp.RequestHandler):
             }
             
         self.response.set_status(404)
-        path = os.path.join(os.path.dirname(__file__), "templates", 'errors/404.html')
+        path = os.path.join(os.path.dirname(__file__), "templates/errors", '404.html')
         self.response.out.write(template.render(path, template_values))
 
 class Handle500(webapp.RequestHandler):
@@ -29,7 +30,7 @@ class Handle500(webapp.RequestHandler):
             }
 
         self.response.set_status(500)
-        path = os.path.join(os.path.dirname(__file__), "templates", 'errors/500.html')
+        path = os.path.join(os.path.dirname(__file__), "templates/errors", '500.html')
         self.response.out.write(template.render(path, template_values))
 
 # Is this the development server?

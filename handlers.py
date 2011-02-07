@@ -7,6 +7,7 @@ import re
 import urllib
 import spreedly
 import base64
+#import markdown
 import webapp2 as webapp
 from xml.dom import minidom
 from utils import fblogin_required,encrypt,decrypt, xmltodict
@@ -20,6 +21,7 @@ from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.webapp import template
 from google.appengine.runtime.apiproxy_errors import CapabilityDisabledError
 from django.utils import simplejson
+#from django.contrib.markup.templatetags import markup 
 
 # Session Extention
 #import extras.extension_support
@@ -382,7 +384,13 @@ class fbCanvasHandler(BaseHandler):
 
 class fbTabHandler(BaseHandler):
     def get(self, **kwargs):
-        self.render("app/fb-tab.html", post=self.request.get('fb_sig_page_id'),method='get')
+        page_id = self.request.get('fb_sig_page_id')
+        try:
+            page = Page.get_by_key_name(page_id)
+            widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
+        except:
+            widgets=None
+        self.render("app/fb-tab.html", page=page,widgets=widgets, method="get")
     def post(self, **kwargs):
         page_id = self.request.get('fb_sig_page_id')
         try:
@@ -390,7 +398,7 @@ class fbTabHandler(BaseHandler):
             widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
         except:
             widgets=None
-        self.render("app/fb-tab.html", page=page,widgets=widgets)
+        self.render("app/fb-tab.html", page=page,widgets=widgets, method="post")
          
 class WallHandler(BaseHandler):
     #@fblogin_required

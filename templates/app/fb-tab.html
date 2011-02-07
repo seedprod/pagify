@@ -1,12 +1,38 @@
-{% if page.header_image_url %}
-<img id="pagify-image" class="" src="{{page.header_image_url}}=s520"/>
-{% endif %}
+{% ifequal method "post" %}
+Coming Soon!
+{% else %}
+    {% if page.header_image_url %}
+    <img id="pagify-image" class="" src="{{page.header_image_url}}=s520"/>
+    {% endif %}
 
-<div id="widget-list" class="">
-	{% for w in widgets %}
-	<div id="{{w.id}}" class="widget-list-item">
-		<h3><a href="#">{{w.name}}</a></h3>
-		<div>{{w.contents}}</div>
-	</div>
-	{% endfor %}
-</div>
+    <div id="widget-list" class="">
+    	{% for w in widgets %}
+    	    <div id="{{w.id}}" class="widget-list-item {{w.type}}">
+        		<h3><a href="#">{{w.name}}</a></h3>
+        		<div>
+    	            {% ifequal w.type "text" %}
+                        {% include "inc/w_text.html" %}
+        	        {% endifequal %}
+        	        {% ifequal w.type "twitter" %}
+                        {% include "inc/w_twitter.html" %}
+        	        {% endifequal %}
+        	        {% ifequal w.type "flickr" %}
+                        {% include "inc/w_flickr.html" %}
+        	        {% endifequal %}
+        	        {% ifequal w.type "youtube" %}
+                        {% include "inc/w_youtube.html" %}
+        	        {% endifequal %}
+        	        {% ifequal w.type "feed" %}
+                        {% include "inc/w_feed.html" %}
+        	        {% endifequal %}
+        	        {% ifequal w.type "googlemaps" %}
+                        {% include "inc/w_googlemaps.html" %}
+        	        {% endifequal %}
+        	        {% ifequal w.type "embedly" %}
+                        {% include "inc/w_embedly.html" %}
+        	        {% endifequal %}
+        	    </div>
+            </div>
+    	{% endfor %}
+    </div>
+{% endifequal %}
