@@ -377,10 +377,19 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
         
 ''' Facebook FrontEnd '''  
 class fbCanvasHandler(BaseHandler):
-    def get(self, **kwargs):
+    '''def get(self, **kwargs):
         self.render("app/fb-canvas.html", )
     def post(self, **kwargs):
-        self.render("app/fb-canvas.html", )
+        self.render("app/fb-canvas.html", )'''
+    def get(self, **kwargs):
+        page_id = self.request.get('page_id')
+        try:
+            page = Page.get_by_key_name(page_id)
+            widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
+        except:
+            page=None
+            widgets=None
+        self.render("app/fb-tab.html", page=page,widgets=widgets, method="get")
 
 class fbTabHandler(BaseHandler):
     def get(self, **kwargs):
@@ -389,6 +398,7 @@ class fbTabHandler(BaseHandler):
             page = Page.get_by_key_name(page_id)
             widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
         except:
+            page=None
             widgets=None
         self.render("app/fb-tab.html", page=page,widgets=widgets, method="get")
     def post(self, **kwargs):
@@ -397,6 +407,7 @@ class fbTabHandler(BaseHandler):
             page = Page.get_by_key_name(page_id)
             widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
         except:
+            page=None
             widgets=None
         self.render("app/fb-tab.html", page=page,widgets=widgets, method="post")
          
