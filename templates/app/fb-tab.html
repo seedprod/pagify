@@ -1,45 +1,69 @@
 {% ifequal method "post" %}
-Coming Soon!
+    Coming Soon!
 {% else %}
-<fb:name uid="loggedinuser" use-you="no"></fb:name>
-    {% if page.header_image_url %}
-    <img id="pagify-image" class="" src="{{page.header_image_url}}=s520"/>
-    {% endif %}
+<!doctype html>  
 
-    <div id="widget-list" class="">
-    	{% for w in widgets %}
-    	    <div id="{{w.id}}" class="widget-list-item {{w.type}}">
-        		<h3><a href="#">{{w.name}}</a></h3>
-        		<div>
-    	            {% ifequal w.type "text" %}
-                        {% include "inc/w_text.html" %}
-        	        {% endifequal %}
-        	        {% ifequal w.type "twitter" %}
-                        {% include "inc/w_twitter.html" %}
-        	        {% endifequal %}
-        	        {% ifequal w.type "flickr" %}
-                        {% include "inc/w_flickr.html" %}
-        	        {% endifequal %}
-        	        {% ifequal w.type "youtube" %}
-                        {% include "inc/w_youtube.html" %}
-        	        {% endifequal %}
-        	        {% ifequal w.type "feed" %}
-                        {% include "inc/w_feed.html" %}
-        	        {% endifequal %}
-        	        {% ifequal w.type "googlemaps" %}
-                        {% include "inc/w_googlemaps.html" %}
-        	        {% endifequal %}
-        	        {% ifequal w.type "embedly" %}
-                        {% include "inc/w_embedly.html" %}
-        	        {% endifequal %}
-        	    </div>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <link rel="stylesheet" href="/static/css/man-in-black/jquery-ui-{{google.jquery_ui_version}}.custom.css">
+  <link rel="stylesheet" href="/static/css/pagify-style.css?v=1">
+  <script src="/static/js/modernizr-1.6.min.js"></script>
+</head>
+<body>
+  <div id="container">
+    <header>
+    </header>
+    <div id="main">
+        <fb:name uid="loggedinuser" use-you="no"></fb:name>
+            {% if page.header_image_url %}
+            <img id="pagify-image" class="" src="{{page.header_image_url}}=s520"/>
+            {% endif %}
+
+            <div id="pagify-widget-list-1" class="">
+            	{% for w in widgets %}
+            	    <div id="{{w.id}}" class="widget-list-item {{w.type}}">
+                		<h3><a href="#">{{w.name}}</a></h3>
+                		<div>
+            	            {% ifequal w.type "text" %}
+                                {% include "inc/w_text.html" %}
+                	        {% endifequal %}
+                	        {% ifequal w.type "twitter" %}
+                                {% include "inc/w_twitter.html" %}
+                	        {% endifequal %}
+                	        {% ifequal w.type "flickr" %}
+                                {% include "inc/w_flickr.html" %}
+                	        {% endifequal %}
+                	        {% ifequal w.type "youtube" %}
+                                {% include "inc/w_youtube.html" %}
+                	        {% endifequal %}
+                	        {% ifequal w.type "feed" %}
+                                {% include "inc/w_feed.html" %}
+                	        {% endifequal %}
+                	        {% ifequal w.type "googlemaps" %}
+                                {% include "inc/w_googlemaps.html" %}
+                	        {% endifequal %}
+                	        {% ifequal w.type "embedly" %}
+                                {% include "inc/w_embedly.html" %}
+                	        {% endifequal %}
+                	    </div>
+                    </div>
+            	{% endfor %}
             </div>
-    	{% endfor %}
-    </div>
+      </div>
+      <footer>
+      </footer>
+    </div> <!-- end of #container -->
     <div id="fb-root"></div>
     <script>
       window.fbAsyncInit = function() {
-        FB.init({appId: '141947329155355', status: true, cookie: true, xfbml: true});
+        FB.init({appId: '{{facebook.app_id}}', status: true, cookie: true, xfbml: true});
     	FB.Canvas.setAutoResize();
       };
       (function() {
@@ -50,5 +74,24 @@ Coming Soon!
         e.async = true;
         document.getElementById('fb-root').appendChild(e);
       }());
+    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/{{google.jquery_version}}/jquery.js"></script>
+    <script>!window.jQuery && document.write(unescape('%3Cscript src=" /static/js/jquery-{{google.jquery_version}}.js"%3E%3C/script%3E'))</script>
+    <script src="/static/js/jquery-ui-{{google.jquery_ui_version}}.custom.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/script.js"></script>
+    <!--[if lt IE 7 ]>
+        <script src="/static/js/dd_belatedpng.js"></script>
+        <script> DD_belatedPNG.fix('img, .png_bg'); </script>
+      <![endif]-->
+    <script>
+     var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
+     (function(d, t) {
+      var g = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      g.async = true;
+      g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g, s);
+     })(document, 'script');
     </script>
 {% endifequal %}

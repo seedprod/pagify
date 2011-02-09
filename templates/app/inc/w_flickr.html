@@ -1,0 +1,9 @@
+<script>
+$(document).ready(function() {
+yqlQuery('USE "http://app.pagifyapp.com/static/yql/flickr.getidfromusername.xml";select user_id from flickr.getidfromusername where username="{{w.flickr_username}}"', 'flickr_cbFunc')
+});
+function flickr_cbFunc(data) {
+    log(data);
+}
+</script>
+<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=10&display=latest&size=t&layout=x&source=user&user=80602895%40N00"></script>
