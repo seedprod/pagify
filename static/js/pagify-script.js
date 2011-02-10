@@ -1,7 +1,3 @@
-$(document).ready(function() {
-    $( "#pagify-widget-list-1" ).accordion();
-});
-
 function yqlQuery(query,cbFunc,format,env,maxage) {
     var yqlURL = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from html where url="' + site + '"') + '&format=xml&diagnostics=false&_maxage=3600';
     query = typeof(query) != 'undefined' ? encodeURIComponent(query) : '';
