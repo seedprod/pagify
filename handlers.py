@@ -55,30 +55,33 @@ class BaseHandler(webapp.RequestHandler):
     #flashes = self.sessions.get_flash()
     @property
     def current_user(self):
-        """Returns the active user, or None if the user has not logged in."""
-        if not hasattr(self, "_current_user"):
+        try:
+            """Returns the active user, or None if the user has not logged in."""
+            if not hasattr(self, "_current_user"):
+                self._current_user = None
+                cookie = facebook.get_user_from_cookie(
+                    self.request.cookies, self.get_config('facebook', 'app_id'), self.get_config('facebook', 'app_secret'))
+                if cookie:
+                    # Store a local instance of the user data so we don't need
+                    # a round-trip to Facebook on every request
+                    user = User.get_by_key_name(cookie["uid"])
+                    if not user:
+                        graph = facebook.GraphAPI(cookie["access_token"])
+                        profile = graph.get_object("me")
+                        user = User(key_name=str(profile["id"]),
+                                    id=str(profile["id"]),
+                                    name=profile["name"],
+                                    email=profile["email"],
+                                    profile_url=profile["link"],
+                                    access_token=cookie["access_token"])
+                        user.put()
+                    elif user.access_token != cookie["access_token"]:
+                        user.access_token = cookie["access_token"]
+                        user.put()
+                    self._current_user = user
+            return self._current_user
+        except:
             self._current_user = None
-            cookie = facebook.get_user_from_cookie(
-                self.request.cookies, self.get_config('facebook', 'app_id'), self.get_config('facebook', 'app_secret'))
-            if cookie:
-                # Store a local instance of the user data so we don't need
-                # a round-trip to Facebook on every request
-                user = User.get_by_key_name(cookie["uid"])
-                if not user:
-                    graph = facebook.GraphAPI(cookie["access_token"])
-                    profile = graph.get_object("me")
-                    user = User(key_name=str(profile["id"]),
-                                id=str(profile["id"]),
-                                name=profile["name"],
-                                email=profile["email"],
-                                profile_url=profile["link"],
-                                access_token=cookie["access_token"])
-                    user.put()
-                elif user.access_token != cookie["access_token"]:
-                    user.access_token = cookie["access_token"]
-                    user.put()
-                self._current_user = user
-        return self._current_user
 
     @property
     def graph(self):
@@ -392,16 +395,8 @@ class fbCanvasHandler(BaseHandler):
         self.render("app/fb-tab.html", page=page,widgets=widgets, method="get")
 
 class fbTabHandler(BaseHandler):
-    def get(self, **kwargs):
-        page_id = self.request.get('fb_sig_page_id')
-        try:
-            page = Page.get_by_key_name(page_id)
-            widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
-        except:
-            page=None
-            widgets=None
-        self.render("app/fb-tab.html", page=page,widgets=widgets, method="get")
     def post(self, **kwargs):
+        logging.info(self.request)
         page_id = self.request.get('fb_sig_page_id')
         try:
             page = Page.get_by_key_name(page_id)

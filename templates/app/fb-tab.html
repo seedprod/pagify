@@ -1,6 +1,3 @@
-{% ifequal method "post" %}
-    Coming Soon!
-{% else %}
 <!doctype html>  
 
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
@@ -19,7 +16,7 @@
 </head>
 <body>
   <div id="container">
-    <header>
+    <header>{{method}}
     </header>
     <div id="main">
             {% if page.header_image_url %}
@@ -98,4 +95,3 @@
       s.parentNode.insertBefore(g, s);
      })(document, 'script');
     </script>
-{% endifequal %}
