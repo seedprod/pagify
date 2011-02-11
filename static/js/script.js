@@ -174,6 +174,8 @@ default:
    						}
    					});
    					$(".wheader").unbind('keydown');
+   					saveWidget(wId);
+   					$("#widget-list").accordion( "activate" , "#" + wId + " > .wheader" );
 			   });//end ajax request
                	
 			   } // end if
@@ -194,6 +196,12 @@ default:
 		    $(firstWidget).load("/api/getwidget?wid="+ encodeURIComponent($("#widget-list > div:eq(0)").attr('id')));
 	    }
 	    
+	    // Save widget after drop
+	    $( "#widget-list" ).bind( "sortreceive", function(event, ui) {
+	      log(this);
+          log('sortreceive');
+        });
+	    
 	    // Sort update
 	    $( "#widget-list" ).bind( "sortupdate", function(event, ui) {
 	        log('sortupdate');
@@ -204,11 +212,13 @@ default:
                 }
                 pageOrder = pageOrder + $(this).attr('id');
             });
-            $.post("/api/savepageorder", { pageorder: pageOrder},function(data){
-        	    if(data){
-        	        log('Saved Page Order');
-        	    };
-        	});//end ajax request
+            if (pageOrder != ''){
+                $.post("/api/savepageorder", { pageorder: pageOrder},function(data){
+            	    if(data){
+            	        log('Saved Page Order');
+            	    };
+            	});//end ajax request
+    	    }
         }); // end sort
         
         // Delete update
@@ -244,14 +254,14 @@ default:
         }); // end delete
         
         // Make Title editable
-        $('.inline-edit').hover(
-          function () {
+        $('.inline-edit').live('mouseover mouseout', function(event) {
+          if (event.type == 'mouseover') {
             $(this).addClass("ui-state-highlight");
-          },
-          function () {
-            $(this).removeClass("ui-state-highlight");
+          } else {
+             $(this).removeClass("ui-state-highlight");
           }
-        );
+        });
+
         $('.inline-edit').live("click", function(event, ui) {
             var oldVal = $(this).text();
             $(this).replaceWith("<input type='text' class='inline-text ui-state-highlight' value=\"" + oldVal + "\"/>");
@@ -284,7 +294,7 @@ default:
         });*/
         
         //Controller Tabs
-        $( "#sb-widgets-menu" ).draggable({handle:".ui-widget-header", opacity:0.7});
+        $( "#sb-widgets-menu" ).draggable({handle:".sb-widgets-header", opacity:0.7});
         $( "#controller-tabs" ).tabs();
         $( "#controller-tabs" ).fadeIn();
     });

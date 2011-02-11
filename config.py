@@ -10,11 +10,12 @@ config['site'] = {
 config['facebook'] = {
     'app_id': '141947329155355',
     'app_secret': '3e48982a6ea78c23afce0209e96fcc7a',
+    'api_key': 'a284fdd504b5191923362afabc0ea6c7',
 }
 
 config['google'] = {
     'api_key': 'AIzaSyBWk2VmSTr0NZEcYvE7o11A7Rkl4gRF-LY',
-    'jquery_version': '1.5.0',
+    'jquery_version': '1.4.4',
     'jquery_ui_version': '1.8.9',
 }
 

@@ -317,19 +317,37 @@ class AjaxApiHandler(BaseHandler):
                                 type = self.request.get('wtype'),
                                 name = self.request.get('wname'),
                                 page = page,
-                                contents = self.request.get('wcontents'),
+                                #contents = self.request.get('wcontents'),
                                 last_modified_by = user
                                )
                 fields = simplejson.loads(self.request.get('wcontents'))
                 for k,v in fields.iteritems():
-                    setattr(widget, k, v)
+                    db_type = k.split('__')
+                    try:
+                        db_type = db_type[1]
+                    except KeyError:
+                        db_type = None
+                    logging.info(db_type)
+                    if db_type == 'text':
+                        setattr(widget, k, db.Text(v))
+                    else:
+                        setattr(widget, k, v)
             else:
                 widget.name = self.request.get('wname')
-                widget.contents = self.request.get('wcontents')
+                #widget.contents = self.request.get('wcontents')
                 widget.last_modified_by = user
                 fields = simplejson.loads(self.request.get('wcontents'))
                 for k,v in fields.iteritems():
-                    setattr(widget, k, v)
+                    db_type = k.split('__')
+                    try:
+                        db_type = db_type[1]
+                    except KeyError:
+                        db_type = None
+                    logging.info(db_type)
+                    if db_type == 'text':
+                        setattr(widget, k, db.Text(v))
+                    else:
+                        setattr(widget, k, v)
             
             try:
                 db.put(widget)
@@ -396,8 +414,13 @@ class fbCanvasHandler(BaseHandler):
 
 class fbTabHandler(BaseHandler):
     def post(self, **kwargs):
-        logging.info(self.request)
-        page_id = self.request.get('fb_sig_page_id')
+        #logging.info(self.request)
+        signed_request = facebook.parse_signed_request(self.request.get('signed_request'),self.get_config('facebook','app_secret'))
+        #logging.info(signed_request)
+        user_id = signed_request['user_id']
+        page_id = signed_request['page']['id']
+        liked = signed_request['page']['liked']
+        admin = signed_request['page']['admin']
         try:
             page = Page.get_by_key_name(page_id)
             widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')

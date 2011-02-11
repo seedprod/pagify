@@ -57,19 +57,19 @@
         		<p>Drag &amp; drop widgets into the Widget Area on your page.</p>
         		<div class="yui3-g">
         	    <ul class="yui3-u-1-2">
-        			<li id="wi-text" class="draggable ui-state-default ui-corner-all">Text</li>
-        			<li id="wi-twitter" class="draggable ui-state-default ui-corner-all">Twitter</li>
-        			<li id="wi-flickr" class="draggable ui-state-default ui-corner-all">Flickr</li>
-        	        <li id="wi-youtube" class="draggable ui-state-default ui-corner-all">YouTube</li>
+        			<li id="wi-text" class="wi draggable ui-state-default ui-corner-all">Text</li>
+        			<li id="wi-twitter" class="wi draggable ui-state-default ui-corner-all">Twitter</li>
+        			<li id="wi-flickr" class="wi draggable ui-state-default ui-corner-all">Flickr</li>
+        	        <li id="wi-youtube" class="wi draggable ui-state-default ui-corner-all">YouTube</li>
         			
         	    </ul>
         	    <ul class="yui3-u-1-2">
-        	        <li id="wi-googlemaps" class="draggable ui-state-default ui-corner-all">Google Maps</li>
-        			<!--<li id="wi-facebookwall" class="draggable ui-state-default ui-corner-all">Facebook Wall</li>-->
-        			<li id="wi-feed" class="draggable ui-state-default ui-corner-all">Feed</li>
-        			<!--<li id="wi-wufoo" class="draggable ui-state-default ui-corner-all">WuFoo</li>-->
-        	        <!--<li id="wi-mailchimp" class="draggable ui-state-default ui-corner-all">MailChimp</li>-->
-        	        <li id="wi-embedly" class="draggable ui-state-default ui-corner-all">Embedly</li>
+        	        <li id="wi-googlemaps" class="wi draggable ui-state-default ui-corner-all">Google Maps</li>
+        			<!--<li id="wi-facebookwall" class="wi draggable ui-state-default ui-corner-all">Facebook Wall</li>-->
+        			<li id="wi-feed" class="wi draggable ui-state-default ui-corner-all">Feed</li>
+        			<!--<li id="wi-wufoo" class="wi draggable ui-state-default ui-corner-all">WuFoo</li>-->
+        	        <!--<li id="wi-mailchimp" class="wi draggable ui-state-default ui-corner-all">MailChimp</li>-->
+        	        <li id="wi-embedly" class="wi draggable ui-state-default ui-corner-all">Embedly</li>
         	    </ul>
         	    </div>
         	</div>
@@ -100,7 +100,7 @@
 </div>
 <div id="fbox-install" style="display:none;">
     <p>Install instructions.</p>
-    <!--http://www.facebook.com/add.php?api_key=177913008913120&pages=1&page=157417897619980-->
+    <a href="http://www.facebook.com/add.php?api_key={{facebook.api_key}}&pages=1&page={{page.id}}">Install</a>
 </div>
 <span id="page-id" class="hidden">{{page.id}}</span>
 {% endblock %}
