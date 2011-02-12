@@ -22,14 +22,12 @@ skip_files: |
 builtins:
 - remote_api: on
 - datastore_admin: on
+- deferred: on
 
 inbound_services:
 - warmup
 
 handlers:
-- url: /_ah/queue/deferred
-  script: $PYTHON_LIB/google/appengine/ext/deferred/deferred.py
-  login: admin
 
 - url: /(robots\.txt|favicon\.ico|apple-touch-icon\.png)
   static_files: static/\1

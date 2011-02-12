@@ -5,6 +5,8 @@ $.ajaxSetup ({
 });
 switch(location.pathname)
 {
+case "/":
+    break;
 case "/dashboard":
     $(document).ready(function() {
         // Set hover state for Pages list
@@ -49,11 +51,7 @@ case "/upgrade":
   break;
 default:
     $(document).ready(function() {
-        // Facebox
-    	$.facebox.settings.opacity = 0.2;
-    	$('a[rel*=facebox]').facebox();
-    	// Tooltips
-    	$('#fb-left-column').tipTip({defaultPosition:'top',content: "This is just a test Facebook Page so you can get an idea of what your page will look like after you publish it."});
+
         // Scroll Controller
         var topwin = $('#sb-widgets-menu').offset().top - parseFloat($('#sb-widgets-menu').css('marginTop').replace(/auto/, 0));
         $(window).scroll(function (event) {
@@ -186,7 +184,8 @@ default:
 		$("#widget-list" ).bind('accordionchange', function(event, ui) {
 		  log('accordionchange');
 		  if($(ui.newContent).html() == 'Loading...'){
-		      $(ui.newContent).load("/api/getwidget?wid="+ encodeURIComponent($(ui.newContent).parent('div').attr('id')));
+		      wid = $(ui.newContent).parent('div').attr('id');
+		      $(ui.newContent).load("/api/getwidget?wid="+ encodeURIComponent(wid));
 		  }
 		});
 		
@@ -197,10 +196,10 @@ default:
 	    }
 	    
 	    // Save widget after drop
-	    $( "#widget-list" ).bind( "sortreceive", function(event, ui) {
+	    /*$( "#widget-list" ).bind( "sortreceive", function(event, ui) {
 	      log(this);
           log('sortreceive');
-        });
+        });*/
 	    
 	    // Sort update
 	    $( "#widget-list" ).bind( "sortupdate", function(event, ui) {
@@ -294,7 +293,7 @@ default:
         });*/
         
         //Controller Tabs
-        $( "#sb-widgets-menu" ).draggable({handle:".sb-widgets-header", opacity:0.7});
+        $( "#sb-widgets-menu" ).draggable({handle:"#sb-widgets-header", opacity:0.7});
         $( "#controller-tabs" ).tabs();
         $( "#controller-tabs" ).fadeIn();
     });

@@ -9,7 +9,7 @@ if 'lib' not in sys.path:
 import webapp2 as webapp
 from webapp2 import RedirectHandler, Route
 from google.appengine.dist import use_library
-use_library('django', '1.1')
+use_library('django', '1.2')
 from google.appengine.ext.webapp import template
 
 # Error Handlers    

@@ -78,7 +78,7 @@
             		<h3>Google Analytics</h3>
             		<p>Get analytics on your page. Simply give us your Google Analytics Domain ID (something like UA-123456-1) and we'll add it to your page. Leave blank if none.</p>
             		<div>
-            		    <input type="text" id="google_analytics" name="google_analytics" value=""></input>
+            		    <input type="text" id="google_analytics_ua"></input>
             		</div>
         		</div>
         	</div>
@@ -90,12 +90,12 @@
 
 
 <!-- Dialogs -->
-<div id="upload-dialog" title="Upload Image">
+<div id="upload-dialog" title="Upload Image" style="display:none;">
     <div id="fileQueue"></div>
     <input type="file" name="uploadify" id="uploadify" />
     <p><a href="javascript:jQuery('#uploadify').uploadifyClearQueue()">Cancel All Uploads</a></p>
 </div>
-<div id="dialog-delete-confirm" title="Delete Widget?">
+<div id="dialog-delete-confirm" title="Delete Widget?" style="display:none;">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>This widget will be permanently deleted and cannot be recovered. Are you sure?</p>
 </div>
 <div id="fbox-install" style="display:none;">
@@ -119,6 +119,8 @@ $(document).ready(function() {
 	 // Facebox
     	$.facebox.settings.opacity = 0.7;
     	$('a[rel*=facebox]').facebox();
+    	// Tooltips
+    	$('#fb-left-column').tipTip({defaultPosition:'top',content: "This is just a test Facebook Page so you can get an idea of what your page will look like after you publish it."});
 	// Uploadify
 	var scriptUrl = '{{upload_url}}';
 	$("#uploadify").uploadify({
@@ -145,6 +147,17 @@ $(document).ready(function() {
                        } else {$.get("/api/scripturl", function(data){scriptUrl=data;});}
                     }
 	});
+});
+
+var timeout_ga_ua;
+$('#google_analytics_ua').bind('textchange', function () {
+  clearTimeout(timeout_ga_ua);
+  //$('#ajaxFired').html('<strong>Typing...</strong>');
+    var self = this;
+    timeout_ga_ua = setTimeout(function () {
+        log($(self).val());
+    //$('#ajaxFired').html('<strong>Saved</strong>: ' + $(self).val());
+  }, 1000);
 });
 </script>
 {% endblock %}

@@ -325,7 +325,7 @@ class AjaxApiHandler(BaseHandler):
                     db_type = k.split('__')
                     try:
                         db_type = db_type[1]
-                    except KeyError:
+                    except IndexError:
                         db_type = None
                     logging.info(db_type)
                     if db_type == 'text':
@@ -341,7 +341,7 @@ class AjaxApiHandler(BaseHandler):
                     db_type = k.split('__')
                     try:
                         db_type = db_type[1]
-                    except KeyError:
+                    except IndexError:
                         db_type = None
                     logging.info(db_type)
                     if db_type == 'text':

@@ -48,9 +48,9 @@ class Widget(db.Expando):
 
     
 class Option(db.Model):
-    id = db.StringProperty(required=True)
     created = db.DateTimeProperty(auto_now_add=True)
     updated = db.DateTimeProperty(auto_now=True)
     name = db.StringProperty(required=True)
     value = db.StringProperty(required=True)
-    type = db.ReferenceProperty()
+    type = db.StringProperty(required=True)
+    type_reference = db.ReferenceProperty()
