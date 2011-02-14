@@ -3,9 +3,6 @@
 </form>
 
 <script>
-$('.{{widget.id}}').bind("blur",function() { 
-	saveWidget('{{widget.id}}');
-});
 var timeout_{{widget.id|cut:"-"}};
 $('.{{widget.id}}').bind('textchange', function () {
   clearTimeout(timeout_{{widget.id|cut:"-"}});
