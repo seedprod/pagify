@@ -196,16 +196,19 @@ class EditPageHandler(BaseHandler):
                 if p.id == page_id:
                     page = p
                     widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
+                    options = Option.all().filter('page =', page)
+                    google_analytics_ua = options.filter('name = ', 'google_analytics_us')
                     admin = True
         except:
             page = None
             widgets = None
+            options = None
         if admin:
             #page = Page.get_by_key_name(str(page_id))
             add_app_url = 'https://www.facebook.com/add.php?api_key=a284fdd504b5191923362afabc0ea6c7&pages=1&page=141947329155355'
             upload_url = blobstore.create_upload_url('/upload')
             page_id = encrypt(page_id).encode('hex')
-            self.render("app/edit.html", admin=True, page=page,upload_url=upload_url, page_id=page_id,widgets= widgets) 
+            self.render("app/edit.html", admin=True, page=page,upload_url=upload_url, page_id=page_id,widgets= widgets, options=options,google_analytics_ua=google_analytics_ua) 
         else:
             self.redirect('/dashboard')
             
@@ -366,14 +369,19 @@ class AjaxApiHandler(BaseHandler):
                 self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
                 self.response.out.write('False')
         if method == 'saveoption':
+            option = Option.get_by_key_name(self.request.get('id'))
             if self.request.get('otype') == 'page':
                 link = Page.get_by_key_name(self.request.get('opageid'))
-            option = Option(
-                            name = self.request.get('oname'),
-                            value = self.request.get('ovalue'),
-                            type = self.request.get('otype'),
-                            type_reference = link
-                           )
+            if not option:
+                option = Option(
+                                name = self.request.get('oname'),
+                                value = self.request.get('ovalue'),
+                                type = self.request.get('otype'),
+                                type_reference = link
+                               )
+            else:
+                option.value = self.request.get('ovalue')
+                
             try:
                 db.put(option)
                 self.response.headers['Content-Type'] = 'text/html;charset=utf-8'

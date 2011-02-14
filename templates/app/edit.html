@@ -79,6 +79,9 @@
             		<p>Get analytics on your page. Simply give us your Google Analytics Domain ID (something like UA-123456-1) and we'll add it to your page. Leave blank if none.</p>
             		<div>
             		    <input type="text" id="google_analytics_ua"></input>
+            		    <input type="hidden" id="google_analytics_ua_id"></input>
+            		    {{google_analytics_ua|pprint}}
+            		    {{google_analytics_ua.value|pprint}}
             		</div>
         		</div>
         	</div>
@@ -157,7 +160,7 @@ $('#google_analytics_ua').bind('textchange', function () {
     var self = this;
     timeout_ga_ua = setTimeout(function () {
         log($(self).val());
-        $.post("/api/saveoption", { oname: 'google_analytics_ua', ovalue: $(self).val()  , otype: 'page', opageid: $("#page-id").html() },function(data){
+        $.post("/api/saveoption", { id:$("#google_analytics_ua_id").val(), oname: 'google_analytics_ua', ovalue: $(self).val()  , otype: 'page', opageid: $("#page-id").html() },function(data){
     	    if(data){
     	        log('Saved Option');
     	    };
