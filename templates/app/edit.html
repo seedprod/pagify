@@ -78,10 +78,10 @@
             		<h3>Google Analytics</h3>
             		<p>Get analytics on your page. Simply give us your Google Analytics Domain ID (something like UA-123456-1) and we'll add it to your page. Leave blank if none.</p>
             		<div>
-            		    <input type="text" id="google_analytics_ua"></input>
-            		    <input type="hidden" id="google_analytics_ua_id"></input>
-            		    {{google_analytics_ua|pprint}}
-            		    {{google_analytics_ua.value|pprint}}
+            		    <input type="text" id="google_analytics_ua" value="{{options.google_analytics_ua.value}}"></input>
+            		    <input type="hidden" id="google_analytics_ua_id" value="{{options.google_analytics_ua.id}}"></input>
+            		    
+            		    
             		</div>
         		</div>
         	</div>

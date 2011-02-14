@@ -189,25 +189,28 @@ class EditPageHandler(BaseHandler):
         admin = False 
         user =  self.current_user  
         page_id = kwargs.get('pageid')
+        options_dict = {}
         try:
             pages = Page.get(user.pages)
             for p in pages:
                 if p.id == page_id:
+                    admin = True
                     page = p
                     widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
-                    options = Option.all().filter('page =', page)
-                    google_analytics_ua = options.filter('name = ', 'google_analytics_ua')
-                    admin = True
+                    options = Option.all().filter('type_reference =', page)
+                    for option in options:
+                        options_dict[option.name] = {'id': str(option.key().id()), 'value': option.value}
+                    
         except:
             page = None
             widgets = None
-            options = None
+            options_dict = None
         if admin:
             #page = Page.get_by_key_name(str(page_id))
-            add_app_url = 'https://www.facebook.com/add.php?api_key=a284fdd504b5191923362afabc0ea6c7&pages=1&page=141947329155355'
+            #add_app_url = 'https://www.facebook.com/add.php?api_key=a284fdd504b5191923362afabc0ea6c7&pages=1&page=141947329155355'
             upload_url = blobstore.create_upload_url('/upload')
             page_id = encrypt(page_id).encode('hex')
-            self.render("app/edit.html", admin=True, page=page,upload_url=upload_url, page_id=page_id,widgets= widgets, options=options,google_analytics_ua=google_analytics_ua) 
+            self.render("app/edit.html", admin=True, page=page,upload_url=upload_url, page_id=page_id,widgets= widgets, options=options_dict) 
         else:
             self.redirect('/dashboard')
             
@@ -363,7 +366,7 @@ class AjaxApiHandler(BaseHandler):
             except:
                 self.response.out.write('False')
         if method == 'saveoption':
-            option = Option.get_by_id(self.request.get('id'))
+            option = Option.get_by_id(int(self.request.get('id')))
             if self.request.get('otype') == 'page':
                 link = Page.get_by_key_name(self.request.get('opageid'))
             if not option:
