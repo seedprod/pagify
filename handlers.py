@@ -197,7 +197,7 @@ class EditPageHandler(BaseHandler):
                     page = p
                     widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
                     options = Option.all().filter('page =', page)
-                    google_analytics_ua = options.filter('name = ', 'google_analytics_us')
+                    google_analytics_ua = options.filter('name = ', 'google_analytics_ua')
                     admin = True
         except:
             page = None
@@ -369,7 +369,7 @@ class AjaxApiHandler(BaseHandler):
                 self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
                 self.response.out.write('False')
         if method == 'saveoption':
-            option = Option.get_by_key_name(self.request.get('id'))
+            option = Option.get_by_id(self.request.get('id'))
             if self.request.get('otype') == 'page':
                 link = Page.get_by_key_name(self.request.get('opageid'))
             if not option:
