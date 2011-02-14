@@ -366,20 +366,21 @@ class AjaxApiHandler(BaseHandler):
                 self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
                 self.response.out.write('False')
         if method == 'saveoption':
-            page = Page.get_by_key_name(self.request.get('opageid'))
+            if self.request.get('otype') == 'page':
+                link = Page.get_by_key_name(self.request.get('opageid'))
             option = Option(
                             name = self.request.get('oname'),
                             value = self.request.get('ovalue'),
-                            type = 'page',
-                            type_reference = page
+                            type = self.request.get('otype'),
+                            type_reference = link
                            )
-           try:
-               db.put(widget)
-               self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
-               self.response.out.write('True')
-           except:
-               self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
-               self.response.out.write('False')
+            try:
+                db.put(option)
+                self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
+                self.response.out.write('True')
+            except:
+                self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
+                self.response.out.write('False')
                
                
 ''' Listen for changes from Spreedly'''

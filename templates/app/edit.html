@@ -157,6 +157,11 @@ $('#google_analytics_ua').bind('textchange', function () {
     var self = this;
     timeout_ga_ua = setTimeout(function () {
         log($(self).val());
+        $.post("/api/saveoption", { oname: 'google_analytics_ua', ovalue: $(self).val()  , otype: 'page', opageid: $("#page-id").html() },function(data){
+    	    if(data){
+    	        log('Saved Option');
+    	    };
+    	});//end ajax request
     //$('#ajaxFired').html('<strong>Saved</strong>: ' + $(self).val());
   }, 1000);
 });
