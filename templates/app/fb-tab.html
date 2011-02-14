@@ -10,9 +10,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Pagify</title>
   <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.3.0/build/cssgrids/grids-min.css">
-  <link rel="stylesheet" href="/static/css/cupertino/jquery-ui-1.8.5.custom.css">
+  <link rel="stylesheet" href="/static/css/aristo/jquery-ui-1.8.7.custom.css">
   <link rel="stylesheet" href="/static/css/pagify-style.css?v=1">
   <script src="/static/js/modernizr-1.6.min.js"></script>
+  <script src="http://widgets.twimg.com/j/2/widget.js"></script>
 </head>
 <body>
   <div id="container">
@@ -28,27 +29,40 @@
                 	<h3><a href="#">{{w.name}}</a></h3>
                 	<div id="{{w.id}}" class="widget-list-item {{w.type}}">
             	            {% ifequal w.type "text" %}
-                                {% include "inc/w_text.html" %}
+                                {{w.text__text}}
                 	        {% endifequal %}
-                	        {% ifequal w.type "twitter" %}
-                                {% include "inc/w_twitter.html" %}
-                	        {% endifequal %}
-                	        {% ifequal w.type "flickr" %}
-                                {% include "inc/w_flickr.html" %}
-                	        {% endifequal %}
-                	        {% ifequal w.type "youtube" %}
-                                {% include "inc/w_youtube.html" %}
-                	        {% endifequal %}
-                	        {% ifequal w.type "feed" %}
-                                {% include "inc/w_feed.html" %}
-                	        {% endifequal %}
-                	        {% ifequal w.type "googlemaps" %}
-                                {% include "inc/w_googlemaps.html" %}
-                	        {% endifequal %}
-                	        {% ifequal w.type "embedly" %}
-                                {% include "inc/w_embedly.html" %}
-                	        {% endifequal %}
-                	    
+                	        {% ifequal w.type "twitter" %}      
+								<script>
+								    new TWTR.Widget({
+								      version: 2,
+								      type: 'profile',
+								      rpp: 4,
+								      interval: 6000,
+								      width: 'auto',
+								      height: 300,
+								      theme: {
+								        shell: {
+								          background: 'transparent',
+								          color: 'inherit'
+								        },
+								        tweets: {
+								          background: 'transparent',
+								          color: 'inherit',
+								          links: 'inherit'
+								        }
+								      },
+								      features: {
+								        scrollbar: false,
+								        loop: false,
+								        live: false,
+								        hashtags: true,
+								        timestamp: true,
+								        avatars: false,
+								        behavior: 'all'
+								      }
+								    }).render().setUser('{{w.twitter_username}}').start();
+								</script>
+                	        {% endifequal %}           	    
                     </div>
             	{% endfor %}
             </div>
@@ -77,9 +91,49 @@
     <script src="/static/js/pagify-plugins.js"></script>
     <script src="/static/js/pagify-script.js"></script>
     <script>
+	function yqlQuery(query,cbFunc,format,maxage,env) {
+	    var yqlURL = 'http://query.yahooapis.com/v1/public/yql';
+	    query = typeof(query) != 'undefined' ? encodeURIComponent(query) : '';
+	    format = typeof(format) != 'undefined' ? format : 'json';
+	    env = typeof(env) != 'undefined' ? env : 'store://datatables.org/alltableswithkeys';
+	    maxage = typeof(maxage) != 'undefined' ? maxage : '';
+	    yql = yqlURL + '?q=' + query + '&format=' + format + '&diagnostics=false&_maxage=' + maxage + '&env=' + env;
+		$.ajax({url: yql, 
+	            dataType: 'jsonp',
+	            jsonp: 'callback', 
+	            jsonpCallback: cbFunc
+	            });
+	}
+	
     $(document).ready(function() {
         $( "#pagify-widget-list-1" ).accordion({autoHeight: false});
     });
+	{% for w in widgets %}
+		{% ifequal w.type "flickr" %}
+		
+			function {{w.id|cut:"-"}}_cbFunc(data) {
+				  $.each(data.results, function(index, value) { 
+				  $('#{{w.id}}').html(value);
+				});
+			}
+			yqlQuery('select * from html where url="http://www.flickr.com/badge_code_v2.gne?show_name=1&count=10&display=latest&size=t&layout=x&source=user&user=80602895@N00" and xpath=\'//div[@class="flickr_badge_image"]\'','{{w.id|cut:"-"}}_cbFunc','xml','3600');
+	    
+		{% endifequal %}
+	    {% ifequal w.type "youtube" %}
+	    {% endifequal %}
+	    {% ifequal w.type "feed" %}
+	    {% endifequal %}
+	    {% ifequal w.type "googlemaps" %}
+			
+			function {{w.id|cut:"-"}}_cbFunc(data) {
+				$('#{{w.id}}').html(data.query.results.json.html);
+			}
+			yqlQuery('select * from embedly where url="http://maps.google.com/?ie=UTF8&hq=&hnear=Charleston,+South+Carolina&ll=32.776566,-79.930922&spn=0.774757,0.986023&z=10"','{{w.id|cut:"-"}}_cbFunc');
+		
+		{% endifequal %}
+	    {% ifequal w.type "embedly" %}
+	    {% endifequal %}
+	{% endfor %}
     </script>
     <!--[if lt IE 7 ]>
         <script src="/static/js/dd_belatedpng.js"></script>
