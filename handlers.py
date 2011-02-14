@@ -100,7 +100,6 @@ class BaseHandler(webapp.RequestHandler):
                     google=self.get_config('google')
                     )
         args.update(kwargs)
-        self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
         path = os.path.join(os.path.dirname(__file__), "templates", path)
         self.response.out.write(template.render(path, args))
     
@@ -251,7 +250,7 @@ class AjaxApiHandler(BaseHandler):
         method = kwargs.get('method')
         if method == 'scripturl':
             upload_url = blobstore.create_upload_url('/upload')
-            self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
+            
             self.response.out.write(upload_url)
         if method == 'headerimageurl':
             #pages = Page.get(user.pages)
@@ -264,10 +263,10 @@ class AjaxApiHandler(BaseHandler):
             page = Page.get_by_key_name(key_name)
             if page:
                 header_image_url = page.header_image_url
-                self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
+                
                 self.response.out.write(header_image_url)
             else:
-                self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
+                
                 self.response.out.write('')
         if method == 'getwidget':
             widget_id = self.request.get("wid")
@@ -282,7 +281,7 @@ class AjaxApiHandler(BaseHandler):
             if widget_type:
                 self.render('app/widgets/'+widget_type+".html", widget=widget)
             else:
-                self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
+                
                 self.response.out.write("This widget cannot be found.")
     def post(self, **kwargs):
         user =  self.current_user
@@ -296,10 +295,8 @@ class AjaxApiHandler(BaseHandler):
                 widget.last_modified_by = user
             try:
                 db.put(widget)
-                self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
                 self.response.out.write('True')
             except:
-                self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
                 self.response.out.write('False')
                 
         if method == 'savepageorder':
@@ -314,11 +311,10 @@ class AjaxApiHandler(BaseHandler):
                     batch.append(widget)
             try:
                 db.put(batch)
-                self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
                 self.response.out.write('True')
             except:
-                self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
                 self.response.out.write('False')
+                
         if method == 'savewidget':
             page = Page.get_by_key_name(self.request.get('pageid'))
             key_name = self.request.get('wid')
@@ -363,10 +359,8 @@ class AjaxApiHandler(BaseHandler):
             
             try:
                 db.put(widget)
-                self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
                 self.response.out.write('True')
             except:
-                self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
                 self.response.out.write('False')
         if method == 'saveoption':
             option = Option.get_by_id(self.request.get('id'))
@@ -384,10 +378,8 @@ class AjaxApiHandler(BaseHandler):
                 
             try:
                 db.put(option)
-                self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
                 self.response.out.write('True')
             except:
-                self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
                 self.response.out.write('False')
                
                
@@ -398,11 +390,9 @@ class ListenHandler(webapp.RequestHandler):
             subscriber_ids = self.request.get("subscriber_ids").split(',')
             for i in subscriber_ids:
                 deferred.defer(get_subscriber_changes, i)
-            self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
             self.response.set_status(200)
         except:
             logging.error('Listen Error: ' + self.request.get("subscriber_ids"))
-            self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
             self.abort(500)
         
 class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
@@ -430,7 +420,6 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
         
         if batch:
             db.put(batch)
-        self.response.headers['Content-Type'] = 'text/html;charset=utf-8'
         self.response.set_status(302)
         
 ''' Facebook FrontEnd '''  

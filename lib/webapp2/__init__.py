@@ -56,6 +56,8 @@ class Response(webob.Response):
     Implements all of ``webapp.Response`` interface, except ``wsgi_write()``
     as the response itself is returned by the WSGI application.
     """
+    default_charset = 'utf-8'
+    
     def __init__(self, *args, **kwargs):
         super(Response, self).__init__(*args, **kwargs)
         # webapp uses response.out.write(), so we point `.out` to `self`
