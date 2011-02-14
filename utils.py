@@ -2,7 +2,6 @@ import sys
 import xml.dom.minidom
 import config
 import webapp2 as webapp
-from pprint import pprint
 from Crypto.Cipher import ARC4 as cipher
 
 

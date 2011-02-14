@@ -189,6 +189,7 @@ default:
 		  }
 		});
 		
+		
 		// Load default widget if there is one
 		var firstWidget = $("#widget-list > div:eq(0) > div:eq(0)");
 		if($(firstWidget)){
