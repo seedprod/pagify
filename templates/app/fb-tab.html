@@ -62,7 +62,22 @@
 								      }
 								    }).render().setUser('{{w.twitter_username}}').start();
 								</script>
-                	        {% endifequal %}           	    
+                	        {% endifequal %}  
+                	        {% ifequal w.type "flickr" %}  
+                	        Loading...  
+                	        {% endifequal %}   
+                	        {% ifequal w.type "youtube" %}   
+                	        Loading...   
+                	        {% endifequal %}
+                	        {% ifequal w.type "feed" %}   
+                	        Loading...   
+                	        {% endifequal %}
+                	        {% ifequal w.type "googlemaps" %} 
+                	        Loading...     
+                	        {% endifequal %}
+                	        {% ifequal w.type "embedly" %}
+                	        Loading...      
+                	        {% endifequal %}     	    
                     </div>
             	{% endfor %}
             </div>
@@ -106,18 +121,38 @@
 	}
 	
     $(document).ready(function() {
-        $( "#pagify-widget-list-1" ).accordion({autoHeight: false});
+        $( "#pagify-widget-list-1" ).accordion({autoHeight: false, animated: 'bounceslide' });
+        
+        // Ajax Accordian
+		$("#pagify-widget-list-1" ).bind('accordionchange', function(event, ui) {
+		  if($(ui.newContent).html().trim() == 'Loading...'){
+		      wid = $(ui.newContent).attr('id');
+		      call = "call_" + wid.replace(/-/g, "") + "()";
+              eval(call);
+		  }
+		});
+		
+		// Load default widget if there is one
+		var firstWidget = $("#pagify-widget-list-1 > div:eq(0)");
+		if($(firstWidget)){
+		    wid = $(firstWidget).attr('id');
+		      call = "call_" + wid.replace(/-/g, "") + "()";
+		      log(call);
+            eval(call);
+	    }
     });
 	{% for w in widgets %}
 		{% ifequal w.type "flickr" %}
-		
-			function {{w.id|cut:"-"}}_cbFunc(data) {
+		    
+			function cbFunc_{{w.id|cut:"-"}}(data) {
 				  $.each(data.results, function(index, value) { 
-				  $('#{{w.id}}').html(value);
+				  $('#{{w.id}}').append(value);
 				});
 			}
-			yqlQuery('select * from html where url="http://www.flickr.com/badge_code_v2.gne?show_name=1&count=10&display=latest&size=t&layout=x&source=user&user=80602895@N00" and xpath=\'//div[@class="flickr_badge_image"]\'','{{w.id|cut:"-"}}_cbFunc','xml','3600');
-	    
+			function call_{{w.id|cut:"-"}}() {
+			    log('flickr');
+			    yqlQuery('select * from html where url="http://www.flickr.com/badge_code_v2.gne?show_name=1&count=10&display=latest&size=t&layout=x&source=user&user=80602895@N00" and xpath=\'//div[@class="flickr_badge_image"]\'','cbFunc_{{w.id|cut:"-"}}','xml','3600');
+            }
 		{% endifequal %}
 	    {% ifequal w.type "youtube" %}
 	    {% endifequal %}
@@ -125,11 +160,13 @@
 	    {% endifequal %}
 	    {% ifequal w.type "googlemaps" %}
 			
-			function {{w.id|cut:"-"}}_cbFunc(data) {
+			function cbFunc_{{w.id|cut:"-"}}(data) {
 				$('#{{w.id}}').html(data.query.results.json.html);
-			}
-			yqlQuery('select * from embedly where url="http://maps.google.com/?ie=UTF8&hq=&hnear=Charleston,+South+Carolina&ll=32.776566,-79.930922&spn=0.774757,0.986023&z=10"','{{w.id|cut:"-"}}_cbFunc');
-		
+			}    
+			function call_{{w.id|cut:"-"}}() {
+    			log('googlemaps');
+			    yqlQuery('select * from embedly where url="http://maps.google.com/?ie=UTF8&hq=&hnear=Charleston,+South+Carolina&ll=32.776566,-79.930922&spn=0.774757,0.986023&z=10"','cbFunc_{{w.id|cut:"-"}}');
+	        }
 		{% endifequal %}
 	    {% ifequal w.type "embedly" %}
 	    {% endifequal %}
