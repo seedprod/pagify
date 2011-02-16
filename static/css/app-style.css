@@ -281,6 +281,7 @@ padding-top: 10px;}
 .fbpage-title a{position:relative;
 z-index:999;}
 .upgrade{display:block;margin:0 0 15px 0;}
+.btn{margin:10px 0;}
 .btn-unlock{
     cursor: pointer;
     cursor: hand;
