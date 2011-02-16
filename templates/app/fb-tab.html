@@ -11,6 +11,7 @@
   <title>Pagify</title>
   <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.3.0/build/cssgrids/grids-min.css">
   <link rel="stylesheet" href="/static/css/aristo/jquery-ui-1.8.7.custom.css">
+  <link rel="stylesheet" href="/static/css/aristo/jquery.fancybox-1.3.4.css">
   <link rel="stylesheet" href="/static/css/pagify-style.css?v=1">
   <script src="/static/js/modernizr-1.6.min.js"></script>
   <script src="http://widgets.twimg.com/j/2/widget.js"></script>
@@ -21,10 +22,10 @@
     </header>
     <div id="main">
             {% if page.header_image_url %}
-            <img id="pagify-image" class="" src="{{page.header_image_url}}=s520"/>
+            <img id="pagify-image" class="widget" src="{{page.header_image_url}}=s520"/>
             {% endif %}
 
-            <div id="pagify-widget-list-1" class="">
+            <div id="pagify-widget-list-1" class="widget">
             	{% for w in widgets %}
                 	<h3><a href="#">{{w.name}}</a></h3>
                 	<div id="{{w.id}}" class="widget-list-item {{w.type}}">
@@ -64,19 +65,19 @@
 								</script>
                 	        {% endifequal %}  
                 	        {% ifequal w.type "flickr" %}  
-                	        Loading...  
+                	        <img src="/static/images/loading.gif" alt="Loading..." class="fb-loading"/> 
                 	        {% endifequal %}   
                 	        {% ifequal w.type "youtube" %}   
-                	        Loading...   
+                	        <img src="/static/images/loading.gif" alt="Loading..." class="fb-loading"/>   
                 	        {% endifequal %}
                 	        {% ifequal w.type "feed" %}   
-                	        Loading...   
+                	        <img src="/static/images/loading.gif" alt="Loading..." class="fb-loading"/>   
                 	        {% endifequal %}
                 	        {% ifequal w.type "googlemaps" %} 
-                	        Loading...     
+                	        <img src="/static/images/loading.gif" alt="Loading..." class="fb-loading"/>   
                 	        {% endifequal %}
                 	        {% ifequal w.type "embedly" %}
-                	        Loading...      
+                	        <img src="/static/images/loading.gif" alt="Loading..." class="fb-loading"/>     
                 	        {% endifequal %}     	    
                     </div>
             	{% endfor %}
@@ -125,7 +126,7 @@
         
         // Ajax Accordian
 		$("#pagify-widget-list-1" ).bind('accordionchange', function(event, ui) {
-		  if($(ui.newContent).html().trim() == 'Loading...'){
+		  if($(" > img",ui.newContent).attr('alt') == 'Loading...'){
 		      wid = $(ui.newContent).attr('id');
 		      call = "call_" + wid.replace(/-/g, "") + "()";
               eval(call);
@@ -134,10 +135,9 @@
 		
 		// Load default widget if there is one
 		var firstWidget = $("#pagify-widget-list-1 > div:eq(0)");
-		if($(firstWidget)){
+		if($(firstWidget) && $(" > img",firstWidget).attr('alt') == 'Loading...'){
 		    wid = $(firstWidget).attr('id');
-		      call = "call_" + wid.replace(/-/g, "") + "()";
-		      log(call);
+		    call = "call_" + wid.replace(/-/g, "") + "()";
             eval(call);
 	    }
     });
@@ -145,12 +145,13 @@
 		{% ifequal w.type "flickr" %}
 		    
 			function cbFunc_{{w.id|cut:"-"}}(data) {
-				  $.each(data.results, function(index, value) { 
-				  $('#{{w.id}}').append(value);
+			    var html = '';
+				$.each(data.results, function(index, value) { 
+				  html = html + value;
 				});
+				$('#{{w.id}}').html(html);
 			}
 			function call_{{w.id|cut:"-"}}() {
-			    log('flickr');
 			    yqlQuery('select * from html where url="http://www.flickr.com/badge_code_v2.gne?show_name=1&count=10&display=latest&size=t&layout=x&source=user&user=80602895@N00" and xpath=\'//div[@class="flickr_badge_image"]\'','cbFunc_{{w.id|cut:"-"}}','xml','3600');
             }
 		{% endifequal %}
