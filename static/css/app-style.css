@@ -398,12 +398,12 @@ z-index:999;}
 
 /* Edit */
 
-#fb-profile{border: 1px solid #CCC;width:776px;background:#fff url(/static/images/facebook-page-b.png) no-repeat;margin-bottom: 40px;text-shadow:none;}
+#fb-profile{border: 1px solid #CCC;width:776px;background:#fff url(/static/images/facebook-page-v2.png) no-repeat;margin-bottom: 40px;text-shadow:none;}
 #fb-left-column{width:220px;}
-#fb-left-column img {margin: 20px 0px 20px 12px;}
-#facebook-page-sidebar{margin-left: 10px;background:#fff url(/static/images/facebook-page-sidebar-b.png) no-repeat; width:207px ;height:499px;}
+#fb-left-column img {margin: 58px 0px 20px 14px;}
+#facebook-page-sidebar{margin-left: 10px;background:transparent url(/static/images/facebook-page-sidebar-v2.png) no-repeat 23px 0; width:207px ;height:499px;}
 #fb-right-column{width:520px;margin: 75px 0px 0px 11px;position:relative;}
-#fb-title{position:absolute;top:-55px;left:0;font-size:123.1%; font-weight:bold;}
+#fb-title{position:absolute;top:-15px;left:0;font-size:123.1%; font-weight:bold;}
 #pagify-header{overflow: hidden;margin:20px 0;}
 #pagify-image{margin:20px 0;position: relative;
     z-index: 0;}
