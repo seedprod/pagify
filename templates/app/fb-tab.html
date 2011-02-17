@@ -30,7 +30,7 @@
                 	<h3><a href="#">{{w.name}}</a></h3>
                 	<div id="{{w.id}}" class="widget-list-item {{w.type}}">
             	            {% ifequal w.type "text" %}
-                                {{w.text__text}}
+                                {{w.text__text|safe}}
                 	        {% endifequal %}
                 	        {% ifequal w.type "twitter" %}      
 								<script>
