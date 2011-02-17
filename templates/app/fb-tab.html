@@ -28,7 +28,7 @@
             <div id="pagify-widget-list-1" class="widget">
             	{% for w in widgets %}
                 	<h3><a href="#">{{w.name}}</a></h3>
-                	<div id="{{w.id}}" class="widget-list-item {{w.type}}">
+                	<div id="{{w.id}}" class="widget-list-item widget-{{w.type}}">
             	            {% ifequal w.type "text" %}
                                 {{w.text__text|removetags:"script"|safe}}
                 	        {% endifequal %}
@@ -61,7 +61,7 @@
 								        avatars: false,
 								        behavior: 'all'
 								      }
-								    }).render().setUser('{{w.twitter_username}}').start();
+								    }).render().setUser('{{w.twitter_username|default:"pagifyapp"}}').start();
 								</script>
                 	        {% endifequal %}  
                 	        {% ifequal w.type "flickr" %}  
@@ -152,7 +152,7 @@
 				$('#{{w.id}}').html(html);
 			}
 			function call_{{w.id|cut:"-"}}() {
-			    yqlQuery('select * from html where url="http://www.flickr.com/badge_code_v2.gne?show_name=1&count=10&display=latest&size=t&layout=x&source=user&user=80602895@N00" and xpath=\'//div[@class="flickr_badge_image"]\'','cbFunc_{{w.id|cut:"-"}}','xml','3600');
+			    yqlQuery('select * from html where url="http://www.flickr.com/badge_code_v2.gne?count=10&display=latest&size=t&layout=x&source=user&user={{w.flickr_userid}}" and xpath=\'//div[@class="flickr_badge_image"]\'','cbFunc_{{w.id|cut:"-"}}','xml','3600');
             }
 		{% endifequal %}
 	    {% ifequal w.type "youtube" %}
@@ -165,8 +165,7 @@
 				$('#{{w.id}}').html(data.query.results.json.html);
 			}    
 			function call_{{w.id|cut:"-"}}() {
-    			log('googlemaps');
-			    yqlQuery('select * from embedly where url="http://maps.google.com/?ie=UTF8&hq=&hnear=Charleston,+South+Carolina&ll=32.776566,-79.930922&spn=0.774757,0.986023&z=10"','cbFunc_{{w.id|cut:"-"}}');
+			    yqlQuery('select * from embedly where url="{{w.googlemaps_link}}"','cbFunc_{{w.id|cut:"-"}}');
 	        }
 		{% endifequal %}
 	    {% ifequal w.type "embedly" %}

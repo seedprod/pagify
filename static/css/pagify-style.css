@@ -29,7 +29,6 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
   vertical-align: baseline;
 }
@@ -169,7 +168,7 @@ button {  width: auto; overflow: visible; }
 
 .widget{margin-bottom:10px !important;}
 #pagify-image,.fb-loading{display: block;margin:0 auto;}
-
+.widget-googlemaps{text-align: center;}
 /* Flickr Widget */
 .flickr_badge_image{
     float:left;
