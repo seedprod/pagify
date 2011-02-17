@@ -47,7 +47,11 @@
 
     <div id="sb-widgets-menu" class="widget box_round_6">
         <div id="sb-widgets-header">
-            <a id="facebook-publish" href="#fbox-install" rel="facebox" class="hand"></a>
+            {% if page.has_added_app == "True" %}
+            <a id="facebook-view" href="http://www.facebook.com/{{page.id}}" class="hand"></a>
+            {% else %}
+            <a id="facebook-publish" href="http://www.facebook.com/add.php?api_key={{facebook.api_key}}&pages=1&page={{page.id}}" class="hand"></a>
+            {% endif %}
     	</div>
     	<div id="controller-tabs">
         	<ul>

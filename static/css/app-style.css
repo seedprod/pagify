@@ -455,6 +455,13 @@ z-index:999;}
     width: 150px;
     display:block;
 }
+#facebook-view{
+    background:transparent url(/static/images/facebook_view.png) no-repeat 0 0;
+    height: 22px;
+    margin: 7px auto;
+    width: 150px;
+    display:block;
+}
 
 /* jqury ui */
 .ui-dialog{background:#fff !important;border:10px solid #76756C !important;}

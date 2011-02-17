@@ -456,9 +456,6 @@ class fbTabHandler(BaseHandler):
         except:
             page=None
             widgets=None
-        logging.info(self.request)
-        logging.info(page)
-        logging.info(widgets)
         self.render("app/fb-tab.html", page=page,widgets=widgets, method="post")
          
 class WallHandler(BaseHandler):
