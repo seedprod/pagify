@@ -5,6 +5,10 @@
 {% endblock %}
 {% block body %}
 <h1>Upgrade</h1>
+<p style="text-align:center;font-size:30px">
+Coming Soon!
+</p>
+{% comment %}
 <ul id="upgrade-list" class="">
     {% for p in pages %}
         <li><img src="{{p.picture}}">{{p.name}} <input type="checkbox" id="{{p.id}}" class="btn-upgrade" {% ifequal p.id page_id %}checked{% endifequal %}/><label for="{{p.id}}">Upgrade</label></li>
@@ -13,7 +17,7 @@
 <p><a href="{{subscribe_url}}">Subscribe</a></p>
 {% endblock %}
 {% block foot %}
-<script src="/static/js/jquery-ui-1.8.6.custom.min.js"></script>
+<script src="/static/js/jquery-ui-{{google.jquery_ui_version}}.custom.min.js"></script>
 <script>
 var plans = "{{plans}}";
 plans = plans.split(',');
@@ -24,4 +28,5 @@ $.each(plans, function(index, value) {
 });
 
 </script>
+{% endcomment %}
 {% endblock %}

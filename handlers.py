@@ -243,7 +243,7 @@ class UpgradeHandler(BaseHandler):
         subscribe_url = subscribe_url + return_url
         
         
-        self.render("upgrade.html", admin=True, subscribe_url=subscribe_url,pages=pages, page_id=page_id, plans=plans)
+        self.render("app/upgrade.html", admin=True, subscribe_url=subscribe_url,pages=pages, page_id=page_id, plans=plans)
         
 class AjaxApiHandler(BaseHandler):
     @fblogin_required
