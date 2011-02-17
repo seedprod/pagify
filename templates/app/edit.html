@@ -47,8 +47,8 @@
 
     <div id="sb-widgets-menu" class="widget box_round_6">
         <div id="sb-widgets-header">
-            {% if page.has_added_app == "True" %}
-            <a id="facebook-view" href="http://www.facebook.com/{{page.id}}" class="hand"></a>
+            {% if page.has_added_app %}
+            <a id="facebook-view" href="{{page.link}}?sk=app_141947329155355" class="hand"></a>
             {% else %}
             <a id="facebook-publish" href="http://www.facebook.com/add.php?api_key={{facebook.api_key}}&pages=1&page={{page.id}}" class="hand"></a>
             {% endif %}
@@ -170,12 +170,13 @@ $(document).ready(function() {
 
 		// Theme options
         theme_advanced_toolbar_location : "top",
-        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,separator,bullist,numlist,outdent,indent,blockquote",
+        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,separator,formatselect,separator,bullist,numlist,outdent,indent,blockquote",
         theme_advanced_buttons2 : "undo,redo,separator,link,unlink,separator,justifyleft,justifycenter,justifyright,separator,code,removeformat",
         theme_advanced_buttons3 : "",
         theme_advanced_toolbar_align : "left",
 		theme_advanced_resizing : true,
 		theme_advanced_statusbar_location : "bottom",
+		theme_advanced_blockformats : "p,div,h1,h2,h3,h4,h5,h6",
 
 		convert_urls : 0,
         dialog_type : "modal",
