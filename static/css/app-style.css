@@ -307,6 +307,18 @@ z-index:999;}
     z-index:99;
 }
 
+.upgrade-ribbon-large{
+    background:transparent url(/static/images/ribbon-upgrade-large.png) no-repeat top left;
+    position:absolute;
+    display:block;
+    width:109px;
+    height:109px;
+    z-index:99;
+    top:0;
+    left:0;
+}
+
+
 .btn-delete .ui-icon,.btn-unlock .ui-icon{position:relative !important;}
 
 /* General */
@@ -399,7 +411,7 @@ z-index:999;}
 /* Edit */
 
 #fb-profile{border: 1px solid #CCC;width:776px;background:#fff url(/static/images/facebook-page-v2.png) no-repeat;margin-bottom: 40px;text-shadow:none;}
-#fb-left-column{width:220px;}
+#fb-left-column{width:220px;position:relative;}
 #fb-left-column img {margin: 58px 0px 20px 14px;}
 #facebook-page-sidebar{margin-left: 10px;background:transparent url(/static/images/facebook-page-sidebar-v2.png) no-repeat 23px 0; width:207px ;height:499px;}
 #fb-right-column{width:520px;margin: 75px 0px 0px 11px;position:relative;}
