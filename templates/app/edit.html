@@ -193,7 +193,7 @@ $(document).ready(function() {
 	});
 	});
 });
-
+// Settings
 var timeout_ga_ua;
 $('#google_analytics_ua').bind('textchange', function () {
   clearTimeout(timeout_ga_ua);
@@ -209,5 +209,19 @@ $('#google_analytics_ua').bind('textchange', function () {
     //$('#ajaxFired').html('<strong>Saved</strong>: ' + $(self).val());
   }, 1000);
 });
+
+function yqlQuery(query,cbFunc,format,maxage,env) {
+    var yqlURL = 'http://query.yahooapis.com/v1/public/yql';
+    query = typeof(query) != 'undefined' ? encodeURIComponent(query) : '';
+    format = typeof(format) != 'undefined' ? format : 'json';
+    env = typeof(env) != 'undefined' ? env : 'store://datatables.org/alltableswithkeys';
+    maxage = typeof(maxage) != 'undefined' ? maxage : '';
+    yql = yqlURL + '?q=' + query + '&format=' + format + '&diagnostics=false&_maxage=' + maxage + '&env=' + env;
+	$.ajax({url: yql, 
+            dataType: 'jsonp',
+            jsonp: 'callback', 
+            jsonpCallback: cbFunc
+            });
+}
 </script>
 {% endblock %}

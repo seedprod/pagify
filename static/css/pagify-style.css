@@ -175,6 +175,10 @@ button {  width: auto; overflow: visible; }
     float:left;
     margin: 2px;
 }
+.flickr_badge_image img{
+    border: 1px solid #E5E5E5;
+    padding:3px;
+}
 
 /* Twitter Widget */
 .twtr-ft,.twtr-join-conv {display:none;}
