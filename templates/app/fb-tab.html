@@ -157,6 +157,20 @@
 				  html = html + value;
 				});
 				$('#{{w.id}}').html(html);
+				$('.flickr_badge_image').each(function() {
+            	    $("a",this).addClass('fgallery').attr({
+                      rel: 'group1',
+                      href: $("a > img",this).attr('src').replace(/_t/,"")
+                    });
+            	});
+            	$(".fgallery").fancybox({
+            	    'modal'         : false,
+            	    'titleShow'     : false,
+                    'transitionIn'  : 'elastic',
+                    'transitionOut' : 'elastic',
+                    'easingIn'      : 'easeOutBack',
+                    'easingOut'     : 'easeInBack'
+            	});
 			}
 			function call_{{w.id|cut:"-"}}() {
 			    yqlQuery('select * from html where url="http://www.flickr.com/badge_code_v2.gne?count=10&display=latest&size=t&layout=x&source=user&user={{w.flickr_userid}}" and xpath=\'//div[@class="flickr_badge_image"]\'','cbFunc_{{w.id|cut:"-"}}','xml','3600');
