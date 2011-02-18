@@ -450,13 +450,18 @@ class fbTabHandler(BaseHandler):
         page_id = signed_request['page']['id']
         liked = signed_request['page']['liked']
         admin = signed_request['page']['admin']
+        options_dict = {}
         try:
             page = Page.get_by_key_name(page_id)
             widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
+            options = Option.all().filter('type_reference =', page)
+            for option in options:
+                options_dict[option.name] = {'id': str(option.key().id()), 'value': option.value}
         except:
             page=None
             widgets=None
-        self.render("app/fb-tab.html", page=page,widgets=widgets, method="post")
+            options_dict = None
+        self.render("app/fb-tab.html", page=page,widgets=widgets, method="post",options=options_dict)
          
 class WallHandler(BaseHandler):
     #@fblogin_required
