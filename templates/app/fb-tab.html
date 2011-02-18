@@ -141,6 +141,12 @@
 		    call = "call_" + wid.replace(/-/g, "") + "()";
             eval(call);
 	    }
+	    $('a').each(function() {
+            if(!this.target) {
+                this.target = '_top';
+            }
+        });
+        
     });
 	{% for w in widgets %}
 		{% ifequal w.type "flickr" %}

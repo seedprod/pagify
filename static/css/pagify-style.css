@@ -177,10 +177,14 @@ button {  width: auto; overflow: visible; }
 }
 
 /* Twitter Widget */
-.twtr-join-conv {display:none;}
+.twtr-ft,.twtr-join-conv {display:none;}
 
 /* Footer */
 footer{text-align:right;}
+#powered-by img{
+    top: -12px;
+    position: relative;
+}
 /******************************************************************************/
 
 /**
