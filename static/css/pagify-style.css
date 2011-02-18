@@ -166,7 +166,7 @@ button {  width: auto; overflow: visible; }
   overflow:hidden; 
 }
 
-.widget{margin-bottom:10px !important;}
+.widget{margin-bottom:15px !important;}
 #pagify-image,.fb-loading{display: block;margin:0 auto;}
 .widget-googlemaps{text-align: center;}
 /* Flickr Widget */

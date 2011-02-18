@@ -417,7 +417,7 @@ z-index:999;}
 #fb-right-column{width:520px;margin: 75px 0px 0px 11px;position:relative;}
 #fb-title{position:absolute;top:-15px;left:0;font-size:123.1%; font-weight:bold;}
 #pagify-header{overflow: hidden;margin:20px 0;}
-#pagify-image{margin:20px 0;position: relative;
+#pagify-image{margin:20px auto;position: relative;display:block;
     z-index: 0;}
     
 #fb-profile-picture{position:absolute; top:10px;left: 225px;}

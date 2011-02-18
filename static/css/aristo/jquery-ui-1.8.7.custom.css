@@ -104,20 +104,13 @@
 .ui-state-hover a, .ui-state-hover a:hover { color: #313131; text-decoration: none; }
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { 
 	outline: none;
-	color: #1c4257; border: 1px solid #7096ab;
-	background: url(images/bg_fallback.png) 0 -50px repeat-x;
-	background: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(1, rgb(185,224,245)),
-    color-stop(0, rgb(146,189,214))
-	);
-	background: -moz-linear-gradient(
-		center top,
-		rgb(185,224,245),
-		rgb(146,189,214)
-	);
+	color: #e5e5e5; border: 1px solid #999;
+    background-color: #ededed;
+      background-image: -moz-linear-gradient(top, #ededed, #d8d8d8); /* FF3.6 */
+      background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ededed),color-stop(1, #d8d8d8)); /* Saf4+, Chrome */
+      background-image: -webkit-linear-gradient(#ededed, #d8d8d8); /* Chrome 10+, Saf6 */
+      background-image: linear-gradient(top, #ededed, #d8d8d8);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ededed', EndColorStr='#d8d8d8'); /* IE6–IE9 */
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 }
