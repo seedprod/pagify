@@ -179,6 +179,27 @@
 	    {% ifequal w.type "youtube" %}
 	    {% endifequal %}
 	    {% ifequal w.type "feed" %}
+	        function cbFunc_{{w.id|cut:"-"}}(data) {
+                var html = '';
+                var count = 0
+                $.each(data.query.results.feed.entry, function(index, value) { 
+            	   html = html + '<h2><a href="'+value.link.href+'">' + value.title + '</a></h2><span>'+dateFormat(value.published,"shortDate");+'</span>';
+            	   try{
+            	       summary =value.summary.content;
+            	   }catch(err){}
+            	   if(typeof summary !== 'undefined'){
+            	       html = html + '<p>' + value.summary.content + '</p>';   
+            	   }
+            	   count++;
+            	   if(count == 10){
+            	       return false;
+            	   }
+            	});
+            	$('#{{w.id}}').html(html);
+            }
+            function call_{{w.id|cut:"-"}}() {
+                yqlQuery('select * from feednormalizer where url=\'{{w.feed_url}}\' and output=\'atom_1.0\'','cbFunc_{{w.id|cut:"-"}}','json','3600');
+            }
 	    {% endifequal %}
 	    {% ifequal w.type "googlemaps" %}
 			
@@ -186,7 +207,7 @@
 				$('#{{w.id}}').html(data.query.results.json.html);
 			}    
 			function call_{{w.id|cut:"-"}}() {
-			    yqlQuery('select * from embedly where url="{{w.googlemaps_link}}"','cbFunc_{{w.id|cut:"-"}}');
+			    yqlQuery('select * from embedly where url="{{w.googlemaps_link}}"','cbFunc_{{w.id|cut:"-"}}','json','3600');
 	        }
 		{% endifequal %}
 	    {% ifequal w.type "embedly" %}
