@@ -177,6 +177,22 @@
             }
 		{% endifequal %}
 	    {% ifequal w.type "youtube" %}
+    	    function cbFunc_{{w.id|cut:"-"}}(data) {
+                var html = '';
+                var count = 0
+                $.each(data.query.results.item, function(index, value) { 
+                   html = html + value.description;
+                   count++;
+            	   if(count == 10){
+            	       return false;
+            	   }
+            	});
+                $('#{{w.id}}').html(html);
+                $('#{{w.id}} > div').css('width','100%');
+            }
+            function call_{{w.id|cut:"-"}}() {
+                yqlQuery('select * from rss where url=\'http://gdata.youtube.com/feeds/base/users/{{w.youtube_username}}/uploads?alt=rss&v=2&orderby=published\'','cbFunc_{{w.id|cut:"-"}}','json','3600');
+            }
 	    {% endifequal %}
 	    {% ifequal w.type "feed" %}
 	        function cbFunc_{{w.id|cut:"-"}}(data) {
@@ -207,7 +223,7 @@
 				$('#{{w.id}}').html(data.query.results.json.html);
 			}    
 			function call_{{w.id|cut:"-"}}() {
-			    yqlQuery('select * from embedly where url="{{w.googlemaps_link}}"','cbFunc_{{w.id|cut:"-"}}','json','3600');
+			    yqlQuery('select * from embedly where url="{{w.googlemaps_link|safe}}"','cbFunc_{{w.id|cut:"-"}}','json','3600');
 	        }
 		{% endifequal %}
 	    {% ifequal w.type "embedly" %}
