@@ -227,6 +227,34 @@
 	        }
 		{% endifequal %}
 	    {% ifequal w.type "embedly" %}
+	    
+    	    function cbFunc_{{w.id|cut:"-"}}(data) {
+    	        var type =data.query.results.json.type;
+    	         try{
+            	       title = data.query.results.json.title;
+            	   }catch(err){title = ''}
+    	        var html = '';
+    	        switch(type)
+                {
+                case 'photo':
+                  html = '<img src="' + data.query.results.json.url + '" alt="' + title + '"/></a>';
+                  break;
+                case 'video':
+                  html = data.query.results.json.html;
+                  break;
+                case 'rich':
+                  html = data.query.results.json.html;
+                  break;
+                case 'link':
+                  html = '<a href="' + data.query.results.json.url + '">' + title + '</a>'
+                  break;
+                default:
+                }
+    			$('#{{w.id}}').html(html);
+    		}    
+    		function call_{{w.id|cut:"-"}}() {
+    		    yqlQuery('select * from embedly where url="{{w.embedly_url|safe}}"" and maxwidth ="500"','cbFunc_{{w.id|cut:"-"}}','json','3600');
+            }
 	    {% endifequal %}
 	{% endfor %}
     </script>
