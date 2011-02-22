@@ -20,6 +20,7 @@ from google.appengine.api import urlfetch
 from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.webapp import template
 from google.appengine.runtime.apiproxy_errors import CapabilityDisabledError
+from google.appengine.api import capabilities
 from django.utils import simplejson
 #from django.contrib.markup.templatetags import markup 
 
@@ -101,7 +102,11 @@ class BaseHandler(webapp.RequestHandler):
                     )
         args.update(kwargs)
         path = os.path.join(os.path.dirname(__file__), "templates", path)
-        self.response.out.write(template.render(path, args))
+        datastore_write_enabled = capabilities.CapabilitySet('datastore_v3', capabilities=['write']).is_enabled()
+        if datastore_write_enabled:
+            self.response.out.write(template.render(path, args))
+        else:
+            self.response.out.write(template.render(os.path.join(os.path.dirname(__file__), "templates","app", "maintenance.html"), args))
     
 class PageHandler(BaseHandler):
     def get(self, **kwargs):

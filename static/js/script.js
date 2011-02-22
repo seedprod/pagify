@@ -90,14 +90,11 @@ default:
 			autoOpen: false,
 			show: "fade",
 			hide: "fade",
-			modal: true
-			/*open: function() { 
-						$(".ui-dialog").position({
-						       my: 'right',
-						       at: 'right',
-						       of: "#pagify-image"
-						    });
-				}*/
+			modal: true,
+			width: 450,
+			open: function() { 
+                $.get("/api/scripturl", function(data){scriptUrl=data;});
+				}
 		});
 
 		$( "#pagify-image" ).bind('click',function() {

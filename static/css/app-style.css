@@ -435,7 +435,7 @@ z-index:999;}
 
     }
 .widget-list-item{margin:10px 0;}
-.widget-list-item textarea{width:100%;}
+.widget-list-item textarea{width:450px;}
 .wheader{display:block;}
 .wheader h3 {margin:0;display:inline;}
 .wheader h3 a{display:inline !important; cursor:text;padding:0 !important;margin-left: 2.2em;}
@@ -473,6 +473,10 @@ z-index:999;}
     margin: 7px auto;
     width: 150px;
     display:block;
+}
+
+#upload-dialog{
+    width:300px;
 }
 
 /* jqury ui */

@@ -102,7 +102,7 @@
 <div id="upload-dialog" title="Upload Image" style="display:none;">
     <div id="fileQueue"></div>
     <input type="file" name="uploadify" id="uploadify" />
-    <p><a href="javascript:jQuery('#uploadify').uploadifyClearQueue()">Cancel All Uploads</a></p>
+    <p>Images larger than 520px wide will be resized. Images smaller than 520px will be shown as is.</p>
 </div>
 <div id="dialog-delete-confirm" title="Delete Widget?" style="display:none;">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>This widget will be permanently deleted and cannot be recovered. Are you sure?</p>
@@ -125,6 +125,7 @@ $.ajaxSetup ({
     // Disable caching of AJAX responses */
     cache: false
 });
+var scriptUrl = '{{upload_url}}';
 $(document).ready(function() {
 	 // Facebox
     	$.facebox.settings.opacity = 0.7;
@@ -132,7 +133,7 @@ $(document).ready(function() {
     	// Tooltips
     	$('#fb-left-column').tipTip({defaultPosition:'top',content: "This is just a test Facebook Page so you can get an idea of what your page will look like after you publish it."});
 	// Uploadify
-	var scriptUrl = '{{upload_url}}';
+	
 	$("#uploadify").uploadify({
 		'uploader'       : '/static/swf/uploadify.swf',
 		'script'         : scriptUrl,
