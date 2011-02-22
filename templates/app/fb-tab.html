@@ -17,7 +17,7 @@
   <script src="http://widgets.twimg.com/j/2/widget.js"></script>
 </head>
 <body>
-  <div id="container">
+  <div id="container" class="fbpage">
     <header>
     </header>
     <div id="main">
@@ -121,13 +121,12 @@
 	            jsonpCallback: cbFunc
 	            });
 	}
-	function targetTop(){
-	    $('a').each(function() {
-            if(!this.target) {
-                this.target = '_top';
-            }
+	function targetTop(id){
+	    $('.fbpage a').each(function() {
+            this.target = '_top';
         });
 	}
+	targetTop();
     $(document).ready(function() {
         $( "#pagify-widget-list-1" ).accordion({autoHeight: false, animated: 'bounceslide' });
         
@@ -204,7 +203,7 @@
                 var html = '';
                 var count = 0
                 $.each(data.query.results.feed.entry, function(index, value) { 
-            	   html = html + '<h2><a href="'+value.link.href+'">' + value.title + '</a></h2><span>'+dateFormat(value.published,"shortDate");+'</span>';
+            	   html = html + '<h2><a href="'+value.link.href+'">' + value.title + '</a></h2><span>'+dateFormat(value.published,"longDate")+'</span>';
             	   try{
             	       summary =value.summary.content;
             	   }catch(err){}
@@ -215,9 +214,10 @@
             	   if(count == 10){
             	       return false;
             	   }
-            	   targetTop();
+            	   
             	});
             	$('#{{w.id}}').html(html);
+            	targetTop();
             }
             function call_{{w.id|cut:"-"}}() {
                 yqlQuery('select * from feednormalizer where url=\'{{w.feed_url}}\' and output=\'atom_1.0\'','cbFunc_{{w.id|cut:"-"}}','json','3600');
@@ -253,7 +253,7 @@
                   html = data.query.results.json.html;
                   break;
                 case 'link':
-                  html = '<a href="' + data.query.results.json.url + '">' + title + '</a>'
+                  html = '<a href="' + data.query.results.json.url + '" target="_top">' + title + '</a>'
                   break;
                 default:
                 }
@@ -261,7 +261,7 @@
     			targetTop();
     		}    
     		function call_{{w.id|cut:"-"}}() {
-    		    yqlQuery('select * from embedly where url="{{w.embedly_url|safe}}"" and maxwidth ="500"','cbFunc_{{w.id|cut:"-"}}','json','3600');
+    		    yqlQuery('select * from embedly where url="{{w.embedly_url|safe}}" and maxwidth ="500"','cbFunc_{{w.id|cut:"-"}}','json','3600');
             }
 	    {% endifequal %}
 	{% endfor %}
