@@ -158,13 +158,13 @@
 				  html = html + value;
 				});
 				$('#{{w.id}}').html(html);
-				$('.flickr_badge_image').each(function() {
+				$('#{{w.id}} .flickr_badge_image').each(function() {
             	    $("a",this).addClass('fgallery').attr({
                       rel: 'group1',
                       href: $("a > img",this).attr('src').replace(/_t/,"")
                     });
             	});
-            	$(".fgallery").fancybox({
+            	$("#{{w.id}} .fgallery").fancybox({
             	    'overlayShow'   : false,
             	    'titleShow'     : false,
                     'transitionIn'  : 'elastic',
@@ -173,6 +173,17 @@
                     'easingOut'     : 'easeInBack'
             	});
             	targetTop();
+            	var postMaxHeight = 0;
+                $("#{{w.id}} .fgallery").each(function (i) {
+                     var elHeight = $(this).height();
+                     if(parseInt(elHeight) > postMaxHeight){
+                         postMaxHeight = parseInt(elHeight);
+                     }
+                });
+                $("#{{w.id}} .fgallery").each(function (i) {
+                    $(this).css('height',postMaxHeight+'px');
+                });
+                
 			}
 			function call_{{w.id|cut:"-"}}() {
 			    yqlQuery('select * from html where url="http://www.flickr.com/badge_code_v2.gne?count=10&display=latest&size=t&layout=x&source=user&user={{w.flickr_userid}}" and xpath=\'//div[@class="flickr_badge_image"]\'','cbFunc_{{w.id|cut:"-"}}','xml','3600');
