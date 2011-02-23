@@ -7,11 +7,17 @@ URL:<br/>
 var timeout_{{widget.id|cut:"-"}};
 $('.{{widget.id}}').bind('textchange', function () {
   clearTimeout(timeout_{{widget.id|cut:"-"}});
-  //$('#ajaxFired').html('<strong>Typing...</strong>');
     var self = this;
     timeout_{{widget.id|cut:"-"}} = setTimeout(function () {
         saveWidget('{{widget.id}}');
-        //$('#ajaxFired').html('<strong>Saved</strong>: ' + $(self).val());
   }, 1000);
 });
+$("#fm-{{widget.id}}").validate({
+    rules: {
+      embedly_url: {
+        required: true,
+        url: true
+      }
+    }
+ });
 </script>

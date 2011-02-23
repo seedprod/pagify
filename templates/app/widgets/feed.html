@@ -1,6 +1,6 @@
 <form id="fm-{{widget.id}}" class="widget-form">
 Feed Link:<br/>
-<input type="text" name="feed_url" class="{{widget.id}}" value="{{widget.feed_url|default:""}}"></input>
+<input type="text" name="feed_url" class="{{widget.id}} " value="{{widget.feed_url|default:""}}"></input>
 </form>
 
 <script>
@@ -13,5 +13,13 @@ $('.{{widget.id}}').bind('textchange', function () {
         saveWidget('{{widget.id}}');
         //$('#ajaxFired').html('<strong>Saved</strong>: ' + $(self).val());
   }, 1000);
-});
+});  
+$("#fm-{{widget.id}}").validate({
+    rules: {
+      feed_url: {
+        required: true,
+        url: true
+      }
+    }
+ });
 </script>

@@ -296,8 +296,17 @@ default:
         $( "#controller-tabs" ).fadeIn();
     });
 }
-
+// Validate defaults
+$.validator.setDefaults({
+	highlight: function(input) {
+		$(input).addClass("ui-state-error");
+	},
+	unhighlight: function(input) {
+		$(input).removeClass("ui-state-error");
+	}
+});
 // Functions
+
 
 //Save Widget
 function saveWidget(id){
@@ -310,11 +319,12 @@ function saveWidget(id){
     });
 	var wContents = $.toJSON(params);
 	var pageId = $("#page-id").html();  
-	if(wId!=''){
+	if(wId!='' && $("#fm-"+id).validate().form()){
 	$.post("/api/savewidget", { wid: wId , wtype: wType , wname: wName, wcontents: wContents, pageid: pageId},function(data){
 	    if(data){
 	        log('Saved Widget');
 	        $('#widget-list').trigger('sortupdate')
+	        $('#saving').show().delay(800).fadeOut(400);
 	    };
 	});//end ajax request
     }

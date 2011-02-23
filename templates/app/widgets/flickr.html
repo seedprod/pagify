@@ -1,23 +1,28 @@
 <form id="fm-{{widget.id}}" class="widget-form">
 Flickr Username:<br/>
-<input type="text" id="flickr_username" name="flickr_username" class="{{widget.id}}" value="{{widget.flickr_username|default:""}}"></input>
-<input type="hidden" id="flickr_userid" name="flickr_userid" class="{{widget.id}}" value="{{widget.flickr_userid|default:""}}"></input>
+<input type="text" name="flickr_username" class="{{widget.id}} flickr_username" value="{{widget.flickr_username|default:""}}"></input>
+<input type="hidden" name="flickr_userid" class="{{widget.id}} flickr_userid" value="{{widget.flickr_userid|default:""}}"></input>
 </form>
 
 <script>
 var timeout_{{widget.id|cut:"-"}};
 $('.{{widget.id}}').bind('textchange', function () {
   clearTimeout(timeout_{{widget.id|cut:"-"}});
-  //$('#ajaxFired').html('<strong>Typing...</strong>');
     var self = this;
     timeout_{{widget.id|cut:"-"}} = setTimeout(function () {
-        username = $('#fm-{{widget.id}} #flickr_username').val();
+        username = $('#fm-{{widget.id}} .flickr_username').val();
         yqlQuery('SELECT * FROM flickr.people.findbyusername WHERE username=\'' + username + '\'','cbFunc_{{w.id|cut:"-"}}','json','3600');
-        //$('#ajaxFired').html('<strong>Saved</strong>: ' + $(self).val());
   }, 1000);
 });
 function cbFunc_{{w.id|cut:"-"}}(data) {
-	$('#fm-{{widget.id}} #flickr_userid').val(data.query.results.user.id);
+	$('#fm-{{widget.id}} .flickr_userid').val(data.query.results.user.id);
 	saveWidget('{{widget.id}}');
 }
+$("#fm-{{widget.id}}").validate({
+    rules: {
+      flickr_username: {
+        required: true
+      }
+    }
+ });
 </script>
