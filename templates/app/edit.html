@@ -198,13 +198,12 @@ $('#google_analytics_ua').bind('textchange', function () {
   //$('#ajaxFired').html('<strong>Typing...</strong>');
     var self = this;
     timeout_ga_ua = setTimeout(function () {
-        log($(self).val());
         $.post("/api/saveoption", { id:$("#google_analytics_ua_id").val(), oname: 'google_analytics_ua', ovalue: $(self).val()  , otype: 'page', opageid: $("#page-id").html() },function(data){
     	    if(data){
     	        log('Saved Option');
+    	        $('#saving').show().delay(800).fadeOut(400);
     	    };
     	});//end ajax request
-    //$('#ajaxFired').html('<strong>Saved</strong>: ' + $(self).val());
   }, 1000);
 });
 
