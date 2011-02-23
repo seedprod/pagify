@@ -178,7 +178,7 @@ button {  width: auto; overflow: visible; }
 .flickr_badge_image img{
     border: 1px solid #E5E5E5;
     padding:3px;
-    margin: 0 5px;
+    margin: 10px 5px;
 }
 
 /* YouTube */

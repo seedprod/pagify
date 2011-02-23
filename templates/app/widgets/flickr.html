@@ -1,6 +1,17 @@
 <form id="fm-{{widget.id}}" class="widget-form">
 Flickr Username:<br/>
 <input type="text" name="flickr_username" class="{{widget.id}} flickr_username" value="{{widget.flickr_username|default:""}}"></input>
+Which ones?<br/>
+<select name="flickr_whichone" class="{{widget.id}}">
+    <option value="mostrecent" {% if flickr_whichone == 'mostrecent' %}selected {% endif %}>Most Recent</option>
+     <option value="random" {% if flickr_whichone == 'random' %}selected {% endif %}>Random</option>
+</select>
+How Many:<br/>
+<select name="flickr_count" class="{{widget.id}}">
+    {% for i in 10 %}
+        <option value="{{ i }}" {% if flickr_count == '{{ i }}' %}selected {% endif %}>{{ i }}</option>
+    {% endfor %}
+</select>
 <input type="hidden" name="flickr_userid" class="{{widget.id}} flickr_userid" value="{{widget.flickr_userid|default:""}}"></input>
 </form>
 

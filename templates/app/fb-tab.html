@@ -174,13 +174,13 @@
             	});
             	targetTop();
             	var postMaxHeight = 0;
-                $("#{{w.id}} .fgallery").each(function (i) {
+                $("#{{w.id}} .fgallery img").each(function (i) {
                      var elHeight = $(this).height();
                      if(parseInt(elHeight) > postMaxHeight){
                          postMaxHeight = parseInt(elHeight);
                      }
                 });
-                $("#{{w.id}} .fgallery").each(function (i) {
+                $("#{{w.id}} .flickr_badge_image").each(function (i) {
                     $(this).css('height',postMaxHeight+'px');
                 });
                 
