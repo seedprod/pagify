@@ -151,6 +151,7 @@ $(document).ready(function() {
 							  //Refresh Picture
 							  //$.get("/api/headerimageurl", { p: "{{page.id}}"},function(data){$("#pagify-image").css('background-image','url('+data+'=s540)');});
                               $.get("/api/headerimageurl", { p: "{{page.id}}"},function(data){$("#pagify-image").attr('src',data+'=s520');});
+                              $("#upload-dialog").dialog( "close" )
                           });
                           return false;   
                        } else {$.get("/api/scripturl", function(data){scriptUrl=data;});}
