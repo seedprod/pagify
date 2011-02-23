@@ -324,7 +324,7 @@ function saveWidget(id){
 	    if(data){
 	        log('Saved Widget');
 	        $('#widget-list').trigger('sortupdate')
-	        $('#saving').show().delay(800).fadeOut(400);
+	        $('#saving').show().delay(1500).fadeOut('slow');
 	    };
 	});//end ajax request
     }

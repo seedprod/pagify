@@ -201,7 +201,7 @@ $('#google_analytics_ua').bind('textchange', function () {
         $.post("/api/saveoption", { id:$("#google_analytics_ua_id").val(), oname: 'google_analytics_ua', ovalue: $(self).val()  , otype: 'page', opageid: $("#page-id").html() },function(data){
     	    if(data){
     	        log('Saved Option');
-    	        $('#saving').show().delay(800).fadeOut(400);
+    	        $('#saving').show().delay(1500).fadeOut('slow');
     	    };
     	});//end ajax request
   }, 1000);

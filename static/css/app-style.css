@@ -479,6 +479,27 @@ z-index:999;}
     width:300px;
 }
 
+#saving{
+    display:none;
+    color:#fff;
+    padding:5px;
+    background:#55a616;
+    position:fixed;
+    top:20px;
+    left:20px;
+    text-shadow:none;
+    font-size:13px;
+       -moz-border-radius: 4px; /* FF1+ */
+    -webkit-border-radius: 4px; /* Saf3-4, iOS 1+, Android 1.5+ */
+            border-radius: 4px; /* Opera 10.5, IE9, Saf5, Chrome, FF4 */
+       -moz-box-shadow: 0px 0px 4px #333; /* FF3.5+ */
+    -webkit-box-shadow: 0px 0px 4px #333; /* Saf3.0+, Chrome */
+            box-shadow: 0px 0px 4px #333; /* Opera 10.5, IE9, Chrome 10+ */
+
+
+}
+
+
 /* jqury ui */
 .ui-dialog{background:#fff !important;border:10px solid #76756C !important;}
 .ui-dialog .ui-widget-header {background-image:none !important; background-color:#333 !important;

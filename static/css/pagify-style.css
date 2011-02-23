@@ -181,6 +181,9 @@ button {  width: auto; overflow: visible; }
     margin: 0 5px;
 }
 
+/* YouTube */
+.widget-youtube td > div{ border:none !important;}
+
 /* Twitter Widget */
 .twtr-ft,.twtr-join-conv {display:none;}
 
