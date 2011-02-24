@@ -113,7 +113,8 @@ default:
 		$( "#widget-list" )
 			.accordion({
 				header: "> div > .wheader",
-				autoHeight: false
+				autoHeight: false,
+				collapsible: true
 			})
 			.sortable({
 				axis: "y",
@@ -159,7 +160,8 @@ default:
       				});
    				    $( "#widget-list" ).accordion('destroy').accordion({
    						header: "> div > .wheader",
-   						autoHeight: false
+   						autoHeight: false,
+   						collapsible: true
    					})
    					.sortable({
    						axis: "y",
