@@ -173,13 +173,13 @@ button {  width: auto; overflow: visible; }
 /* Flickr Widget */
 .flickr_badge_image{
     float:left;
-    margin: 2px;
+    margin: 7px 3px
 }
 .flickr_badge_image img{
     border: 1px solid #E5E5E5;
     padding:3px;
-    margin: 10px 5px;
 }
+.fancybox-title-over{color:block;position:static;}
 
 /* YouTube */
 .widget-youtube td > div{ border:none !important;}

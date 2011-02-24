@@ -279,6 +279,7 @@ class AjaxApiHandler(BaseHandler):
         if method == 'getwidget':
             widget_id = self.request.get("wid")
             widget = Widget.get_by_key_name(widget_id)
+            tenr = range(1,11)
             if widget:
                 widget_type = widget.type
             if not widget:
@@ -287,7 +288,7 @@ class AjaxApiHandler(BaseHandler):
                             id=widget_id
                             )
             if widget_type:
-                self.render('app/widgets/'+widget_type+".html", widget=widget)
+                self.render('app/widgets/'+widget_type+".html", widget=widget,tenr=tenr)
             else:
                 
                 self.response.out.write("This widget cannot be found.")

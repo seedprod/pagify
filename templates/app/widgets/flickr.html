@@ -1,23 +1,29 @@
 <form id="fm-{{widget.id}}" class="widget-form">
-Flickr Username:<br/>
+<span class="fm-divider">
+<label for="flickr_username">Flickr Username:</label>
 <input type="text" name="flickr_username" class="{{widget.id}} flickr_username" value="{{widget.flickr_username|default:""}}"></input>
-Which ones?<br/>
+</span>
+<span class="fm-divider">
+<label for="flickr_whichone">Which Ones:</label>
 <select name="flickr_whichone" class="{{widget.id}}">
-    <option value="mostrecent" {% if flickr_whichone == 'mostrecent' %}selected {% endif %}>Most Recent</option>
-     <option value="random" {% if flickr_whichone == 'random' %}selected {% endif %}>Random</option>
+    <option value="latest" {% if widget.flickr_whichone == 'latest' %}selected {% endif %}>Most Recent</option>
+     <option value="random" {% if widget.flickr_whichone == 'random' %}selected {% endif %}>Random</option>
 </select>
-How Many:<br/>
+</span>
+<span class="fm-divider">
+<label for="flickr_count">How Many:</label>
 <select name="flickr_count" class="{{widget.id}}">
-    {% for i in 10 %}
-        <option value="{{ i }}" {% if flickr_count == '{{ i }}' %}selected {% endif %}>{{ i }}</option>
+    {% for i in tenr %}
+        <option value="{{i}}" {% if widget.flickr_count|add:"0" == i|add:"0" %}selected {% endif %}>{{i}}</option>
     {% endfor %}
 </select>
+</span>
 <input type="hidden" name="flickr_userid" class="{{widget.id}} flickr_userid" value="{{widget.flickr_userid|default:""}}"></input>
 </form>
 
 <script>
 var timeout_{{widget.id|cut:"-"}};
-$('.{{widget.id}}').bind('textchange', function () {
+$('.{{widget.id}}').bind('textchange change', function () {
   clearTimeout(timeout_{{widget.id|cut:"-"}});
     var self = this;
     timeout_{{widget.id|cut:"-"}} = setTimeout(function () {
@@ -26,8 +32,10 @@ $('.{{widget.id}}').bind('textchange', function () {
   }, 1000);
 });
 function cbFunc_{{w.id|cut:"-"}}(data) {
+    try{
 	$('#fm-{{widget.id}} .flickr_userid').val(data.query.results.user.id);
 	saveWidget('{{widget.id}}');
+    }catch(err){}
 }
 $("#fm-{{widget.id}}").validate({
     rules: {

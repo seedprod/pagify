@@ -409,7 +409,7 @@ z-index:999;}
 }
 
 /* Edit */
-
+.fm-divider{margin-bottom:6px;display:block;}
 #fb-profile{border: 1px solid #CCC;width:776px;background:#fff url(/static/images/facebook-page-v2.png) no-repeat;margin-bottom: 40px;text-shadow:none;}
 #fb-left-column{width:220px;position:relative;}
 #fb-left-column img {margin: 58px 0px 20px 14px;}
@@ -481,6 +481,7 @@ z-index:999;}
 
 #saving{
     display:none;
+    z-index:100;
     color:#fff;
     padding:5px;
     background:#55a616;
@@ -529,7 +530,8 @@ z-index:999;}
 #wi-embedly{background:#F26627 url(/static/images/embedly_16.png) no-repeat 2px 2px;padding-left:20px !important;color:#fff;}
 #options_ga h3{background:transparent url(/static/images/googleanalytics_16.png) no-repeat 2px 0px;padding-left:20px !important;font-weight:normal;}
 .widget-form{font-size:93%;}
-.widget-form input{width:100%;}
+/*.widget-form input{width:100%;}*/
+.widget-form label{margin-top:5px;}
 
 /* 2.2 Uploader */
 .uploadifyQueueItem {

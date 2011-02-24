@@ -159,6 +159,7 @@
 				});
 				$('#{{w.id}}').html(html);
 				$('#{{w.id}} .flickr_badge_image').each(function() {
+				    $("a",this).data('flickr_link', $("a",this).attr('href'));
             	    $("a",this).addClass('fgallery').attr({
                       rel: 'group1',
                       href: $("a > img",this).attr('src').replace(/_t/,"")
@@ -166,7 +167,9 @@
             	});
             	$("#{{w.id}} .fgallery").fancybox({
             	    'overlayShow'   : false,
-            	    'titleShow'     : false,
+            	    'titleShow'     : true,
+            	    'titlePosition' : 'inside',
+            	    'titleFormat'   : function() {return '<span class="fancybox-title-over"><a target="_top" href="'+$('a[href="'+this.href+'"]').data('flickr_link')+'">'+'A Flickr Photo'+'</a></span>';},
                     'transitionIn'  : 'elastic',
                     'transitionOut' : 'elastic',
                     'easingIn'      : 'easeOutBack',
@@ -186,7 +189,7 @@
                 
 			}
 			function call_{{w.id|cut:"-"}}() {
-			    yqlQuery('select * from html where url="http://www.flickr.com/badge_code_v2.gne?count=10&display=latest&size=t&layout=x&source=user&user={{w.flickr_userid}}" and xpath=\'//div[@class="flickr_badge_image"]\'','cbFunc_{{w.id|cut:"-"}}','xml','3600');
+			    yqlQuery('select * from html where url="http://www.flickr.com/badge_code_v2.gne?count={{w.flickr_count}}&display={{w.flickr_whichone}}&size=t&layout=x&source=user&user={{w.flickr_userid}}" and xpath=\'//div[@class="flickr_badge_image"]\'','cbFunc_{{w.id|cut:"-"}}','xml','3600');
             }
 		{% endifequal %}
 	    {% ifequal w.type "youtube" %}
