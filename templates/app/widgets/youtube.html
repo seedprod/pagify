@@ -1,6 +1,8 @@
-<form id="fm-{{widget.id}}" class="widget-form">
-    YouTube Username:<br/>
+<form id="fm-{{widget.id}}" class="widget-form widget-youtube">
+    <span class="fm-divider">
+    <label for="youtube_username">YouTube Username:</label>
     <input type="text" name="youtube_username" class="{{widget.id}}" value="{{widget.youtube_username|default:""}}"></input>
+    </span>
 </form>
 
 <script>

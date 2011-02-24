@@ -1,6 +1,8 @@
-<form id="fm-{{widget.id}}" class="widget-form">
-URL:<br/>
+<form id="fm-{{widget.id}}" class="widget-form widget-embedly">
+<span class="fm-divider">
+<label for="embedly_url">URL:</label>
 <input type="text" name="embedly_url" class="{{widget.id}}" value="{{widget.embedly_url|default:""}}"></input>
+</span>
 </form>
 
 <script>

@@ -1,6 +1,8 @@
-<form id="fm-{{widget.id}}" class="widget-form">
-    Twitter Username:<br/>
+<form id="fm-{{widget.id}}" class="widget-form widget-twitter">
+    <span class="fm-divider">
+    <label for="twitter_username">Twitter Username:</label>
     <input type="text" name="twitter_username" class="{{widget.id}}" value="{{widget.twitter_username|default:""}}"></input>
+    </span>
 </form>
 
 <script>

@@ -1,6 +1,8 @@
-<form id="fm-{{widget.id}}" class="widget-form">
-Feed Link:<br/>
+<form id="fm-{{widget.id}}" class="widget-form widget-feed">
+<span class="fm-divider">
+<label for="feed_url">Feed URL:</label>
 <input type="text" name="feed_url" class="{{widget.id}} " value="{{widget.feed_url|default:""}}"></input>
+</span>
 </form>
 
 <script>

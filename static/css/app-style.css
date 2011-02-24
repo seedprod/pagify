@@ -434,6 +434,7 @@ z-index:999;}
       height:200px;
 
     }
+.widget-embedly input,.widget-googlemaps input,.widget-feed input{width:100%;}
 .widget-list-item{margin:10px 0;}
 .widget-list-item textarea{width:450px;}
 .wheader{display:block;}
