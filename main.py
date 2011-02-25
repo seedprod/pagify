@@ -1,6 +1,7 @@
 import os
 import sys
 import config
+import logging
 if 'lib' not in sys.path:
     # Add /lib as primary libraries directory
     sys.path[0:0] = ['lib']
@@ -11,6 +12,9 @@ from webapp2 import RedirectHandler, Route
 from google.appengine.dist import use_library
 use_library('django', '1.2')
 from google.appengine.ext.webapp import template
+from google.appengine.ext import ereporter
+
+ereporter.register_logger()
 
 # Error Handlers    
 class Handle404(webapp.RequestHandler):

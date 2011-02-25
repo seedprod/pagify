@@ -28,6 +28,9 @@ inbound_services:
 - warmup
 
 handlers:
+- url: /_ereporter.*
+  script: $PYTHON_LIB/google/appengine/ext/ereporter/report_generator.py
+  login: admin
 
 - url: /(robots\.txt|favicon\.ico|apple-touch-icon\.png)
   static_files: static/\1
@@ -41,3 +44,8 @@ handlers:
   
 error_handlers:
 - file: /templates/errors/default_gae_error.html
+
+cron:
+- description: Daily exception report
+  url: /_ereporter?sender=john@pagifyapp.com
+  schedule: every day 00:00

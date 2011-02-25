@@ -206,6 +206,23 @@
                 $('#{{w.id}}').html(html);
                 $('#{{w.id}} > div').css('width','100%');
                 targetTop();
+                $("#{{w.id}} a[href^='http://www.youtube.com/watch']").fancybox({
+                    'titleShow'     : false,
+            	    'padding'		: 0,
+        			'autoScale'		: false,
+                    'transitionIn'  : 'elastic',
+                    'transitionOut' : 'elastic',
+                    'easingIn'      : 'easeOutBack',
+                    'easingOut'     : 'easeInBack',
+        			'width'		    : 500,
+        			'height'		: 311,
+        			'href'			: this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
+        			'type'			: 'swf',
+        			'swf'			: {
+        			   	'wmode'		: 'transparent',
+        				'allowfullscreen'	: 'true'
+        			}
+            	});
             }
             function call_{{w.id|cut:"-"}}() {
                 yqlQuery('select * from rss where url=\'http://gdata.youtube.com/feeds/base/users/{{w.youtube_username}}/uploads?alt=rss&v=2&orderby=published\'','cbFunc_{{w.id|cut:"-"}}','json','3600');
