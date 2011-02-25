@@ -44,8 +44,3 @@ handlers:
   
 error_handlers:
 - file: /templates/errors/default_gae_error.html
-
-cron:
-- description: Daily exception report
-  url: /_ereporter?sender=john@pagifyapp.com
-  schedule: every day 00:00
