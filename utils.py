@@ -2,7 +2,6 @@ import sys
 import xml.dom.minidom
 import config
 import webapp2 as webapp
-from Crypto.Cipher import ARC4 as cipher
 
 
 # XML to Dict
@@ -52,12 +51,10 @@ def _login_required(handler):
     return 
     
 def encrypt(str):
-    enc = cipher.new(config.config['extras.sessions']['secret_key'])
-    x = enc.encrypt(str)
+    x = str.encode('base64').encode('hex')
     return x
   
 def decrypt(str):
-    dec = cipher.new(config.config['extras.sessions']['secret_key'])
-    y = dec.decrypt(str)
+    y = str.decode('hex').decode('base64')
     return y
   

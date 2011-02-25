@@ -55,7 +55,7 @@ app = webapp.WSGIApplication([
 # Error Handlers
 app.error_handlers[404] = Handle404
 #if not debug:
-#    app.error_handlers[500] = Handle500
+app.error_handlers[500] = Handle500
 
 # Instantiate the application
 def main():
