@@ -166,6 +166,7 @@
                     });
             	});
             	$("#{{w.id}} .fgallery").fancybox({
+            	    'centerOnScroll': true,
             	    'overlayShow'   : false,
             	    'titleShow'     : true,
             	    'titlePosition' : 'inside',
@@ -206,7 +207,10 @@
                 $('#{{w.id}}').html(html);
                 $('#{{w.id}} > div').css('width','100%');
                 targetTop();
-                $("#{{w.id}} a[href^='http://www.youtube.com/watch']").fancybox({
+                $('#{{w.id}} a[href^="http://www.youtube.com/watch"]').click(function() {
+                $.fancybox({
+                    'centerOnScroll': true,
+                    'overlayShow'   : false,
                     'titleShow'     : false,
             	    'padding'		: 0,
         			'autoScale'		: false,
@@ -214,14 +218,16 @@
                     'transitionOut' : 'elastic',
                     'easingIn'      : 'easeOutBack',
                     'easingOut'     : 'easeInBack',
-        			'width'		    : 500,
-        			'height'		: 311,
+        			'width'		    : 450,
+        			'height'		: 283,
         			'href'			: this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
         			'type'			: 'swf',
         			'swf'			: {
         			   	'wmode'		: 'transparent',
         				'allowfullscreen'	: 'true'
         			}
+            	});
+            	return false;
             	});
             }
             function call_{{w.id|cut:"-"}}() {
