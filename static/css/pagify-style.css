@@ -187,6 +187,11 @@ button {  width: auto; overflow: visible; }
 /* Twitter Widget */
 .twtr-ft,.twtr-join-conv {display:none;}
 
+/* Feed */
+.widget-feed h2{font-size:123.1%}
+.widget-feed > span{font-size:85%}
+.widget-feed >p{margin: 10px 0 20px;}
+
 /* Footer */
 footer{text-align:right;}
 #powered-by img{

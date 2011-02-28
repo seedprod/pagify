@@ -127,7 +127,7 @@
 	}
 	targetTop();
     $(document).ready(function() {
-        $( "#pagify-widget-list-1" ).accordion({autoHeight: false, animated: 'bounceslide' });
+        $( "#pagify-widget-list-1" ).accordion({autoHeight: false, animated: 'slide' });
         
         // Ajax Accordian
 		$("#pagify-widget-list-1" ).bind('accordionchange', function(event, ui) {
@@ -172,9 +172,7 @@
             	    'titlePosition' : 'inside',
             	    'titleFormat'   : function() {return '<span class="fancybox-title-over"><a target="_top" href="'+$('a[href="'+this.href+'"]').data('flickr_link')+'">'+'A Flickr Photo'+'</a></span>';},
                     'transitionIn'  : 'elastic',
-                    'transitionOut' : 'elastic',
-                    'easingIn'      : 'easeOutBack',
-                    'easingOut'     : 'easeInBack'
+                    'transitionOut' : 'elastic'
             	});
             	targetTop();
             	var postMaxHeight = 0;
@@ -200,7 +198,7 @@
                 $.each(data.query.results.item, function(index, value) { 
                    html = html + value.description;
                    count++;
-            	   if(count == 10){
+            	   if(count == {{w.flickr_count}}){
             	       return false;
             	   }
             	});
@@ -216,8 +214,6 @@
         			'autoScale'		: false,
                     'transitionIn'  : 'elastic',
                     'transitionOut' : 'elastic',
-                    'easingIn'      : 'easeOutBack',
-                    'easingOut'     : 'easeInBack',
         			'width'		    : 450,
         			'height'		: 283,
         			'href'			: this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),

@@ -3,6 +3,14 @@
     <label for="youtube_username">YouTube Username:</label>
     <input type="text" name="youtube_username" class="{{widget.id}}" value="{{widget.youtube_username|default:""}}"></input>
     </span>
+    <span class="fm-divider">
+    <label for="youtube_count">How Many:</label>
+    <select name="youtube_count" class="{{widget.id}}">
+        {% for i in tenr %}
+            <option value="{{i}}" {% if widget.youtube_count|add:"0" == i|add:"0" %}selected {% endif %}>{{i}}</option>
+        {% endfor %}
+    </select>
+    </span>
 </form>
 
 <script>
