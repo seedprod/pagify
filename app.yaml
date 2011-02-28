@@ -29,7 +29,7 @@ inbound_services:
 - warmup
 
 handlers:
-- url: /_ereporter.*
+- url: /_ereporter/.*
   script: $PYTHON_LIB/google/appengine/ext/ereporter/report_generator.py
   login: admin
 
@@ -42,6 +42,11 @@ handlers:
 
 - url: /.*
   script: main.py
+  
+admin_console:
+  pages:
+  - name: Appstats
+    url: /_ah/stats/
   
 error_handlers:
 - file: /templates/errors/default_gae_error.html

@@ -198,7 +198,7 @@
                 $.each(data.query.results.item, function(index, value) { 
                    html = html + value.description;
                    count++;
-            	   if(count == {{w.flickr_count}}){
+            	   if(count == {{w.flickr_count|default:"5"}}){
             	       return false;
             	   }
             	});

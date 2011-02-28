@@ -127,7 +127,7 @@ button {  width: auto; overflow: visible; }
 .clearfix { zoom: 1; }
 
 /* 1.2 Hyperlinks */
-a, a:visited,a:active  { color: #444; text-decoration:none; }
+a, a:visited,a:active  { color: #3b5998; text-decoration:none; }
 footer a,footer a:visited,footer a:active{color: #999;}
 a:hover { text-decoration:underline; }
 /* Accessible focus treatment: people.opera.com/patrickl/experiments/keyboard/test */
