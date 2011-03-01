@@ -452,7 +452,10 @@ class fbTabHandler(BaseHandler):
         #logging.info(self.request)
         signed_request = facebook.parse_signed_request(self.request.get('signed_request'),self.get_config('facebook','app_secret'))
         #logging.info(signed_request)
-        user_id = signed_request['user_id']
+        try:
+          user_id = signed_request['user_id']
+        except:
+          user_id = None
         page_id = signed_request['page']['id']
         liked = signed_request['page']['liked']
         admin = signed_request['page']['admin']

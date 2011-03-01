@@ -15,7 +15,7 @@
 
 <script>
 var timeout_{{widget.id|cut:"-"}};
-$('.{{widget.id}}').bind('textchange', function () {
+$('.{{widget.id}}').bind('textchange change', function () {
   clearTimeout(timeout_{{widget.id|cut:"-"}});
   //$('#ajaxFired').html('<strong>Typing...</strong>');
     var self = this;

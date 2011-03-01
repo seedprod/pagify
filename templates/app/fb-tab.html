@@ -25,7 +25,7 @@
             <img id="pagify-image" class="widget" src="{{page.header_image_url}}=s520"/>
             {% endif %}
 
-            <div id="pagify-widget-list-1" class="widget">
+            <div id="pagify-widget-list-1" class="widget" style="display:none">
             	{% for w in widgets %}
                 	<h3><a href="#">{{w.name}}</a></h3>
                 	<div id="{{w.id}}" class="widget-list-item widget-{{w.type}}">
@@ -136,7 +136,7 @@
 		      call = "call_" + wid.replace(/-/g, "") + "()";
               eval(call);
 		  }
-		});
+		}).fadeIn();
 		
 		// Load default widget if there is one
 		var firstWidget = $("#pagify-widget-list-1 > div:eq(0)");
