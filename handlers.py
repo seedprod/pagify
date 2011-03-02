@@ -47,18 +47,17 @@ def get_subscriber_changes(id):
 def get_embedly_code(args):
     id = args["id"]
     url = args["url"]
-    response = oembed_replace('[' + url + ']')
-    logging.info('response')
-    logging.info(response)
-    if response:  
-        widget = Widget.get_by_key_name(id)
-        widget.embedly_code = db.Text(response)
-        widget.put()
-    #try:
-    #
-    #except:
-    #    logging.error(id)
-    #    logging.error(url)
+    try:
+        response = oembed_replace('[' + url + ']')
+        logging.info('response')
+        logging.info(response)
+        if response:  
+            widget = Widget.get_by_key_name(id)
+            widget.embedly_code = db.Text(response)
+            widget.put()
+    except:
+        logging.error(id)
+        logging.error(url)
         
         
 #base Handler

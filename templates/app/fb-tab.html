@@ -293,7 +293,7 @@
     			targetTop();
     		}    
     		function call_{{w.id|cut:"-"}}() {
-    		    yqlQuery('select * from embedly where url="{{w.embedly_url|safe}}" and maxwidth ="500"','cbFunc_{{w.id|cut:"-"}}','json','3600');
+    		    //yqlQuery('select * from embedly where url="{{w.embedly_url|safe}}" and maxwidth ="480"','cbFunc_{{w.id|cut:"-"}}','json','3600');
             }
 	    {% endifequal %}
 	{% endfor %}
