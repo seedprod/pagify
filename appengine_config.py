@@ -1,3 +1,6 @@
+from google.appengine.dist import use_library
+use_library('django', '1.2')
+
 def capability_middleware(application):
   def wsgi_app(environ, start_response):
     if not capabilities.CapabilitySet('datastore_v3').is_enabled():

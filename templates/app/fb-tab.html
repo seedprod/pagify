@@ -77,7 +77,7 @@
                 	        <img src="/static/images/loading.gif" alt="Loading..." class="fb-loading"/>   
                 	        {% endifequal %}
                 	        {% ifequal w.type "embedly" %}
-                	        <img src="/static/images/loading.gif" alt="Loading..." class="fb-loading"/>     
+                	        {{w.embedly_code|safe}}    
                 	        {% endifequal %}     	    
                     </div>
             	{% endfor %}

@@ -1,5 +1,8 @@
 import os
 import sys
+if 'lib' not in sys.path:
+    # Add /lib as primary libraries directory
+    sys.path[0:0] = ['lib']
 import datetime
 import facebook
 import logging
@@ -10,7 +13,7 @@ import base64
 #import markdown
 import webapp2 as webapp
 from xml.dom import minidom
-from utils import fblogin_required,encrypt,decrypt, xmltodict
+from utils import fblogin_required,encrypt,decrypt, xmltodict,oembed_replace
 from models import User, Page, UploadedFiles, Widget, Option
 from google.appengine.ext import db
 from google.appengine.ext import blobstore
@@ -41,7 +44,21 @@ def get_subscriber_changes(id):
     except:
         logging.error(id)
         
-
+def get_embedly_code(args):
+    id = args["id"]
+    url = args["url"]
+    response = oembed_replace('[' + url + ']')
+    logging.info('response')
+    logging.info(response)
+    if response:  
+        widget = Widget.get_by_key_name(id)
+        widget.embedly_code = db.Text(response)
+        widget.put()
+    #try:
+    #
+    #except:
+    #    logging.error(id)
+    #    logging.error(url)
         
         
 #base Handler
@@ -328,6 +345,9 @@ class AjaxApiHandler(BaseHandler):
             page = Page.get_by_key_name(self.request.get('pageid'))
             key_name = self.request.get('wid')
             widget = Widget.get_by_key_name(key_name)
+            if self.request.get('wtype') == 'embedly':
+               fields = simplejson.loads(self.request.get('wcontents'))
+               deferred.defer(get_embedly_code,{'id':self.request.get('wid'),"url":fields['embedly_url']})
             if not widget:
                 widget = Widget(key_name=key_name,
                                 id = key_name,
@@ -471,35 +491,7 @@ class fbTabHandler(BaseHandler):
             widgets=None
             options_dict = None
         self.render("app/fb-tab.html", page=page,widgets=widgets, method="post",options=options_dict)
-         
-class WallHandler(BaseHandler):
-    #@fblogin_required
-    def get(self, **kwargs):
-        try:
-            news_feed = self.graph.get_connections("me", "feed")
-        except facebook.GraphAPIError:
-            self.render("index.html", config=self.get_config('site'))
-            return
-        except:
-            news_feed = {"data": []}
-        for post in news_feed["data"]:
-            post["created_time"] = datetime.datetime.strptime(
-                post["created_time"], "%Y-%m-%dT%H:%M:%S+0000") + \
-                datetime.timedelta(hours=7)
-        self.render("wall.html", news_feed=news_feed)
-        
-               
-class PostHandler(BaseHandler):
-    def post(self):
-        message = self.request.get("message")
-        if not self.current_user or not message:
-            self.redirect("/")
-            return
-        try:
-            self.graph.put_wall_post(message)
-        except:
-            pass
-        self.redirect("/")
+
 
 
         

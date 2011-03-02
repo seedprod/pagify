@@ -25,7 +25,7 @@
 				<img id="pagify-image" class="hand" src="{{page.header_image_url|default_if_none:"/static/images/no-fb-image.png?"}}=s520">
 			
 				<!-- Widgets -->
-				<div id="widget-list" class="">
+				<div id="widget-list" class="" style="display:none">
 					{% for w in widgets %}
 					<div id="{{w.id}}" class="widget-list-item">
 						<span class="wheader">
@@ -148,8 +148,9 @@ $(document).ready(function() {
 							  $.get("/api/scripturl", function(data){scriptUrl=data;});
 							  //Refresh Picture
 							  //$.get("/api/headerimageurl", { p: "{{page.id}}"},function(data){$("#pagify-image").css('background-image','url('+data+'=s540)');});
-                              $.get("/api/headerimageurl", { p: "{{page.id}}"},function(data){$("#pagify-image").attr('src',data+'=s520');});
-                              $("#upload-dialog").dialog( "close" )
+                              $.get("/api/headerimageurl", { p: "{{page.id}}"},function(data){$("#pagify-image").attr('src',data+'=s520');$( "#widget-list" ).sortable( "refresh" );});
+                              $("#upload-dialog").dialog( "close" );
+                              
                           });
                           return false;   
                        } else {$.get("/api/scripturl", function(data){scriptUrl=data;});}
@@ -192,7 +193,7 @@ $(document).ready(function() {
 });
 // Settings
 var timeout_ga_ua;
-$('#google_analytics_ua').bind('textchange', function () {
+$('#google_analytics_ua').bind('textchange change', function () {
   clearTimeout(timeout_ga_ua);
   //$('#ajaxFired').html('<strong>Typing...</strong>');
     var self = this;

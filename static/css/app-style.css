@@ -436,7 +436,7 @@ z-index:999;}
     }
 .widget-embedly input,.widget-googlemaps input,.widget-feed input{width:100%;}
 .widget-list-item{margin:10px 0;}
-.widget-list-item textarea{width:450px;}
+.widget-list-item textarea, .mceLayout{width:450px;}
 .wheader{display:block;}
 .wheader h3 {margin:0;display:inline;}
 .wheader h3 a{display:inline !important; cursor:text;padding:0 !important;margin-left: 2.2em;}

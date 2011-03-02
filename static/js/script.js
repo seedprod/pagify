@@ -124,7 +124,7 @@ default:
 				stop: function() {
 					stop = true;
 				}
-			});
+			}).fadeIn();
 		// override accordian keydown events
 		$(".wheader").unbind('keydown');
 		$('.widget-form').live("submit",function() {
@@ -164,13 +164,17 @@ default:
    						collapsible: true
    					})
    					.sortable({
-   						axis: "y",
-   						handle: ".wheader",
-   						stop: function() {
-   							stop = true;
-   						}
+        				axis: "y",
+        				handle: ".wheader",
+        				placeholder: "ui-state-highlight",
+        				forcePlaceholderSize:true,
+        				stop: function() {
+        					stop = true;
+        				}
    					});
+   					$( "#widget-list" ).sortable( "refresh" );
    					$(".wheader").unbind('keydown');
+   					log('calling save');log(wId);
    					saveWidget(wId);
    					$("#widget-list").accordion( "activate" , "#" + wId + " > .wheader" );
 			   });//end ajax request
@@ -313,15 +317,15 @@ $.validator.setDefaults({
 //Save Widget
 function saveWidget(id){
 	var wId = id;
-	var wType = $('#'+id+' .wtype').text();
-	var wName = $('#'+id+' .inline-edit').text();
+	var wType = $('#'+wId+' .wtype').text();
+	var wName = $('#'+wId+' .inline-edit').text();
 	var params = {};
-    $.each($("#fm-"+id).serializeArray(), function(index,value) {
+    $.each($("#fm-"+wId).serializeArray(), function(index,value) {
     params[value.name] = value.value;
     });
 	var wContents = $.toJSON(params);
 	var pageId = $("#page-id").html();  
-	if(wId!='' && $("#fm-"+id).validate().form()){
+	if(wId!='' && $("#fm-"+wId).validate().form()){
 	$.post("/api/savewidget", { wid: wId , wtype: wType , wname: wName, wcontents: wContents, pageid: pageId},function(data){
 	    if(data){
 	        log('Saved Widget');
