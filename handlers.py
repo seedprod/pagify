@@ -48,20 +48,18 @@ def get_embedly_code(args):
     id = args["id"]
     url = args["url"]
     type = args["type"]
-    try:
-        response = oembed_replace('[' + url + ']')
-        logging.info('response')
-        logging.info(response)
-        if response:  
-            widget = Widget.get_by_key_name(id)
-            if type = "embedly":
-                widget.embedly_code = db.Text(response)
-            if type = "googlemaps":
-                widget.googlemaps_code = db.Text(response)
-            widget.put()
-    except:
-        logging.error(id)
-        logging.error(url)
+    #try:
+    response = oembed_replace('[' + url + ']')
+    if response:  
+        widget = Widget.get_by_key_name(id)
+        if type == "embedly":
+            widget.embedly_code = db.Text(response)
+        if type == "googlemaps":
+            widget.googlemaps_code = db.Text(response)
+        widget.put()
+    #except:
+    #    logging.error(id)
+    #    logging.error(url)
         
         
 #base Handler
