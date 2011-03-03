@@ -139,7 +139,7 @@ default:
 
 		$( "ul, li" ).disableSelection();
 		// After dragged and dropped destroy and recreate accordian
-		$( ".draggable" ).bind( "dragstop",function(event, ui) { 
+		$( ".draggable" ).bind( "dragstop click",function(event, ui) { 
 			var wType = $(this).attr('id');
 			var wName = $(this).html();
 			var wId = uuid();
@@ -148,7 +148,14 @@ default:
 			   //get widget content
 			   $.get("/api/getwidget", {wid:wId, wtype: wType},function(data){
 			       wContents = data
-			       $('#widget-list #' + wType).replaceWith('<div id="'+wId+'" class="widget-list-item"><span class="wheader"><h3><a href="#" class="inline-edit">'+wName+'</a></h3><span class="btn-delete"><span class="ui-icon ui-icon-trash"></span></span></span><div>'+wContents+'</div><span class="hidden wtype">'+wType.replace(/wi-/g,'')+'</span></div>');
+			       wNew = '<div id="'+wId+'" class="widget-list-item"><span class="wheader"><h3><a href="#" class="inline-edit">'+wName+'</a></h3><span class="btn-delete"><span class="ui-icon ui-icon-trash"></span></span></span><div>'+wContents+'</div><span class="hidden wtype">'+wType.replace(/wi-/g,'')+'</span></div>';
+			       if(event.type == 'click') {
+			           $('#widget-list').prepend(wNew);
+			           options = { to: "#"+wId, className: "ui-effects-transfer" };
+			           $( "#"+wType ).effect('transfer', options, 1000);
+			       } else {
+			           $('#widget-list #' + wType).replaceWith(wNew);
+		           }
 			       var stop = false;
       				$( "#widget-list .wheader" ).click(function( event ) {
       					if ( stop ) {
@@ -175,7 +182,7 @@ default:
    					$(".wheader").unbind('keydown');
    					log('calling save');log(wId);
    					saveWidget(wId);
-   					$("#widget-list").accordion( "activate" , "#" + wId + " > .wheader" );
+   					//$("#widget-list").accordion( "activate" , "#" + wId + " > .wheader" );
 			   });//end ajax request
                	
 			   } // end if

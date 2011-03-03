@@ -457,7 +457,7 @@ z-index:999;}
 #sb-widgets-menu ul,#sb-install ul{margin:0;}
 #sb-install li{list-style-type: none;}
 #sb-widgets-menu li{list-style-type: none;padding:3px;margin:5px 0 0; }
-.wi{padding:3px;margin:5px 0 0;cursor: move;}
+.wi{padding:3px;margin:5px 0 0;cursor:pointer;cursor: hand;}
 .fb_profile_pic_rendered img{width:32px;}
 #widget-list h3{font-weight:normal;}
 #controller-tabs{display:none;}
@@ -503,6 +503,7 @@ z-index:999;}
 
 
 /* jqury ui */
+.ui-effects-transfer { border: 2px dotted gray; } 
 .ui-dialog{background:#fff !important;border:10px solid #76756C !important;}
 .ui-dialog .ui-widget-header {background-image:none !important; background-color:#333 !important;
     -moz-border-radius:0 !important;
