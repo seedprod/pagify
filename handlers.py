@@ -47,13 +47,17 @@ def get_subscriber_changes(id):
 def get_embedly_code(args):
     id = args["id"]
     url = args["url"]
+    type = args["type"]
     try:
         response = oembed_replace('[' + url + ']')
         logging.info('response')
         logging.info(response)
         if response:  
             widget = Widget.get_by_key_name(id)
-            widget.embedly_code = db.Text(response)
+            if type = "embedly":
+                widget.embedly_code = db.Text(response)
+            if type = "googlemaps":
+                widget.googlemaps_code = db.Text(response)
             widget.put()
     except:
         logging.error(id)
@@ -346,7 +350,10 @@ class AjaxApiHandler(BaseHandler):
             widget = Widget.get_by_key_name(key_name)
             if self.request.get('wtype') == 'embedly':
                fields = simplejson.loads(self.request.get('wcontents'))
-               deferred.defer(get_embedly_code,{'id':self.request.get('wid'),"url":fields['embedly_url']})
+               deferred.defer(get_embedly_code,{'id':self.request.get('wid'),"url":fields['embedly_url'],"type":"embedly"})
+            if self.request.get('wtype') == 'googlemaps':
+               fields = simplejson.loads(self.request.get('wcontents'))
+               deferred.defer(get_embedly_code,{'id':self.request.get('wid'),"url":fields['googlemaps_link'],"type":"googlemaps"})
             if not widget:
                 widget = Widget(key_name=key_name,
                                 id = key_name,
