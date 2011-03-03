@@ -139,8 +139,7 @@ default:
 
 		$( "ul, li" ).disableSelection();
 		// After dragged and dropped destroy and recreate accordian
-		$( ".draggable" ).draggable({
-		   stop: function(event, ui) { 
+		$( ".draggable" ).bind( "dragstop",function(event, ui) { 
 			var wType = $(this).attr('id');
 			var wName = $(this).html();
 			var wId = uuid();
@@ -180,7 +179,6 @@ default:
 			   });//end ajax request
                	
 			   } // end if
-			}
 		});
 
 		// Ajax Accordian
