@@ -6,7 +6,6 @@ import embedly
 import logging
 import webapp2 as webapp
 
-
 # XML to Dict
 def xmltodict(xmlstring):
 	doc = xml.dom.minidom.parseString(xmlstring)
@@ -61,7 +60,6 @@ def decrypt(str):
     y = str.decode('hex').decode('base64')
     return y
     
-
 def oembed_replace(str=''):
      ns = str
      s = str

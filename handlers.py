@@ -48,18 +48,18 @@ def get_embedly_code(args):
     id = args["id"]
     url = args["url"]
     type = args["type"]
-    #try:
-    response = oembed_replace('[' + url + ']')
-    if response:  
-        widget = Widget.get_by_key_name(id)
-        if type == "embedly":
-            widget.embedly_code = db.Text(response)
-        if type == "googlemaps":
-            widget.googlemaps_code = db.Text(response)
-        widget.put()
-    #except:
-    #    logging.error(id)
-    #    logging.error(url)
+    try:
+        response = oembed_replace('[' + url + ']')
+        if response:  
+            widget = Widget.get_by_key_name(id)
+            if type == "embedly":
+                widget.embedly_code = db.Text(response)
+            if type == "googlemaps":
+                widget.googlemaps_code = db.Text(response)
+            widget.put()
+    except:
+        logging.error(id)
+        logging.error(url)
         
         
 #base Handler
@@ -358,7 +358,7 @@ class AjaxApiHandler(BaseHandler):
                                 type = self.request.get('wtype'),
                                 name = self.request.get('wname'),
                                 page = page,
-                                #contents = self.request.get('wcontents'),
+                                contents = self.request.get('wcontents'),
                                 last_modified_by = user
                                )
                 fields = simplejson.loads(self.request.get('wcontents'))
@@ -375,7 +375,7 @@ class AjaxApiHandler(BaseHandler):
                         setattr(widget, k, v)
             else:
                 widget.name = self.request.get('wname')
-                #widget.contents = self.request.get('wcontents')
+                widget.contents = self.request.get('wcontents')
                 widget.last_modified_by = user
                 fields = simplejson.loads(self.request.get('wcontents'))
                 for k,v in fields.iteritems():
@@ -396,7 +396,10 @@ class AjaxApiHandler(BaseHandler):
             except:
                 self.response.out.write('False')
         if method == 'saveoption':
-            option = Option.get_by_id(int(self.request.get('id')))
+            try:
+                option = Option.get_by_id(int(self.request.get('id')))
+            except:
+                option = None
             if self.request.get('otype') == 'page':
                 link = Page.get_by_key_name(self.request.get('opageid'))
             if not option:

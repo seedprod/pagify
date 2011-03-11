@@ -38,6 +38,7 @@ class UploadedFiles(db.Model):
 class Widget(db.Expando):
     id = db.StringProperty(required=True)
     type = db.StringProperty(required=True)
+    contents = db.TextProperty()
     created = db.DateTimeProperty(auto_now_add=True)
     updated = db.DateTimeProperty(auto_now=True)
     name = db.StringProperty(required=True)

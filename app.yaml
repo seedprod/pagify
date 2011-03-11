@@ -29,6 +29,9 @@ inbound_services:
 - warmup
 
 handlers:
+- url: /_ah/warmup
+  script: main.py
+
 - url: /_ereporter.*
   script: $PYTHON_LIB/google/appengine/ext/ereporter/report_generator.py
   login: admin

@@ -152,7 +152,7 @@ default:
 			       if(event.type == 'click') {
 			           $('#widget-list').prepend(wNew);
 			           options = { to: "#"+wId, className: "ui-effects-transfer" };
-			           $( "#"+wType ).effect('transfer', options, 1000);
+			           $( "#"+wType ).effect('transfer', options, 500);
 			       } else {
 			           $('#widget-list #' + wType).replaceWith(wNew);
 		           }

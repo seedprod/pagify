@@ -38,6 +38,7 @@ import hashlib
 import time
 import urllib
 import hashlib
+import logging
 import hmac
 import base64
 
@@ -223,6 +224,7 @@ def parse_signed_request(signed_request, app_secret):
       encoded_sig = str(l[0])
       payload = str(l[1])
     except IndexError:
+      logging.info(signed_request)
       raise ValueError("'signed_request' malformed")
 
     sig = base64.urlsafe_b64decode(encoded_sig + "=" * ((4 - len(encoded_sig) % 4) % 4))
