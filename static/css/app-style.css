@@ -513,6 +513,16 @@ z-index:999;}
 
 #pagify-feed #feed{
     font-size:85%;
+    margin-top: -20px;
+}
+#pagify-feed h3{
+    display:inline;
+}
+#rss-feed{
+    background: transparent url(/static/images/rss_16.png) no-repeat;
+    position:relative;
+    left:70px;
+    top:-20px;
 }
 #feed li span{
     font-size:77%;
