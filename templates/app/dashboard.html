@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/static/css/man-in-black/jquery-ui-{{google.jquery_ui_version}}.custom.css">
 {% endblock %}
 {% block body %}
-<div id="primary" class="full-col"> 
+<div id="primary"> 
     <div id="content">
 		<h1>Pages</h1>
 		<p>Hi <fb:name uid="loggedinuser" use-you="no"></fb:name>, {% if pages %}these are the pages you have admin rights to. Click on a Page to manage.{% else %}looks like you don't have any Facebook Pages yet? <a href="http://www.facebook.com/pages/create.php">Go create a Facebook Page!</a> Use the right hand option "Official Page".{% endif %}
@@ -23,17 +23,47 @@
 		<div style="clear:both"></div>
     </div><!-- #content -->
 </div><!-- #primary -->
-<!--<div id="secondary" class="widget-area">
-	<ul class="xoxo">
-        <li id="widget-" class="widget-container">
-            <h2 class="widget-title"></h2>
-            <ul>
-                <li>fdgfdgdgdfg</li>
-            </ul>
-        </li>
-    </ul>
-</div>  #secondary -->
+<div id="secondary" class="widget-area">
+	<div id="pagify-feed">
+	    <h3>Updates</h3>
+        <ul id="feed">
+            
+        </ul>
+    </div>
+</div> <!-- #secondary -->
+<div style="clear:both"></div>
 {% endblock %}
 {% block foot %}
 <script src="/static/js/jquery-ui-{{google.jquery_ui_version}}.custom.min.js"></script>
+<script type="text/javascript"> 
+    google.load("feeds", "1");
+
+    function initialize() {
+      var feed = new google.feeds.Feed("http://pagifyapp.com/category/updates/feed/");
+      feed.load(function(result) {
+        if (!result.error) {
+            var container = document.getElementById("feed");
+            for (var i = 0; i < result.feed.entries.length; i++) {
+              var entry = result.feed.entries[i];
+              var attributes = ["publishedDate"];
+              for (var j = 0; j < attributes.length; j++) {
+                var div = document.createElement("div");
+                div.appendChild(document.createTextNode(entry[attributes[j]]));
+                container.appendChild(div);
+              }
+                var m_names = new Array("Jan", "Feb", "Mar", 
+                "Apr", "May", "Jun", "Jul", "Aug", "Sep", 
+                "Oct", "Nov", "Dec");
+                var d = new Date(entry.publishedDate);
+                var curr_date = d.getDate();
+                var curr_month = d.getMonth();
+                var curr_year = d.getFullYear();
+                var pubdate = m_names[curr_month] + " " + curr_date + ", " + curr_year;
+			    div.innerHTML = "<li><a href=\"" + entry.link + "\">" + entry.title + "</a><span>" + pubdate + "</span></li>";
+            }
+        }
+      });
+    }
+    google.setOnLoadCallback(initialize);
+</script>
 {% endblock %}

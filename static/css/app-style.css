@@ -501,6 +501,24 @@ z-index:999;}
 
 }
 
+#pagify-feed{
+    background: #EBF2F8;
+    border: 2px solid #BFD1E1;
+    padding:5px;
+    margin:40px 20px 0 0;
+       -moz-border-radius: 6px; /* FF1+ */
+    -webkit-border-radius: 6px; /* Saf3-4, iOS 1+, Android 1.5+ */
+            border-radius: 6px; /* Opera 10.5, IE9, Saf5, Chrome, FF4 */
+}
+
+#pagify-feed #feed{
+    font-size:85%;
+}
+#feed li span{
+    font-size:77%;
+    display:block;
+    margin-top: -10px;
+}
 
 /* jqury ui */
 .ui-effects-transfer { border: 2px dotted gray; } 
