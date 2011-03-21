@@ -218,6 +218,42 @@ display: inline;
 list-style: none;
 padding: 0px 0 0px 25px;
 }
+#upgrade-list{
+  position:relative;
+}
+#upgrade-list li{
+   list-style: none; 
+   width:350px;
+   margin:5px 0;
+}
+#upgrade-list li img{
+    border: 1px solid #E5E5E5;
+    padding:3px;
+    margin: 3px;
+    width:32px;
+    height:32px;
+}
+#upgrade-list .ui-button-text{
+    text-shadow: #000 1px 1px 0;
+}
+#upgrade-list .ui-state-active .ui-button-text{
+    text-shadow:none;
+}
+
+.upgrade-item-text{
+    position: relative;
+    left:10px;
+    top:-15px;
+    font-weight: bold;
+}
+#upgrade-list .ui-button{
+    float:right;
+    margin: 8px;
+}
+.btn-upgrade{
+    display:none;
+}
+
 .header_box_gradient {
   background-color: #d9d9d9;
   background-image: -moz-linear-gradient(top, #F4F4F4, #d9d9d9); /* FF3.6 */

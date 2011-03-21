@@ -45,9 +45,7 @@ case "/dashboard":
   
   break;
 case "/upgrade":
-    $(document).ready(function() {
-        $(".btn-upgrade").button();
-    });
+
   break;
 default:
     $(document).ready(function() {

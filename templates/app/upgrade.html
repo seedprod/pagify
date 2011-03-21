@@ -1,19 +1,17 @@
 {% extends "base.html" %}
 {% block title %}Upgrade - {% endblock %}
 {% block head %}
-<link rel="stylesheet" href="/static/css/cupertino/jquery-ui-1.8.5.custom.css">
+<link rel="stylesheet" href="/static/css/south-street/jquery-ui-1.8.9.custom.css">
 {% endblock %}
 {% block body %}
 <h1>Upgrade</h1>
-<p style="text-align:center;font-size:30px;line-height: 1.5em;">
-Coming Soon!<br/>
-Packages will be available once Pagify is out of beta.
-<br/>For being a beta tester you will receive 50% off any package!
-</p>
-{% comment %}
-<ul id="upgrade-list" class="">
+<ul id="upgrade-list" class="south-street">
     {% for p in pages %}
-        <li><img src="{{p.picture}}">{{p.name}} <input type="checkbox" id="{{p.id}}" class="btn-upgrade" {% ifequal p.id page_id %}checked{% endifequal %}/><label for="{{p.id}}">Upgrade</label></li>
+        <li class="boxer ui-corner-all">
+            <img src="http://graph.facebook.com/{{p.id}}/picture"/>
+            <input type="checkbox" id="{{p.id}}" class="btn-upgrade" {% ifequal p.id page_id %}checked{% endifequal %}/><label for="{{p.id}}">Upgrade</label>
+            <span class="upgrade-item-text">{{p.name}}</span> 
+            </li>
 	{% endfor %}
 </ul>
 <p><a href="{{subscribe_url}}">Subscribe</a></p>
@@ -21,14 +19,25 @@ Packages will be available once Pagify is out of beta.
 {% block foot %}
 <script src="/static/js/jquery-ui-{{google.jquery_ui_version}}.custom.min.js"></script>
 <script>
-var plans = "{{plans}}";
-plans = plans.split(',');
-var plansArr= new Array();
-$.each(plans, function(index, value) { 
-  val = value.split(":");
-  plansArr[parseInt(val[0])]= parseInt(val[1]);
+
+$(document).ready(function() {
+    $(".btn-upgrade").button().fadeIn();
+    $(".btn-upgrade:checked").each(function() {
+      if($(this).is(':checked')){
+        $(this).parent('li').css({'background-color':'#EDFCD5 ','background-image':'none !important'});
+      }else{
+        $(this).parent('li').attr('style',''); 
+      }
+    });
+    
+    $(".btn-upgrade").bind('click', function() {
+      if($(this).is(':checked')){
+        $(this).parent('li').css({'background-color':'#EDFCD5 ','background-image':'none !important'});
+      }else{
+        $(this).parent('li').attr('style',''); 
+      }
+    });
 });
 
 </script>
-{% endcomment %}
 {% endblock %}
