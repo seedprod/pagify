@@ -20,7 +20,14 @@
     </div>
     <div id="price-body">
        <p><span id="price">$0</span><span id="price-desc"> per month</span></p>
-       <input type="button" id="price-continue" value="Continue &rarr;" />
+       <form method="POST" action="http://sites.fastspring.com/seedprod/api/order">
+         <input type="hidden" name="action" value="create"/>
+         <input type="hidden" name="destination" value="checkout"/>
+         <input type="hidden" name="product_1_path" value="/pagifypro"/>
+         <input type="hidden" id="product_1_quantity" name="product_1_quantity" value="0"/>
+         <input type="submit" id="price-continue" value="Continue &rarr;" />
+       </form>
+       
     </div>
 </div>
 {% endblock %}
@@ -38,6 +45,7 @@ $(document).ready(function() {
       }
     });
     total = numpages * priceperpage;
+    $("#product_1_quantity").val(numpages);
     $("#price").html("$" + total);
   
     $(".btn-upgrade,#price-continue").button().fadeIn();
@@ -64,6 +72,7 @@ $(document).ready(function() {
         }
       });
       total = numpages * priceperpage;
+      $("#product_1_quantity").val(numpages);
       $("#price").html("$" + total);
     });
     
