@@ -14,17 +14,38 @@
             </li>
 	{% endfor %}
 </ul>
-<p><a href="{{subscribe_url}}">Subscribe</a></p>
+<div id="price-summary" class="south-street">
+    <div id="price-header">
+      <h3>Summary</h3>
+    </div>
+    <div id="price-body">
+       <p><span id="price">$0</span><span id="price-desc"> per month</span></p>
+       <input type="button" id="price-continue" value="Continue &rarr;" />
+    </div>
+</div>
 {% endblock %}
 {% block foot %}
 <script src="/static/js/jquery-ui-{{google.jquery_ui_version}}.custom.min.js"></script>
 <script>
-
+var priceperpage = 7;
+var total = 0;
+var numpages = 0;
 $(document).ready(function() {
-    $(".btn-upgrade").button().fadeIn();
+    numpages = 0;
+    $(".btn-upgrade:checked").each(function() {
+      if($(this).is(':checked')){
+        numpages++;
+      }
+    });
+    total = numpages * priceperpage;
+    $("#price").html("$" + total);
+  
+    $(".btn-upgrade,#price-continue").button().fadeIn();
+    
     $(".btn-upgrade:checked").each(function() {
       if($(this).is(':checked')){
         $(this).parent('li').css({'background-color':'#EDFCD5 ','background-image':'none !important'});
+        //$(" + label .ui-button-text",this).html('Upgraded');
       }else{
         $(this).parent('li').attr('style',''); 
       }
@@ -36,6 +57,26 @@ $(document).ready(function() {
       }else{
         $(this).parent('li').attr('style',''); 
       }
+      numpages = 0;
+      $(".btn-upgrade:checked").each(function() {
+        if($(this).is(':checked')){
+          numpages++;
+        }
+      });
+      total = numpages * priceperpage;
+      $("#price").html("$" + total);
+    });
+    
+    var topwin1 = $('#price-summary').offset().top - parseFloat($('#price-summary').css('marginTop').replace(/auto/, 0));
+    $(window).scroll(function (event) {
+          var y = $(this).scrollTop();
+          if (y >= topwin1) {
+            $('#price-summary').addClass('fixed');
+            $('#price-summary').css('top',0);
+          } else {
+            $('#price-summary').removeClass('fixed');
+            $('#price-summary').css('top',119);
+          }
     });
 });
 

@@ -233,9 +233,19 @@ padding: 0px 0 0px 25px;
     width:32px;
     height:32px;
 }
-#upgrade-list .ui-button-text{
+.ui-button-text, #price-continue{
     text-shadow: #000 1px 1px 0;
+    padding:5px !important;
+    display:none;
 }
+#price{
+    font-size:167%;
+    font-weight:bold;
+}
+#price-desc{
+    color:#666;
+}
+
 #upgrade-list .ui-state-active .ui-button-text{
     text-shadow:none;
 }
@@ -479,7 +489,15 @@ z-index:999;}
 .widget > div{padding:5px;}
 .wheader {cursor:move !important;}
 .inline-text{margin-left: 2.2em;}
-
+#price-continue{}
+#price-summary{border:2px solid #ccc;margin-top:20px;padding:10px;width:150px;position:absolute;
+    top: 119px;
+    left: 440px;
+    background: #fff;
+     -moz-border-radius: 6px; /* FF1+ */
+    -webkit-border-radius: 6px; /* Saf3-4, iOS 1+, Android 1.5+ */
+            border-radius: 6px; /* Opera 10.5, IE9, Saf5, Chrome, FF4 */
+    }
 #sb-widgets-menu,.tipsy,.ui-dialog{text-shadow:none;}
 #sb-widgets-menu{margin: 20px 0px 0px;z-index:999;position:absolute; top:120px; left:840px;width:245px;height:300px;
     background:#000;
