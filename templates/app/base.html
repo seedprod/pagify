@@ -87,12 +87,14 @@
     <script type="text/javascript" src="/static/js/dd_belatedpng.js?v=1"></script>
     <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
     <![endif]-->
-    {% if config.google_analytics_id and not is_admin %}
+    {% if config.google_analytics_id %}
     <!-- Google Analytics -->
     <script>
         //<![CDATA[
     	var _gaq = _gaq || [];
     	_gaq.push(['_setAccount','{{config.google_analytics_id}}']);
+    	_gaq.push(['_setDomainName', '.pagifyapp.com']);
+      _gaq.push(['_setAllowHash', false]);
     	_gaq.push(['_trackPageview']);
     	(function() {
     		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

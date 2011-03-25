@@ -6,8 +6,8 @@ config = {}
 config['site'] = {
     'name': 'Pagify',
     'url': 'http://pagifyapp.appspot.com',
-    'description': 'Create custom Facebook pages',
-    'google_analytics_id': '',
+    'description': 'Create Custom Facebook Pages',
+    'google_analytics_id': 'UA-499993-13',
 }
 
 if not debug:
