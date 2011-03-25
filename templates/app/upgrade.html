@@ -22,6 +22,10 @@
        <p><span id="price">$0</span><span id="price-desc"> per month</span></p>
        <form method="POST" action="http://sites.fastspring.com/seedprod/api/order">
          <input type="hidden" name="action" value="create"/>
+         <input type="hidden" name="referrer" value="{{user.id}}"/>
+         <input type="hidden" name="contact_fname" value="{{fname}}"/>
+         <input type="hidden" name="contact_lname" value="{{lname}}"/>
+         <input type="hidden" name="contact_email" value="{{user.email}}"/>
          <input type="hidden" name="destination" value="checkout"/>
          <input type="hidden" name="product_1_path" value="/pagifypro"/>
          <input type="hidden" id="product_1_quantity" name="product_1_quantity" value="0"/>

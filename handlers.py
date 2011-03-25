@@ -252,11 +252,12 @@ class UpgradeHandler(BaseHandler):
     @fblogin_required
     def get(self, **kwargs):  
         user =  self.current_user
+        name =  user.name.split()
+        fname = name[0]
+        lname = name[len(name)-1]
         pages = Page.get(user.pages)
         page_id = self.request.get("p")
-        
-        
-        self.render("app/upgrade.html", admin=True, pages=pages, page_id=page_id)
+        self.render("app/upgrade.html", admin=True, pages=pages, page_id=page_id, user=user, fname=fname, lname=lname)
         
 class AjaxApiHandler(BaseHandler):
     @fblogin_required
