@@ -10,6 +10,7 @@ import re
 import urllib
 import spreedly
 import base64
+import hashlib
 #import markdown
 import webapp2 as webapp
 from xml.dom import minidom
@@ -410,16 +411,30 @@ class AjaxApiHandler(BaseHandler):
                 self.response.out.write('False')
                
                
-''' Listen for changes from Spreedly'''
+''' Listen for changes from subscribers'''
 class ListenHandler(webapp.RequestHandler):  
     def post(self, **kwargs):
         try:
-            subscriber_ids = self.request.get("subscriber_ids").split(',')
-            for i in subscriber_ids:
-                deferred.defer(get_subscriber_changes, i)
+            privatekey = '792ec9274bc52418e995f355e3a8a4d1'
+            if hashlib.md5(self.request.get("security_data") + privatekey).hexdigest() != self.request.get("security_hash")
+            self.abort(500)
+            
+            subscriber_info = {}
+            subscriber_info['details'] = self.request.get("details")
+            subscriber_info['event'] = self.request.get("event")
+            subscriber_info['productname'] = self.request.get("productname")
+            subscriber_info['quantity'] = self.request.get("quantity")
+            subscriber_info['reference'] = self.request.get("reference")
+            subscriber_info['referrer'] = self.request.get("referrer")
+            subscriber_info['status'] = self.request.get("status")
+            subscriber_info['type'] = self.request.get("type")
+            subscriber_info = simplejson.dumps(subscriber_info)
+            user = User.get_by_key_name(subscriber_info['referrer'])
+            user.subscriber_info = subscriber_info
+            db.put(user)
             self.response.set_status(200)
         except:
-            logging.error('Listen Error: ' + self.request.get("subscriber_ids"))
+            logging.error('Listen Error')
             self.abort(500)
         
 class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
