@@ -414,29 +414,44 @@ class AjaxApiHandler(BaseHandler):
 ''' Listen for changes from subscribers'''
 class ListenHandler(webapp.RequestHandler):  
     def post(self, **kwargs):
-        try:
+        #try:
             privatekey = '792ec9274bc52418e995f355e3a8a4d1'
             if hashlib.md5(self.request.get("security_data") + privatekey).hexdigest() != self.request.get("security_hash"):
                 self.abort(500)
-            
+            referrer = urllib.unquote(self.request.get("referrer"))
+            referrer = referrer.split('|')
+            referrer = referrer[0]
+            pages = referrer[1]
             subscriber_info = {}
             subscriber_info['details'] = self.request.get("details")
             subscriber_info['event'] = self.request.get("event")
             subscriber_info['productname'] = self.request.get("productname")
             subscriber_info['quantity'] = self.request.get("quantity")
             subscriber_info['reference'] = self.request.get("reference")
-            subscriber_info['referrer'] = self.request.get("referrer")
+            subscriber_info['referrer'] = referrer
             subscriber_info['status'] = self.request.get("status")
             subscriber_info['type'] = self.request.get("type")
             subscriber_info['enddate'] = self.request.get("enddate")
             subscriber_info = simplejson.dumps(subscriber_info)
+            
             user = User.get_by_key_name(self.request.get("referrer"))
             user.subscriber_info = subscriber_info
             db.put(user)
+            if event == 'Active':
+                pages = pages.split(',');
+                batch = []
+                for p in pages:
+                    page = Page.get_by_key_name(fb_page["id"])
+                    if page:
+                        page.upgraded = '1'
+                        page.upgraded_by = user
+                        batch.append(page)
+                db.put(batch)
+                
             self.response.set_status(200)
-        except:
-            logging.error('Listen Error')
-            self.abort(500)
+        #except:
+        #    logging.error('Listen Error')
+        #    self.abort(500)
         
 class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
     def post(self, **kwargs):

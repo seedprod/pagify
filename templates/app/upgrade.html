@@ -44,13 +44,19 @@ var priceperpage = 7;
 var total = 0;
 var numpages = 0;
 $(document).ready(function() {
+    pages = '';
     numpages = 0;
     $(".btn-upgrade:checked").each(function() {
       if($(this).is(':checked')){
         numpages++;
+        if (pages != ''){
+          pages = pages + ',';
+        }
+        pages = pages + $(this).attr('id');
       }
     });
     total = numpages * priceperpage;
+    $("#referrer").val(encodeURIComponent($("#user-id").text() + '|' + pages));
     $("#product_1_quantity").val(numpages);
     $("#price").html("$" + total);
   
@@ -83,8 +89,6 @@ $(document).ready(function() {
         }
       });
       total = numpages * priceperpage;
-      log(pages);
-      log($("#user-id").text());
       $("#referrer").val(encodeURIComponent($("#user-id").text() + '|' + pages));
       $("#product_1_quantity").val(numpages);
       $("#price").html("$" + total);
