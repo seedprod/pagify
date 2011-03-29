@@ -416,8 +416,8 @@ class ListenHandler(webapp.RequestHandler):
     def post(self, **kwargs):
         try:
             privatekey = '792ec9274bc52418e995f355e3a8a4d1'
-            if hashlib.md5(self.request.get("security_data") + privatekey).hexdigest() != self.request.get("security_hash")
-            self.abort(500)
+            if hashlib.md5(self.request.get("security_data") + privatekey).hexdigest() != self.request.get("security_hash"):
+                self.abort(500)
             
             subscriber_info = {}
             subscriber_info['details'] = self.request.get("details")
@@ -428,8 +428,9 @@ class ListenHandler(webapp.RequestHandler):
             subscriber_info['referrer'] = self.request.get("referrer")
             subscriber_info['status'] = self.request.get("status")
             subscriber_info['type'] = self.request.get("type")
+            subscriber_info['enddate'] = self.request.get("enddate")
             subscriber_info = simplejson.dumps(subscriber_info)
-            user = User.get_by_key_name(subscriber_info['referrer'])
+            user = User.get_by_key_name(self.request.get("referrer"))
             user.subscriber_info = subscriber_info
             db.put(user)
             self.response.set_status(200)

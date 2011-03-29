@@ -22,7 +22,8 @@
        <p><span id="price">$0</span><span id="price-desc"> per month</span></p>
        <form method="POST" action="http://sites.fastspring.com/seedprod/api/order">
          <input type="hidden" name="action" value="create"/>
-         <input type="hidden" name="referrer" value="{{user.id}}"/>
+         <input type="hidden" name="mode" value="test"/>
+         <input type="hidden" id="referrer" name="referrer" value="{{user.id}}"/>
          <input type="hidden" name="contact_fname" value="{{fname}}"/>
          <input type="hidden" name="contact_lname" value="{{lname}}"/>
          <input type="hidden" name="contact_email" value="{{user.email}}"/>
@@ -34,6 +35,7 @@
        
     </div>
 </div>
+<span id="user-id" class="hidden">{{user.id}}</span>
 {% endblock %}
 {% block foot %}
 <script src="/static/js/jquery-ui-{{google.jquery_ui_version}}.custom.min.js"></script>
@@ -69,13 +71,21 @@ $(document).ready(function() {
       }else{
         $(this).parent('li').attr('style',''); 
       }
+      pages = '';
       numpages = 0;
       $(".btn-upgrade:checked").each(function() {
         if($(this).is(':checked')){
           numpages++;
+          if (pages != ''){
+            pages = pages + ',';
+          }
+          pages = pages + $(this).attr('id');
         }
       });
       total = numpages * priceperpage;
+      log(pages);
+      log($("#user-id").text());
+      $("#referrer").val(encodeURIComponent($("#user-id").text() + '|' + pages));
       $("#product_1_quantity").val(numpages);
       $("#price").html("$" + total);
     });
