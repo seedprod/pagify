@@ -28,10 +28,44 @@
 <div id="secondary" class="widget-area">
 	<div id="pagify-feed">
 	    <h3>Updates</h3>
-	    <a id="rss-feed" href="http://pagifyapp.com/category/updates/feed/" class="ir">RSS</a>
-        <ul id="feed">
+	    <a id="rss-feed" href="http://search.twitter.com/search.atom?q=pagifyupdates" class="ir">RSS</a>  
+	    <script src="http://widgets.twimg.com/j/2/widget.js"></script>
+      <script>
+      new TWTR.Widget({
+        version: 2,
+        type: 'search',
+        search: 'pagifyupdates',
+        interval: 6000,
+        title: 'Pagify Updates',
+        subject: '',
+        width: 'auto',
+        height: 300,
+        theme: {
+          shell: {
+            background: 'transparent',
+            color: '#ffffff'
+          },
+          tweets: {
+            background: 'transparent',
+            color: '#444444',
+            links: '#1985b5'
+          }
+        },
+        features: {
+          scrollbar: true,
+          loop: false,
+          live: true,
+          hashtags: true,
+          timestamp: true,
+          avatars: true,
+          toptweets: false,
+          behavior: 'all'
+        }
+      }).render().start();
+      </script>
+        <!--<ul id="feed">
             
-        </ul>
+        </ul>-->
     </div>
 </div> <!-- #secondary -->
 <div style="clear:both"></div>
@@ -39,7 +73,7 @@
 {% block foot %}
 <script src="/static/js/jquery-ui-{{google.jquery_ui_version}}.custom.min.js"></script>
 <script type="text/javascript"> 
-    google.load("feeds", "1");
+    /*google.load("feeds", "1");
 
     function initialize() {
       var feed = new google.feeds.Feed("http://pagifyapp.com/category/updates/feed/");
@@ -67,6 +101,6 @@
         }
       });
     }
-    google.setOnLoadCallback(initialize);
+    google.setOnLoadCallback(initialize);*/
 </script>
 {% endblock %}

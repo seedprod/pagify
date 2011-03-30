@@ -262,6 +262,10 @@ padding: 0px 0 0px 25px;
     text-shadow:none;
 }
 
+.twtr-hd,.twtr-results-hr,.twtr-ft{
+  display:none;
+}
+
 .upgrade-item-text{
     position: relative;
     left:10px;

@@ -120,8 +120,11 @@ class BaseHandler(webapp.RequestHandler):
                     google=self.get_config('google')
                     )
         args.update(kwargs)
-        if self.current_user.subscriber_info:
-            args.update(dict(subscriber_info=simplejson.loads(self.current_user.subscriber_info)))
+        try:
+          if self.current_user.subscriber_info:
+              args.update(dict(subscriber_info=simplejson.loads(self.current_user.subscriber_info)))
+        except:
+          pass
         path = os.path.join(os.path.dirname(__file__), "templates", path)
         datastore_write_enabled = capabilities.CapabilitySet('datastore_v3', capabilities=['write']).is_enabled()
         if datastore_write_enabled:
