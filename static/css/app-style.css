@@ -226,6 +226,18 @@ padding: 0px 0 0px 25px;
    width:350px;
    margin:5px 0;
 }
+
+.upgraded{
+   background-color:#EDFCD5 !important;
+   background-image:none !important;
+     position:relative;
+     z-index:0;
+   border: 1px solid #DDD;
+        text-shadow:none;
+    -moz-box-shadow: rgba(0, 0, 0, 0.296875) 0px 1px 3px;
+   -webkit-box-shadow: rgba(0, 0, 0, 0.296875) 0px 1px 3px;
+         box-shadow:rgba(0, 0, 0, 0.296875) 0px 1px 3px;
+}
 #upgrade-list li img{
     border: 1px solid #E5E5E5;
     padding:3px;

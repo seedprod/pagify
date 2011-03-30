@@ -120,6 +120,8 @@ class BaseHandler(webapp.RequestHandler):
                     google=self.get_config('google')
                     )
         args.update(kwargs)
+        if self.current_user.subscriber_info:
+            args.update(dict(subscriber_info=simplejson.loads(self.current_user.subscriber_info)))
         path = os.path.join(os.path.dirname(__file__), "templates", path)
         datastore_write_enabled = capabilities.CapabilitySet('datastore_v3', capabilities=['write']).is_enabled()
         if datastore_write_enabled:
@@ -420,35 +422,45 @@ class ListenHandler(webapp.RequestHandler):
                 self.abort(500)
             referrer = urllib.unquote(self.request.get("referrer"))
             referrer = referrer.split('|')
-            referrer = referrer[0]
+            uid = referrer[0]
             pages = referrer[1]
+    
             subscriber_info = {}
             subscriber_info['details'] = self.request.get("details")
             subscriber_info['event'] = self.request.get("event")
             subscriber_info['productname'] = self.request.get("productname")
             subscriber_info['quantity'] = self.request.get("quantity")
             subscriber_info['reference'] = self.request.get("reference")
-            subscriber_info['referrer'] = referrer
+            subscriber_info['uid'] = uid
+            subscriber_info['pages'] = pages
             subscriber_info['status'] = self.request.get("status")
             subscriber_info['type'] = self.request.get("type")
             subscriber_info['enddate'] = self.request.get("enddate")
+            subscriber_info['nextperioddate'] = self.request.get("nextperioddate")
             subscriber_info = simplejson.dumps(subscriber_info)
-            
-            user = User.get_by_key_name(self.request.get("referrer"))
+            user = User.get_by_key_name(uid)
             user.subscriber_info = subscriber_info
             db.put(user)
-            if event == 'Active':
+            if self.request.get("event") == 'Active':
                 pages = pages.split(',');
                 batch = []
                 for p in pages:
-                    page = Page.get_by_key_name(fb_page["id"])
+                    page = Page.get_by_key_name(p)
                     if page:
                         page.upgraded = '1'
                         page.upgraded_by = user
                         batch.append(page)
                 db.put(batch)
+            if self.request.get("event") == 'Inactive':
+                pages = Page.all().filter('upgraded_by =', user)
+                batch = []
+                for p in pages:
+                        p.upgraded = '0'
+                        p.upgraded_by = None
+                        batch.append(p)
+                db.put(batch)
                 
-            self.response.set_status(200)
+            self.response.set_status(500)
         #except:
         #    logging.error('Listen Error')
         #    self.abort(500)

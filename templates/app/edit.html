@@ -13,7 +13,9 @@
 		        <img src="http://graph.facebook.com/{{page.id}}/picture?type=large"/>
 				<div id="facebook-page-sidebar">
 				</div>
+				{% if page.upgraded == "0" %}
 				<a class="upgrade-ribbon-large" href="/upgrade?p={{page.id}}"></a>
+				{% endif %}
 		    </div>
 			<div id="fb-right-column" class="yui3-u">
 				<h1 id="fb-title">{{page.name}}</h1>

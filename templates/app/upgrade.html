@@ -7,9 +7,9 @@
 <h1>Upgrade</h1>
 <ul id="upgrade-list" class="south-street">
     {% for p in pages %}
-        <li class="boxer ui-corner-all">
+        <li class="ui-corner-all {% if p.upgraded == "0" %}boxer{% else %} upgraded {% endif %}">
             <img src="http://graph.facebook.com/{{p.id}}/picture"/>
-            <input type="checkbox" id="{{p.id}}" class="btn-upgrade" {% ifequal p.id page_id %}checked{% endifequal %}/><label for="{{p.id}}">Upgrade</label>
+            <input type="checkbox" id="{{p.id}}" class="btn-upgrade" {% if p.upgraded == "1" %}checked disabled{% endif %} {% ifequal p.id page_id %}checked{% endifequal %}/><label for="{{p.id}}">{% if p.upgraded == "1" %}Upgraded{% else %}Upgrade{% endif %}</label>
             <span class="upgrade-item-text">{{p.name}}</span> 
             </li>
 	{% endfor %}
@@ -64,18 +64,22 @@ $(document).ready(function() {
     
     $(".btn-upgrade:checked").each(function() {
       if($(this).is(':checked')){
-        $(this).parent('li').css({'background-color':'#EDFCD5 ','background-image':'none !important'});
+        $(this).parent('li').addClass('upgraded');
+        $(this).parent('li').removeClass('boxer');
         //$(" + label .ui-button-text",this).html('Upgraded');
       }else{
-        $(this).parent('li').attr('style',''); 
+        $(this).parent('li').addClass('boxer');
+        $(this).parent('li').removeClass('upgraded');
       }
     });
     
     $(".btn-upgrade").bind('click', function() {
       if($(this).is(':checked')){
-        $(this).parent('li').css({'background-color':'#EDFCD5 ','background-image':'none !important'});
+        $(this).parent('li').addClass('upgraded');
+        $(this).parent('li').removeClass('boxer');
       }else{
-        $(this).parent('li').attr('style',''); 
+        $(this).parent('li').addClass('boxer');
+        $(this).parent('li').removeClass('upgraded');
       }
       pages = '';
       numpages = 0;
