@@ -245,7 +245,7 @@ padding: 0px 0 0px 25px;
     width:32px;
     height:32px;
 }
-.ui-button-text, #price-continue{
+.ui-button-text, #price-continue, #update-continue{
     text-shadow: #000 1px 1px 0;
     padding:5px !important;
     display:none;
@@ -261,7 +261,10 @@ padding: 0px 0 0px 25px;
 #upgrade-list .ui-state-active .ui-button-text{
     text-shadow:none;
 }
-
+#upgrade-downgrade-notice{
+  font-size:77%;
+  line-height:1;
+}
 .twtr-hd,.twtr-results-hr,.twtr-ft{
   display:none;
 }

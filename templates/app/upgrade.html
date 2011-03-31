@@ -4,12 +4,13 @@
 <link rel="stylesheet" href="/static/css/south-street/jquery-ui-1.8.9.custom.css">
 {% endblock %}
 {% block body %}
-<h1>Upgrade</h1>
+<h1>{% if subscriber_info.status == "Active" %}Upgrade / Downgrade{% else %}Upgrade{% endif %}</h1>
 <ul id="upgrade-list" class="south-street">
     {% for p in pages %}
         <li class="ui-corner-all {% if p.upgraded == "0" %}boxer{% else %} upgraded {% endif %}">
             <img src="http://graph.facebook.com/{{p.id}}/picture"/>
-            <input type="checkbox" id="{{p.id}}" class="btn-upgrade" {% if p.upgraded == "1" %}checked disabled{% endif %} {% ifequal p.id page_id %}checked{% endifequal %}/><label for="{{p.id}}">{% if p.upgraded == "1" %}Upgraded{% else %}Upgrade{% endif %}</label>
+            <input type="checkbox" id="{{p.id}}" class="btn-upgrade" {% if p.upgraded == "1" %}checked{% endif %} {% ifequal p.id page_id %}checked{% endifequal %}/>
+            <label for="{{p.id}}">{% if p.upgraded == "1" %}Downgrade{% else %}Upgrade{% endif %}</label>
             <span class="upgrade-item-text">{{p.name}}</span> 
             </li>
 	{% endfor %}
@@ -20,6 +21,10 @@
     </div>
     <div id="price-body">
        <p><span id="price">$0</span><span id="price-desc"> per month</span></p>
+       {% if subscriber_info.status == "Active" %}
+       <p id="upgrade-downgrade-notice">Clicking "Update" will update your billing to the amount above.</p>
+       <input type="button" id="update-continue" value="Update &rarr;" />
+       {% else %}
        <form method="POST" action="http://sites.fastspring.com/seedprod/api/order">
          <input type="hidden" name="action" value="create"/>
          <input type="hidden" name="mode" value="test"/>
@@ -32,6 +37,7 @@
          <input type="hidden" id="product_1_quantity" name="product_1_quantity" value="0"/>
          <input type="submit" id="price-continue" value="Continue &rarr;" />
        </form>
+       {% endif %}
        
     </div>
 </div>
@@ -60,16 +66,18 @@ $(document).ready(function() {
     $("#product_1_quantity").val(numpages);
     $("#price").html("$" + total);
   
-    $(".btn-upgrade,#price-continue").button().fadeIn();
+    $(".btn-upgrade,#price-continue,#update-continue").button().fadeIn();
     
     $(".btn-upgrade:checked").each(function() {
       if($(this).is(':checked')){
         $(this).parent('li').addClass('upgraded');
         $(this).parent('li').removeClass('boxer');
+        $(this).parent('li').find('label > span').html('Downgrade')
         //$(" + label .ui-button-text",this).html('Upgraded');
       }else{
         $(this).parent('li').addClass('boxer');
         $(this).parent('li').removeClass('upgraded');
+        $(this).parent('li').find('label > span').html('Upgrade')
       }
     });
     
@@ -77,9 +85,11 @@ $(document).ready(function() {
       if($(this).is(':checked')){
         $(this).parent('li').addClass('upgraded');
         $(this).parent('li').removeClass('boxer');
+        $(this).parent('li').find('label > span').html('Downgrade')
       }else{
         $(this).parent('li').addClass('boxer');
         $(this).parent('li').removeClass('upgraded');
+        $(this).parent('li').find('label > span').html('Upgrade')
       }
       pages = '';
       numpages = 0;
@@ -108,6 +118,18 @@ $(document).ready(function() {
             $('#price-summary').removeClass('fixed');
             $('#price-summary').css('top',119);
           }
+    });
+    
+    $('#update-continue').bind('click',function() {
+      if(numpages == 0){
+        window.location = "{{subscriber_info.details}}"
+        return
+      }
+      $.post("/api/upgradedowngrade", { qty: numpages, , pages: pages},function(data){
+    	    if(data){
+    	        log('Upgraded Downgraded');
+    	    };
+    	});//end ajax request
     });
 });
 

@@ -23,7 +23,12 @@ if debug:
         'app_secret': 'edf36480fd0b7b1e40af15dda796ec81',
         'api_key': '0874652ff3b6b35cf768ea03b3063ad1',
     }
-
+    
+config['saasy'] = {
+    'username': 'api',
+    'password': 'ckemendent',
+    'product': 'pagifypro',
+}
 config['google'] = {
     'api_key': 'AIzaSyBWk2VmSTr0NZEcYvE7o11A7Rkl4gRF-LY',
     'jquery_version': '1.4.4',

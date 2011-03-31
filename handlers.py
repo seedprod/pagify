@@ -414,6 +414,20 @@ class AjaxApiHandler(BaseHandler):
                 self.response.out.write('True')
             except:
                 self.response.out.write('False')
+        if method == 'upgradedowngrade':
+          username = self.get_config('saasy','username')
+          password = self.get_config('saasy','password')
+          product = self.get_config('saasy','product')
+          qty = str(self.request.get('qty'))
+          basic_auth = base64.b64encode('%s:%s' % (username, password)) 
+          xml_data = "<subscription><productPath>/%s</productPath><quantity>%s</quantity><no-end-date/></subscription>" % (product,qty)
+          subscriber_info=simplejson.loads(self.current_user.subscriber_info)
+          url = "https://api.fastspring.com/company/seedprod/subscription/%s" % subscriber_info['reference']
+          response = urlfetch.fetch(url=url,payload=xml_data,headers={'Authorization': 'Basic %s' % basic_auth ,'Content-Type': 'application/xml' },method=urlfetch.PUT)
+          if response.status_code == 200:
+            self.response.out.write('True')
+          else:
+            self.response.out.write('False')
                
                
 ''' Listen for changes from subscribers'''

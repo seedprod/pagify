@@ -35,7 +35,7 @@
         	    <ul>
         			<li class="page_item"><a href="/dashboard">Pages</a></li>
         			<li class="page_item"><a href="javascript:void(0);" onclick="feedback_widget.show()">Help</a></li>
-        			<li class="page_item"><a href="/upgrade">Upgrade</a></li>
+        			<li class="page_item"><a href="/upgrade">{% if subscriber_info.status == "Active" %}Upgrade/Downgrade{% else %}Upgrade{% endif %}</a></li>
         			{% if subscriber_info.status == "Active" %}
         			<li class="page_item"><a href="{{subscriber_info.details}}">Account</a></li>
         			{% endif %}

@@ -49,7 +49,7 @@ app = webapp.WSGIApplication([
     Route('/settings', 'handlers.SettingsHandler', name='settings'),
     Route('/upgrade', 'handlers.UpgradeHandler', name='upgrade'),
     Route('/upload', 'handlers.UploadHandler', name='upload'),
-    Route('/api/<method:(scripturl|headerimageurl|getwidget|savewidget|savepageorder|deletewidget|saveoption)>', 'handlers.AjaxApiHandler', name='api'),
+    Route('/api/<method:(scripturl|headerimageurl|getwidget|savewidget|savepageorder|deletewidget|saveoption|upgradedowngrade)>', 'handlers.AjaxApiHandler', name='api'),
     Route('/listen', 'handlers.ListenHandler', name='api'),
     #Facebook Routes
     Route('/canvas/', 'handlers.fbCanvasHandler', name='fb-canvas'),
