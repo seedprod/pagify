@@ -425,6 +425,22 @@ class AjaxApiHandler(BaseHandler):
           url = "https://api.fastspring.com/company/seedprod/subscription/%s" % subscriber_info['reference']
           response = urlfetch.fetch(url=url,payload=xml_data,headers={'Authorization': 'Basic %s' % basic_auth ,'Content-Type': 'application/xml' },method=urlfetch.PUT)
           if response.status_code == 200:
+            # Update Pages
+            upgraded_pages = self.request.get('pages').split(',')
+            pages = Page.get(user.pages)
+            batch = []
+            for p in pages:
+              if p.id in upgraded_pages:
+                p.upgraded = '1'
+                p.upgraded_by = user
+              else:
+                if p.upgraded_by:
+                  if p.upgraded_by.id == user.id:
+                    p.upgraded = '0'
+                    p.upgraded_by = None
+              batch.append(p)
+            db.put(batch)
+                           
             self.response.out.write('True')
           else:
             self.response.out.write('False')

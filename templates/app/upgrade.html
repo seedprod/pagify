@@ -9,7 +9,7 @@
     {% for p in pages %}
         <li class="ui-corner-all {% if p.upgraded == "0" %}boxer{% else %} upgraded {% endif %}">
             <img src="http://graph.facebook.com/{{p.id}}/picture"/>
-            <input type="checkbox" id="{{p.id}}" class="btn-upgrade" {% if p.upgraded == "1" %}checked{% endif %} {% ifequal p.id page_id %}checked{% endifequal %}/>
+            <input type="checkbox" id="{{p.id}}" class="btn-upgrade" {% if p.upgraded_by.email|default:current_user.email != current_user.email %}disabled{% endif %} {% if p.upgraded == "1" %}checked{% endif %} {% ifequal p.id page_id %}checked{% endifequal %}/>
             <label for="{{p.id}}">{% if p.upgraded == "1" %}Downgrade{% else %}Upgrade{% endif %}</label>
             <span class="upgrade-item-text">{{p.name}}</span> 
             </li>
@@ -46,6 +46,10 @@
 {% block foot %}
 <script src="/static/js/jquery-ui-{{google.jquery_ui_version}}.custom.min.js"></script>
 <script>
+$.ajaxSetup ({
+    // Disable caching of AJAX responses */
+    cache: false
+});
 var priceperpage = 7;
 var total = 0;
 var numpages = 0;
@@ -125,7 +129,7 @@ $(document).ready(function() {
         window.location = "{{subscriber_info.details}}"
         return
       }
-      $.post("/api/upgradedowngrade", { qty: numpages, , pages: pages},function(data){
+      $.post("/api/upgradedowngrade", { qty: numpages,pages: pages },function(data){
     	    if(data){
     	        log('Upgraded Downgraded');
     	    };
