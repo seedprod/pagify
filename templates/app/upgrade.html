@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Upgrade - {% endblock %}
 {% block head %}
+<link rel="stylesheet" href="/static/css/man-in-black/jquery-ui-1.8.9.custom.css">
 <link rel="stylesheet" href="/static/css/south-street/jquery-ui-1.8.9.custom.css">
 {% endblock %}
 {% block body %}
@@ -42,6 +43,9 @@
     </div>
 </div>
 <span id="user-id" class="hidden">{{user.id}}</span>
+<div id="dialog-upgradedowngrade" title="Update Status" style="display:none;">
+	<p></p>
+</div>
 {% endblock %}
 {% block foot %}
 <script src="/static/js/jquery-ui-{{google.jquery_ui_version}}.custom.min.js"></script>
@@ -131,10 +135,28 @@ $(document).ready(function() {
       }
       $.post("/api/upgradedowngrade", { qty: numpages,pages: pages },function(data){
     	    if(data){
-    	        log('Upgraded Downgraded');
+    	        $("#dialog-upgradedowngrade p").html("Your Pages have been successfully updated!");
+    	    }else{
+    	        $("#dialog-upgradedowngrade p").html("There was an error with the update.<br/>Please try again.");
     	    };
+    	    $( "#dialog-upgradedowngrade" ).dialog( "open" );
     	});//end ajax request
     });
+    
+    // Delete update
+    $( "#dialog-upgradedowngrade" ).dialog({
+          autoOpen: false,
+    			resizable: false,
+    			draggable:false,
+    			show: "fade",
+    			hide: "fade",
+    			modal: true,
+    			buttons: {
+    				OK: function() {
+    					$( this ).dialog( "close" );
+    				}
+    			}
+    		});
 });
 
 </script>
