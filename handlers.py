@@ -557,17 +557,22 @@ class fbTabHandler(BaseHandler):
         liked = signed_request['page']['liked']
         admin = signed_request['page']['admin']
         options_dict = {}
-        message = 'test'
-        try:
-            page = Page.get_by_key_name(page_id)
-            widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
-            options = Option.all().filter('type_reference =', page)
-            for option in options:
-                options_dict[option.name] = {'id': str(option.key().id()), 'value': option.value}
-        except:
-            page=None
-            widgets=None
-            options_dict = None
+        message = None
+        #try:
+        page = Page.get_by_key_name(page_id)
+        #check for expired page.
+        if (page.created + datetime.timedelta(days=1)) > datetime.datetime.now():
+          logging.info('valid')
+        else:
+          logging.info('expired')
+        widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
+        options = Option.all().filter('type_reference =', page)
+        for option in options:
+            options_dict[option.name] = {'id': str(option.key().id()), 'value': option.value}
+        #except:
+        page=None
+        widgets=None
+        options_dict = None
         self.render("app/fb-tab.html", page=page,widgets=widgets, method="post",options=options_dict,admin=admin,message=message)
 
 
