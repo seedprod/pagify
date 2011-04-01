@@ -17,9 +17,14 @@
   <script src="http://widgets.twimg.com/j/2/widget.js"></script>
 </head>
 <body>
+  {% if status == False  %}
+  <div id="container" class="fbpage-error">
+    <h2>This Pagify Page has expired.</h2>
+    <p>If you are the owner please visit http://pagifyapp.com to update your account.</p>
+  </div>
+  {% endif %}
   <div id="container" class="fbpage">
     <header>
-      {{message}}
     </header>
     <div id="main">
             {% if page.header_image_url %}
@@ -272,3 +277,6 @@
       s.parentNode.insertBefore(g, s);
      })(document, 'script');
     </script>
+{% endif %}
+  </body>
+</html>
