@@ -332,6 +332,7 @@ function saveWidget(id){
 	$.post("/api/savewidget", { wid: wId , wtype: wType , wname: wName, wcontents: wContents, pageid: pageId},function(data){
 	    if(data){
 	        log('Saved Widget');
+	        location.href = location.href = "#reload"
 	        $('#widget-list').trigger('sortupdate')
 	        $('#saving').show().delay(1500).fadeOut('slow');
 	    };
