@@ -15,12 +15,21 @@
   <link rel="stylesheet" href="/static/css/pagify-style.css?v=1">
   <script src="/static/js/modernizr-1.6.min.js"></script>
   <script src="http://widgets.twimg.com/j/2/widget.js"></script>
+  {% if status == 'False'  %}
+  <style type="text/css">
+  #container{
+    zoom:1;
+    opacity: 0.2;
+    filter: alpha(opacity = 20);
+  }
+  </style>
+  {% endif %}
 </head>
 <body>
-  {% if status == False  %}
-  <div id="container" class="fbpage-error">
+  {% if status == 'False'  %}
+  <div id="fbpage-error">
     <h2>This Pagify Page has expired.</h2>
-    <p>If you are the owner please visit http://pagifyapp.com to update your account.</p>
+    <p>If you are the owner please visit <a href="http://pagifyapp.com">http://pagifyapp.com</a> to update your account.</p>
   </div>
   {% endif %}
   <div id="container" class="fbpage">
@@ -277,6 +286,6 @@
       s.parentNode.insertBefore(g, s);
      })(document, 'script');
     </script>
-{% endif %}
+
   </body>
 </html>

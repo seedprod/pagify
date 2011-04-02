@@ -557,19 +557,21 @@ class fbTabHandler(BaseHandler):
         liked = signed_request['page']['liked']
         admin = signed_request['page']['admin']
         options_dict = {}
-        status = True
+        status = 'True'
         try:
           page = Page.get_by_key_name(page_id)
           #check active account or for expired account.
           if page.upgraded != '1':
-            expire_date = page.created + datetime.timedelta(days=1)
+
+            expire_date = page.created + datetime.timedelta(days=30)
             min_expire_date = datetime.datetime(2011,7,1)
         
             if (expire_date < min_expire_date):
               expire_date = min_expire_date
-          
-            if (expire_date <= datetime.datetime.now():
-              status = False
+
+            if expire_date < datetime.datetime.now():
+              status = 'False'
+
           
           
           widgets = Widget.all().filter('page =', page).filter('deleted = ', False).order('order')
