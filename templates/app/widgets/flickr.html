@@ -18,18 +18,14 @@
     {% endfor %}
 </select>
 </span>
+<span class="south-street"><button class="{{widget.id}} btn">Save</button>
 <input type="hidden" name="flickr_userid" class="{{widget.id}} flickr_userid" value="{{widget.flickr_userid|default:""}}"></input>
 </form>
 
 <script>
-var timeout_{{widget.id|cut:"-"}};
-$('.{{widget.id}}').bind('textchange change', function () {
-  clearTimeout(timeout_{{widget.id|cut:"-"}});
-    var self = this;
-    timeout_{{widget.id|cut:"-"}} = setTimeout(function () {
-        username = $('#fm-{{widget.id}} .flickr_username').val();
-        yqlQuery('SELECT * FROM flickr.people.findbyusername WHERE username=\'' + username + '\'','cbFunc_{{w.id|cut:"-"}}','json','3600');
-  }, 1000);
+$( "#fm-{{widget.id}} button").button().click(function() { 
+  username = $('#fm-{{widget.id}} .flickr_username').val();
+  yqlQuery('SELECT * FROM flickr.people.findbyusername WHERE username=\'' + username + '\'','cbFunc_{{w.id|cut:"-"}}','json','3600');
 });
 function cbFunc_{{w.id|cut:"-"}}(data) {
     try{

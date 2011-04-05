@@ -4,7 +4,8 @@
 </form>
 
 <script>
-$( "#fm-{{widget.id}} button").button().click(function() { saveWidget('{{widget.id}}');});
+$( "#fm-{{widget.id}} button").button().click(function() { 
+saveWidget('{{widget.id}}');});
 //trigger event for tinymce
 $("body").trigger("widgetloaded");
 </script>

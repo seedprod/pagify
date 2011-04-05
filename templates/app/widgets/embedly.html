@@ -4,17 +4,14 @@
 <label for="embedly_url">URL:</label>
 <input type="text" name="embedly_url" class="{{widget.id}}" value="{{widget.embedly_url|default:""}}"></input>
 </span>
+<span class="south-street"><button class="{{widget.id}} btn">Save</button>
 </form>
 
 <script>
-var timeout_{{widget.id|cut:"-"}};
-$('.{{widget.id}}').bind('textchange', function () {
-  clearTimeout(timeout_{{widget.id|cut:"-"}});
-    var self = this;
-    timeout_{{widget.id|cut:"-"}} = setTimeout(function () {
-        saveWidget('{{widget.id}}');
-  }, 1000);
+$( "#fm-{{widget.id}} button").button().click(function() { 
+  saveWidget('{{widget.id}}');
 });
+
 $("#fm-{{widget.id}}").validate({
     rules: {
       embedly_url: {

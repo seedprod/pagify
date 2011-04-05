@@ -3,18 +3,12 @@
     <label for="twitter_username">Twitter Username:</label>
     <input type="text" name="twitter_username" class="{{widget.id}}" value="{{widget.twitter_username|default:""}}"></input>
     </span>
+    <span class="south-street"><button class="{{widget.id}} btn">Save</button>
 </form>
 
 <script>
-var timeout_{{widget.id|cut:"-"}};
-$('.{{widget.id}}').bind('textchange change', function () {
-  clearTimeout(timeout_{{widget.id|cut:"-"}});
-  //$('#ajaxFired').html('<strong>Typing...</strong>');
-    var self = this;
-    timeout_{{widget.id|cut:"-"}} = setTimeout(function () {
-        saveWidget('{{widget.id}}');
-        //$('#ajaxFired').html('<strong>Saved</strong>: ' + $(self).val());
-  }, 1000);
+$( "#fm-{{widget.id}} button").button().click(function() { 
+  saveWidget('{{widget.id}}');
 });
 /*$("#fm-{{widget.id}}").validate({
     rules: {
