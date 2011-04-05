@@ -99,6 +99,7 @@
 
 <!-- Save -->
 <div id="saving">Saving...</div>
+<a id="saved">Saved</div>
 <!-- Dialogs -->
 <div id="upload-dialog" title="Upload Image" style="display:none;">
     <div id="fileQueue"></div>
@@ -118,6 +119,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 <script src="/static/js/jquery-ui-{{google.jquery_ui_version}}.custom.min.js"></script>
 <script type="text/javascript" src="/static/js/tiny_mce/jquery.tinymce.js"></script>
+<script type="/static/js/jquery.bar.js"></script>
 <script>
 console.log(location.href.search('#reload'))
 if (location.href.search('#reload')  != -1){
@@ -204,7 +206,8 @@ $( "#options_ga button").button().click(function() {
         $.post("/api/saveoption", { id:$("#google_analytics_ua_id").val(), oname: 'google_analytics_ua', ovalue: $(self).val()  , otype: 'page', opageid: $("#page-id").html() },function(data){
     	    if(data){
     	        log('Saved Option');
-    	        $('#saving').show().delay(1500).fadeOut('slow');
+    	        //$('#saving').show().delay(1500).fadeOut('slow');
+    	        $('#saved').trigger('click');
     	    };
 });
 
