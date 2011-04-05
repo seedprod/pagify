@@ -86,6 +86,7 @@
             		<div>
             		    <input type="text" id="google_analytics_ua" value="{{options.google_analytics_ua.value}}"></input>
             		    <input type="hidden" id="google_analytics_ua_id" value="{{options.google_analytics_ua.id}}"></input>
+            		    <span class="south-street"><button class="btn">Save</button>
             		    
             		    
             		</div>
@@ -198,19 +199,13 @@ $(document).ready(function() {
 	});
 });
 // Settings
-var timeout_ga_ua;
-$('#google_analytics_ua').bind('textchange change', function () {
-  clearTimeout(timeout_ga_ua);
-  //$('#ajaxFired').html('<strong>Typing...</strong>');
-    var self = this;
-    timeout_ga_ua = setTimeout(function () {
+
+$( "#options_ga button").button().click(function() { 
         $.post("/api/saveoption", { id:$("#google_analytics_ua_id").val(), oname: 'google_analytics_ua', ovalue: $(self).val()  , otype: 'page', opageid: $("#page-id").html() },function(data){
     	    if(data){
     	        log('Saved Option');
     	        $('#saving').show().delay(1500).fadeOut('slow');
     	    };
-    	});//end ajax request
-  }, 1000);
 });
 
 function yqlQuery(query,cbFunc,format,maxage,env) {
