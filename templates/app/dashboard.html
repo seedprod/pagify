@@ -33,11 +33,9 @@
       <script>
       new TWTR.Widget({
         version: 2,
-        type: 'search',
-        search: 'pagifyupdates',
+        type: 'profile',
+        rpp: 3,
         interval: 6000,
-        title: 'Pagify Updates',
-        subject: '',
         width: 'auto',
         height: 300,
         theme: {
@@ -58,10 +56,9 @@
           hashtags: true,
           timestamp: true,
           avatars: true,
-          toptweets: false,
           behavior: 'all'
         }
-      }).render().start();
+      }).render().setUser('pagifyapp').start();
       </script>
         <!--<ul id="feed">
             
