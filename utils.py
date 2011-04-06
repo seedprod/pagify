@@ -60,33 +60,31 @@ def decrypt(str):
     y = str.decode('hex').decode('base64')
     return y
     
-def oembed_replace(urls=''):
+def oembed_replace(srcurl=''):
      r = ''
      client = Embedly()
-     logging.info(urls)
-     oembed_json = client.oembed(urls,maxwidth=480)
-     logging.info(oembed_json)
-     for idx,item in enumerate(oembed_json):
-         try:
-             title = item['title']
-         except KeyError:
-             title = ''
-         try:
-             url = item['url']
-         except KeyError:
-             url = ''
-         try:
-             thumbnail_url = item['thumbnail_url']
-         except KeyError:
-             thumbnail_url = ''
-         r = ''
-         if item['type'] == 'photo': 
-            r = ' <a href="http://' + urls[idx] + '" target="_blank"><img src="' + url + '" alt="' + title + '"/></a>'
-         if item['type'] == 'video':
-            r = ' '+item['html']
-         if item['type'] == 'rich':
-            r = ' '+item['html']
-         if item['type'] == 'link':
-            r = ' <a href="' + url + '">' + title + '</a>'
-         #s = re.sub('\[http://'+urls[idx]+']', r, s)
+     obj = client.oembed(srcurl)
+     #for idx,item in enumerate(oembed_json):
+     try:
+         title = obj['title']
+     except KeyError:
+         title = ''
+     try:
+         url = obj['url']
+     except KeyError:
+         url = ''
+     try:
+         thumbnail_url = obj['thumbnail_url']
+     except KeyError:
+         thumbnail_url = ''
+     
+     if obj['type'] == 'photo': 
+        r = ' <a href="http://' + srcurl + '" target="_blank"><img src="' + url + '" alt="' + title + '"/></a>'
+     if obj['type'] == 'video':
+        r = ' '+obj['html']
+     if obj['type'] == 'rich':
+        r = ' '+obj['html']
+     if obj['type'] == 'link':
+        r = ' <a href="' + url + '">' + title + '</a>'
+
      return r

@@ -335,19 +335,18 @@ function saveWidget(id){
 	        location.href = location.href = "#reload"
 	        $('#widget-list').trigger('sortupdate')
 	        //$('#saving').show().delay(1500).fadeOut('slow');
-	        $('#saved').trigger('click');
+	        $.notifyBar({
+              html: "Saved",
+              delay: 2000,
+              cls: "success",
+              animationSpeed: "normal"
+            });
 	    };
 	});//end ajax request
     }
 }
 
-$('#saved').bar({
-	color 			 : '#fff',
-	background_color : '#55a616',
-	removebutton     : false,
-	message			 : 'Saved',
-	time			 : 4000
-});
+
 
 function getParameterByName( name )
 {

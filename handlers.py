@@ -33,6 +33,7 @@ from django.utils import simplejson
 #import extras.sessions  
 
 #deferred functions
+
 def get_subscriber_changes(id):
     try:
         response = spreedly.request('subscribers/%s.xml' % id, 'get')
@@ -49,8 +50,9 @@ def get_embedly_code(args):
     id = args["id"]
     url = args["url"]
     type = args["type"]
+    logging.info(args)
     try:
-        response = oembed_replace('[' + url + ']')
+        response = oembed_replace(url)
         if response:  
             widget = Widget.get_by_key_name(id)
             if type == "embedly":
@@ -345,6 +347,7 @@ class AjaxApiHandler(BaseHandler):
             widget = Widget.get_by_key_name(key_name)
             if self.request.get('wtype') == 'embedly':
                fields = simplejson.loads(self.request.get('wcontents'))
+               #get_embedly_code({'id':self.request.get('wid'),"url":fields['embedly_url'],"type":"embedly"})
                deferred.defer(get_embedly_code,{'id':self.request.get('wid'),"url":fields['embedly_url'],"type":"embedly"})
             if self.request.get('wtype') == 'googlemaps':
                fields = simplejson.loads(self.request.get('wcontents'))

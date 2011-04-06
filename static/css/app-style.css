@@ -531,7 +531,8 @@ z-index:999;}
 #sb-widgets-header{cursor:move;}
 #sb-widgets-menu ul,#sb-install ul{margin:0;}
 #sb-install li{list-style-type: none;}
-#sb-widgets-menu li{list-style-type: none;padding:3px;margin:5px 0 0; }
+#tabs-1 li{list-style-type: none;padding:3px;margin:5px 0 0; }
+
 .wi{padding:3px;margin:5px 0 0;cursor:pointer;cursor: hand;}
 .fb_profile_pic_rendered img{width:32px;}
 #widget-list h3{font-weight:normal;}
@@ -783,32 +784,31 @@ z-index:999;}
 	}
 }
 
-.jbar{
-	height:50px;
-	width:100%;
-	background-color: #fff;
-	position:fixed;
-	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=95); 
-	opacity: 0.95;
-	-moz-opacity: 0.95;
-	text-align:center;
-	left:0px;
-	z-index:9999999;
-	margin:0px;
-	padding:0px;
+.jquery-notify-bar {
+  width:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:32768;
+  background-color:#efefef;
+  font-size:18px;
+  color:#000;
+  text-align:center;
+  font-family: Arial, Verdana, sans-serif;
+  padding:20px 0px;
+  border-bottom:1px solid #bbb;
+  cursor: pointer;
 }
-.jbar-top{
-	top:0px;
-	border-top:2px solid #fff;
-	border-bottom: 1px solid #ebebeb;
+.jquery-notify-bar.error {
+  color:#f00;
+  background-color:#fdd;
 }
-
-.jbar-content{
-	line-height:46px;
-	font-size: 18px;
-	font-family:'Lucida Grande',sans-serif;
+.jquery-notify-bar.success {
+  color:#060;
+  background-color:#BBFFB6;
 }
-
-.jbar-top a{
-	top:8px;	
+.notify-bar-close {
+  position:absolute;
+  left:95%;
+  font-size:11px;
 }
