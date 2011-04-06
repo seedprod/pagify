@@ -28,7 +28,9 @@
        {% else %}
        <form method="POST" action="http://sites.fastspring.com/seedprod/api/order">
          <input type="hidden" name="action" value="create"/>
+         {% if debug %}
          <input type="hidden" name="mode" value="test"/>
+         {% endif %}
          <input type="hidden" id="referrer" name="referrer" value="{{user.id}}"/>
          <input type="hidden" name="contact_fname" value="{{fname}}"/>
          <input type="hidden" name="contact_lname" value="{{lname}}"/>
