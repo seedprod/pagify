@@ -129,7 +129,7 @@ class BaseHandler(webapp.RequestHandler):
           pass
         path = os.path.join(os.path.dirname(__file__), "templates", path)
         datastore_write_enabled = capabilities.CapabilitySet('datastore_v3', capabilities=['write']).is_enabled()
-        if datastore_write_enabled:
+        if datastore_write_enabled and path != "app/fb-tab.html":
             self.response.out.write(template.render(path, args))
         else:
             self.response.out.write(template.render(os.path.join(os.path.dirname(__file__), "templates","app", "maintenance.html"), args))
