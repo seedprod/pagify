@@ -567,7 +567,7 @@ class fbTabHandler(BaseHandler):
           if page.upgraded != '1':
 
             expire_date = page.created + datetime.timedelta(days=30)
-            min_expire_date = datetime.datetime(2011,7,1)
+            min_expire_date = datetime.datetime(2011,5,1)
         
             if (expire_date < min_expire_date):
               expire_date = min_expire_date
