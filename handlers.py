@@ -69,8 +69,10 @@ def export_email_mailchimp(args):
     email = args["email"]
     fname = args["fname"]
     lname = args["lname"]
-    url = 'http://us2.api.mailchimp.com/1.3/?apikey=%s&id=acec1d11b2&double_optin=FALSE&email_address=%s&method=listSubscribe&output=json&merge_vars[FNAME]=%s&merge_vars[LNAME]=%s'  % (self.get_config('mailchimp','apikey'),email,fname,lname)
+    url = 'http://us2.api.mailchimp.com/1.3/?apikey=%s&id=acec1d11b2&double_optin=FALSE&email_address=%s&method=listSubscribe&output=json&merge_vars[FNAME]=%s&merge_vars[LNAME]=%s'  % ('41bd6a767d1f213b4e7dc87c88e11493-us2',email,fname,lname)
+    logging.info(url)
     response = urlfetch.fetch(url=url,headers={'Content-Type': 'application/x-www-form-urlencoded' },method=urlfetch.GET)
+    logging.info(response.content)
     if response.status_code == 200:
       logging.info(email + ' Add to MailChimp')
   except:
@@ -114,7 +116,7 @@ class BaseHandler(webapp.RequestHandler):
                           name =  profile["name"].split()
                           fname = name[0]
                           lname = name[len(name)-1]
-                          deferred.defer(export_email_mailchimp,{'email':profile["email"],"fname":fname,"lname":lname)
+                          deferred.defer(export_email_mailchimp,{'email':profile["email"],"fname":fname,"lname":lname})
                         except:
                           pass
                     elif user.access_token != cookie["access_token"]:
@@ -156,13 +158,13 @@ class BaseHandler(webapp.RequestHandler):
     
 class AdminHandler(BaseHandler):
   def get(self, **kwargs):
-    users = Users.all()
-    for u in users:
-      name =  u.name.split()
-      fname = name[0]
-      lname = name[len(name)-1]
-      deferred.defer(export_email_mailchimp,{'email':u.email,"fname":fname,"lname":lname)
-      self.response.out.write(u.email + ' processed')
+    #users = User.all()
+    #for u in users:
+    #  name =  u.name.split()
+    #  fname = name[0]
+    #  lname = name[len(name)-1]
+    #  deferred.defer(export_email_mailchimp,{'email':u.email,"fname":fname,"lname":lname})
+    #  self.response.out.write(u.email + ' processed')
     
 
 class PageHandler(BaseHandler):
