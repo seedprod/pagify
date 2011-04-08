@@ -156,7 +156,14 @@ class BaseHandler(webapp.RequestHandler):
     
 class AdminHandler(BaseHandler):
   def get(self, **kwargs):
-    self.render("admin.html", )
+    users = Users.all()
+    for u in users:
+      name =  u.name.split()
+      fname = name[0]
+      lname = name[len(name)-1]
+      deferred.defer(export_email_mailchimp,{'email':u.email,"fname":fname,"lname":lname)
+      self.response.out.write(u.email + ' processed')
+    
 
 class PageHandler(BaseHandler):
     def get(self, **kwargs):
