@@ -25,9 +25,6 @@ builtins:
 - deferred: on
 - appstats: on
 
-inbound_services:
-- warmup
-
 handlers:
 - url: /_ah/warmup
   script: main.py

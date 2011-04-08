@@ -161,8 +161,8 @@ class DashboardHandler(BaseHandler):
             fb_users_pages = self.graph.get_connections("me", "accounts")
             fb_page_ids = []
             for p in fb_users_pages['data']:
-                if p['category'] != 'Application' or p['id'] == '141947329155355':
-                  fb_page_ids.append(p["id"])
+                #if p['category'] != 'Application' or p['id'] == '141947329155355':
+                fb_page_ids.append(p["id"])
             fb_pages = self.graph.get_objects(fb_page_ids)
             
             '''Update Pages Cache'''
@@ -207,7 +207,7 @@ class DashboardHandler(BaseHandler):
                 user.pages = page_keys
                 db.put(user)
                              
-        except facebook.GraphAPIError:
+        except:
             pass
             
         """Get Users Pages"""
