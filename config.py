@@ -23,7 +23,9 @@ if debug:
         'app_secret': 'edf36480fd0b7b1e40af15dda796ec81',
         'api_key': '0874652ff3b6b35cf768ea03b3063ad1',
     }
-    
+config['mailchimp'] = {
+    'apikey': '41bd6a767d1f213b4e7dc87c88e11493-us2',
+}    
 config['saasy'] = {
     'username': 'api',
     'password': 'ckemendent',

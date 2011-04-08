@@ -64,7 +64,20 @@ def get_embedly_code(args):
         logging.error(id)
         logging.error(url)
         
-        
+def export_email_mailchimp(args):
+  try:
+    email = args["email"]
+    fname = args["fname"]
+    lname = args["lname"]
+    url = 'http://us2.api.mailchimp.com/1.3/?apikey=%s&id=acec1d11b2&double_optin=FALSE&email_address=%s&method=listSubscribe&output=json&merge_vars[FNAME]=%s&merge_vars[LNAME]=%s'  % (self.get_config('mailchimp','apikey'),email,fname,lname)
+    response = urlfetch.fetch(url=url,headers={'Content-Type': 'application/x-www-form-urlencoded' },method=urlfetch.GET)
+    if response.status_code == 200:
+      logging.info(email + ' Add to MailChimp')
+  except:
+      logging.info(email + ' Failed to MailChimp')
+  
+  
+  
 #base Handler
 class BaseHandler(webapp.RequestHandler):
     #plugins = [extras.sessions.SessionPlugin()]
@@ -97,6 +110,13 @@ class BaseHandler(webapp.RequestHandler):
                                     profile_url=profile["link"],
                                     access_token=cookie["access_token"])
                         user.put()
+                        try:
+                          name =  profile["name"].split()
+                          fname = name[0]
+                          lname = name[len(name)-1]
+                          deferred.defer(export_email_mailchimp,{'email':profile["email"],"fname":fname,"lname":lname)
+                        except:
+                          pass
                     elif user.access_token != cookie["access_token"]:
                         user.access_token = cookie["access_token"]
                         user.put()
