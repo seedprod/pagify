@@ -50,6 +50,8 @@ admin_console:
   pages:
   - name: Appstats
     url: /_ah/stats/
+  - name: Admin Utilities
+    url: /admin
   
 error_handlers:
 - file: /templates/errors/default_gae_error.html

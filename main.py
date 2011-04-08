@@ -44,6 +44,7 @@ app = webapp.WSGIApplication([
     #Front-End Routes
     Route('/<page:(|privacy|terms)>', 'handlers.PageHandler', name='frontend-pages'),
     #App Routes
+    Route('/admin', 'handlers.AdminHandler', name='admin'),
     Route('/dashboard', 'handlers.DashboardHandler', name='dashboard'),
     Route('/edit/page/<pageid:\d+>', 'handlers.EditPageHandler', name='edit-page'),
     Route('/settings', 'handlers.SettingsHandler', name='settings'),

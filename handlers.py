@@ -134,6 +134,10 @@ class BaseHandler(webapp.RequestHandler):
         else:
             self.response.out.write(template.render(os.path.join(os.path.dirname(__file__), "templates","app", "maintenance.html"), args))
     
+class AdminHandler(BaseHandler):
+  def get(self, **kwargs):
+    self.render("admin.html", )
+
 class PageHandler(BaseHandler):
     def get(self, **kwargs):
         pages = ['app/login']
