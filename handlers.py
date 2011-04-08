@@ -162,7 +162,11 @@ class DashboardHandler(BaseHandler):
             fb_page_ids = []
             for p in fb_users_pages['data']:
                 #if p['category'] != 'Application' or p['id'] == '141947329155355':
-                fb_page_ids.append(p["id"])
+                try:
+                    if p['name']:
+                      fb_page_ids.append(p["id"])
+                except:
+                  pass
             fb_pages = self.graph.get_objects(fb_page_ids)
             
             '''Update Pages Cache'''
