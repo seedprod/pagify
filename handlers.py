@@ -158,25 +158,25 @@ class BaseHandler(webapp.RequestHandler):
     
 class AdminHandler(BaseHandler):
   def get(self, **kwargs):
-    #users = User.all()
-    #for u in users:
-    #  name =  u.name.split()
-    #  fname = name[0]
-    #  lname = name[len(name)-1]
-    #  deferred.defer(export_email_mailchimp,{'email':u.email,"fname":fname,"lname":lname})
-    #  self.response.out.write(u.email + ' processed')
+    users = User.all()
+    for u in users:
+      name =  u.name.split()
+      fname = name[0]
+      lname = name[len(name)-1]
+      #deferred.defer(export_email_mailchimp,{'email':u.email,"fname":fname,"lname":lname})
+      self.response.out.write(u.email + ' processed')
     
 
 class PageHandler(BaseHandler):
-    def get(self, **kwargs):
-        pages = ['app/login']
-        page = kwargs.get('page')
-        if page is '':
-            page = 'app/login'
-        if self.current_user and (page in pages):
-            self.redirect('/dashboard')
-        else:
-            self.render(page+".html", )
+  def get(self, **kwargs):
+    pages = ['app/login']
+    page = kwargs.get('page')
+    if page is '':
+        page = 'app/login'
+    if self.current_user and (page in pages):
+        self.redirect('/dashboard')
+    else:
+        self.render(page+".html", )
          
 class DashboardHandler(BaseHandler):
     @fblogin_required
