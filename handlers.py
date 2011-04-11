@@ -492,7 +492,7 @@ class AjaxApiHandler(BaseHandler):
 ''' Listen for changes from subscribers'''
 class ListenHandler(webapp.RequestHandler):  
     def post(self, **kwargs):
-        #try:
+        try:
             privatekey = '792ec9274bc52418e995f355e3a8a4d1'
             if hashlib.md5(self.request.get("security_data") + privatekey).hexdigest() != self.request.get("security_hash"):
                 self.abort(500)
@@ -536,10 +536,10 @@ class ListenHandler(webapp.RequestHandler):
                         batch.append(p)
                 db.put(batch)
                 
-            self.response.set_status(500)
-        #except:
-        #    logging.error('Listen Error')
-        #    self.abort(500)
+            self.response.set_status(200)
+        except:
+            logging.error('Listen Error')
+            self.abort(500)
         
 class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
     def post(self, **kwargs):
