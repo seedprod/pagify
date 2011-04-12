@@ -33,18 +33,6 @@ from django.utils import simplejson
 #import extras.sessions  
 
 #deferred functions
-
-def get_subscriber_changes(id):
-    try:
-        response = spreedly.request('subscribers/%s.xml' % id, 'get')
-        if response:  
-            #dom = minidom.parseString(response)
-            #customer_id = dom.getElementsByTagName('customer-id')[0].firstChild.data
-            user = User.get_by_key_name(id)
-            user.subscriber_info = response
-            user.put()
-    except:
-        logging.error(id)
         
 def get_embedly_code(args):
     id = args["id"]
@@ -181,9 +169,6 @@ class PageHandler(BaseHandler):
 class DashboardHandler(BaseHandler):
     @fblogin_required
     def get(self, **kwargs):
-        ''' See if coming from payment'''
-        if self.request.get("s") == '1':
-            get_subscriber_changes(self.current_user.id)
             
         '''Get Users Pages From Facebook'''
         try:
