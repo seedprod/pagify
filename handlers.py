@@ -11,7 +11,6 @@ import urllib
 import spreedly
 import base64
 import hashlib
-#import markdown
 import webapp2 as webapp
 from xml.dom import minidom
 from utils import fblogin_required,encrypt,decrypt, xmltodict,oembed_replace
@@ -26,31 +25,25 @@ from google.appengine.ext.webapp import template
 from google.appengine.runtime.apiproxy_errors import CapabilityDisabledError
 from google.appengine.api import capabilities
 from django.utils import simplejson
-#from django.contrib.markup.templatetags import markup 
 
-# Session Extention
-#import extras.extension_support
-#import extras.sessions  
-
-#deferred functions
-        
+# deferred functions 
 def get_embedly_code(args):
     id = args["id"]
     url = args["url"]
     type = args["type"]
-    logging.info(args)
     try:
-        response = oembed_replace(url)
-        if response:  
-            widget = Widget.get_by_key_name(id)
-            if type == "embedly":
-                widget.embedly_code = db.Text(response)
-            if type == "googlemaps":
-                widget.googlemaps_code = db.Text(response)
-            widget.put()
+        if url:
+            response = oembed_replace(url)
+            if response:  
+                widget = Widget.get_by_key_name(id)
+                if type == "embedly":
+                    widget.embedly_code = db.Text(response)
+                if type == "googlemaps":
+                    widget.googlemaps_code = db.Text(response)
+                widget.put()
     except:
-        logging.error(id)
-        logging.error(url)
+        logging.info("Embedly Error")
+        logging.info(args)
         
 def export_email_mailchimp(args):
   try:
@@ -70,14 +63,6 @@ def export_email_mailchimp(args):
   
 #base Handler
 class BaseHandler(webapp.RequestHandler):
-    #plugins = [extras.sessions.SessionPlugin()]
-    #@property
-    #def sessions(self):
-    #    return self.request.registry.get('extras.sessions.SessionStore')
-    # Load a session. # Set a session value. session['foo'] = 'bar'
-    #session = self.sessions.get_session()
-    # Get flash messages. self.sessions.set_flash('some value')
-    #flashes = self.sessions.get_flash()
     @property
     def current_user(self):
         try:
@@ -101,10 +86,10 @@ class BaseHandler(webapp.RequestHandler):
                                     access_token=cookie["access_token"])
                         user.put()
                         try:
-                          name =  profile["name"].split()
+                          name =  u.name.split()
                           fname = name[0]
                           lname = name[len(name)-1]
-                          deferred.defer(export_email_mailchimp,{'email':profile["email"],"fname":fname,"lname":lname})
+                          deferred.defer(export_email_mailchimp,{'email':u.email,"fname":fname,"lname":lname})
                         except:
                           pass
                     elif user.access_token != cookie["access_token"]:
@@ -588,7 +573,7 @@ class fbTabHandler(BaseHandler):
           #check active account or for expired account.
           if page.upgraded != '1':
 
-            expire_date = page.created + datetime.timedelta(days=30)
+            expire_date = page.created + datetime.timedelta(days=14)
             min_expire_date = datetime.datetime(2011,5,1)
         
             if (expire_date < min_expire_date):
