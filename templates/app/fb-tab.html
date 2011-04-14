@@ -128,7 +128,7 @@
 	    format = typeof(format) != 'undefined' ? format : 'json';
 	    env = typeof(env) != 'undefined' ? env : 'store://datatables.org/alltableswithkeys';
 	    maxage = typeof(maxage) != 'undefined' ? maxage : '';
-	    yql = yqlURL + '?q=' + query + '&format=' + format + '&diagnostics=false&_maxage=' + maxage + '&env=' + env;
+	    yql = yqlURL + '?q=' + query + '&format=' + format + '&diagnostics=false&_maxage=' + maxage + '&env=' + env + '&rnd=_2010031310';
 		$.ajax({url: yql, 
 	            dataType: 'jsonp',
 	            jsonp: 'callback', 
@@ -185,7 +185,7 @@
             	    'overlayShow'   : false,
             	    'titleShow'     : true,
             	    'titlePosition' : 'inside',
-            	    'titleFormat'   : function() {return '<span class="fancybox-title-over"><a target="_top" href="'+$('a[href="'+this.href+'"]').data('flickr_link')+'">'+'A Flickr Photo'+'</a></span>';},
+            	    'titleFormat'   : function() {return '<span class="fancybox-title-over"><a target="_top" href="'+$('a[href="'+this.href+'"]').data('flickr_link')+'">'+'View Original'+'</a></span>';},
                     'transitionIn'  : 'elastic',
                     'transitionOut' : 'elastic'
             	});
@@ -213,7 +213,7 @@
                 $.each(data.query.results.item, function(index, value) { 
                    html = html + value.description;
                    count++;
-            	   if(count == {{w.flickr_count|default:"5"}}){
+            	   if(count == {{w.youtube_count|default:"5"}}){
             	       return false;
             	   }
             	});
