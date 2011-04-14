@@ -86,10 +86,10 @@ class BaseHandler(webapp.RequestHandler):
                                     access_token=cookie["access_token"])
                         user.put()
                         try:
-                          name =  u.name.split()
+                          name =  user.name.split()
                           fname = name[0]
                           lname = name[len(name)-1]
-                          deferred.defer(export_email_mailchimp,{'email':u.email,"fname":fname,"lname":lname})
+                          deferred.defer(export_email_mailchimp,{'email':user.email,"fname":fname,"lname":lname})
                         except:
                           pass
                     elif user.access_token != cookie["access_token"]:

@@ -23,7 +23,7 @@ builtins:
 - remote_api: on
 - datastore_admin: on
 - deferred: on
-- appstats: on
+- appstats: off
 
 handlers:
 - url: /_ah/warmup
