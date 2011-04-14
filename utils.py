@@ -63,7 +63,7 @@ def decrypt(str):
 def oembed_replace(srcurl=''):
      r = ''
      client = Embedly()
-     obj = client.oembed(srcurl)
+     obj = client.oembed(srcurl,maxwidth=480)
      #for idx,item in enumerate(oembed_json):
      try:
          title = obj['title']
@@ -79,7 +79,7 @@ def oembed_replace(srcurl=''):
          thumbnail_url = ''
      
      if obj['type'] == 'photo': 
-        r = ' <a href="http://' + srcurl + '" target="_blank"><img src="' + url + '" alt="' + title + '"/></a>'
+        r = ' <a href="http://' + srcurl + '" target="_blank"><img style="width:480px" src="' + url + '" alt="' + title + '"/></a>'
      if obj['type'] == 'video':
         r = ' '+obj['html']
      if obj['type'] == 'rich':
