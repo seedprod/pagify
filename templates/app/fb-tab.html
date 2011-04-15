@@ -106,7 +106,7 @@
     <script>
       window.fbAsyncInit = function() {
         FB.init({appId: '{{facebook.app_id}}', status: true, cookie: true, xfbml: true});
-    	FB.Canvas.setAutoResize();
+    	  FB.Canvas.setAutoResize();
       };
       (function() {
         var e = document.createElement('script');
@@ -221,23 +221,28 @@
                 $('#{{w.id}} > div').css('width','100%');
                 targetTop();
                 $('#{{w.id}} a[href^="http://www.youtube.com/watch"]').click(function() {
+                var ele = this;
                 $.fancybox({
                     'centerOnScroll': true,
                     'overlayShow'   : false,
                     'titleShow'     : false,
-            	    'padding'		: 0,
-        			'autoScale'		: false,
+            	      'padding'		: 0,
+        		      	'autoScale'		: false,
                     'transitionIn'  : 'elastic',
                     'transitionOut' : 'elastic',
-        			'width'		    : 450,
-        			'height'		: 283,
-        			'href'			: this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
-        			'type'			: 'swf',
-        			'swf'			: {
-        			   	'wmode'		: 'transparent',
-        				'allowfullscreen'	: 'true'
-        			}
-            	});
+              			'width'		    : 450,
+              			'height'		: 283,
+              			'href'			: this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
+              			'type'			: 'swf',
+              			'swf'			: {
+        			   	      'wmode'		: 'transparent',
+        				        'allowfullscreen'	: 'true'},
+    				        'onComplete':	function() {
+            				  var p = $(ele);
+            				  log(ele);
+            				  var position = p.position(); 
+            				  $("#fancybox-wrap").css("top",position.top + 'px');}
+            	  });
             	return false;
             	});
             }
@@ -255,7 +260,7 @@
             	       summary =value.summary.content;
             	   }catch(err){}
             	   if(typeof summary !== 'undefined'){
-            	       html = html + '<p>' + value.summary.content + '</p>';   
+            	       html = html + '<p class="clearfix">' + value.summary.content + '</p>';   
             	   }
             	   count++;
             	   if(count == 10){
