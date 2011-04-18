@@ -122,13 +122,14 @@
     <script src="/static/js/jquery-ui-{{google.jquery_ui_version}}.custom.min.js"></script>
     <script src="/static/js/pagify-plugins.js"></script>
     <script>
-	function yqlQuery(query,cbFunc,format,maxage,env) {
+	function yqlQuery(query,cbFunc,format,maxage,env,retry) {
 	    var yqlURL = 'http://query.yahooapis.com/v1/public/yql';
 	    query = typeof(query) != 'undefined' ? encodeURIComponent(query) : '';
 	    format = typeof(format) != 'undefined' ? format : 'json';
-	    env = typeof(env) != 'undefined' ? env : 'store://datatables.org/alltableswithkeys';
 	    maxage = typeof(maxage) != 'undefined' ? maxage : '';
-	    yql = yqlURL + '?q=' + query + '&format=' + format + '&diagnostics=false&_maxage=' + maxage + '&env=' + env + '&rnd=_2010031310';
+	    env = typeof(env) != 'undefined' ? env : 'store://datatables.org/alltableswithkeys';
+	    retry = typeof(retry) != 'undefined' ? retry : '';
+	    yql = yqlURL + '?q=' + query + '&format=' + format + '&diagnostics=false&_maxage=' + maxage + '&env=' + env + '&rnd=_' + retry;
 		$.ajax({url: yql, 
 	            dataType: 'jsonp',
 	            jsonp: 'callback', 
@@ -210,7 +211,17 @@
             }
 		{% endifequal %}
 	    {% ifequal w.type "youtube" %}
+	        var retry_{{w.id|cut:"-"}} = 0;
     	    function cbFunc_{{w.id|cut:"-"}}(data) {
+    	        try{
+    	        if (data.query.results.error || data.query.results === null){
+                    if(retry_{{w.id|cut:"-"}} > 5) {
+                        return false;
+                    }
+                    retry_{{w.id|cut:"-"}}++;
+                    call_{{w.id|cut:"-"}}(retry_{{w.id|cut:"-"}});
+	            }
+	            }catch(err){}
                 var html = '';
                 var count = 0
                 $.each(data.query.results.item, function(index, value) { 
@@ -248,12 +259,22 @@
             	return false;
             	});
             }
-            function call_{{w.id|cut:"-"}}() {
-                yqlQuery('select * from rss where url=\'http://gdata.youtube.com/feeds/base/users/{{w.youtube_username}}/uploads?alt=rss&v=2&orderby=published\'','cbFunc_{{w.id|cut:"-"}}','json','3600');
+            function call_{{w.id|cut:"-"}}(retry) {
+                yqlQuery('select * from rss where url=\'http://gdata.youtube.com/feeds/base/users/{{w.youtube_username}}/uploads?alt=rss&v=2&orderby=published\'','cbFunc_{{w.id|cut:"-"}}','json','3600', null, retry);
             }
 	    {% endifequal %}
 	    {% ifequal w.type "feed" %}
+	        var retry_{{w.id|cut:"-"}} = 0;
 	        function cbFunc_{{w.id|cut:"-"}}(data) {
+	            try{
+	            if (data.query.results.error || data.query.results === null){
+                    if(retry_{{w.id|cut:"-"}} > 5) {
+                        return false;
+                    }
+                    retry_{{w.id|cut:"-"}}++;
+                    call_{{w.id|cut:"-"}}(retry_{{w.id|cut:"-"}});
+	            }
+	            }catch(err){}
                 var html = '';
                 var count = 0
                 $.each(data.query.results.feed.entry, function(index, value) { 
@@ -273,8 +294,8 @@
             	$('#{{w.id}}').html(html);
             	targetTop();
             }
-            function call_{{w.id|cut:"-"}}() {
-                yqlQuery('select * from feednormalizer where url=\'{{w.feed_url}}\' and output=\'atom_1.0\'','cbFunc_{{w.id|cut:"-"}}','json','3600');
+            function call_{{w.id|cut:"-"}}(retry) {
+                yqlQuery('select * from feednormalizer where url=\'{{w.feed_url}}\' and output=\'atom_1.0\'','cbFunc_{{w.id|cut:"-"}}','json','3600',null,retry);
             }
 	    {% endifequal %}
 	{% endfor %}
