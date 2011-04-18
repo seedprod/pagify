@@ -182,6 +182,7 @@
                     });
             	});
             	$("#{{w.id}} .fgallery").fancybox({
+            	    'centerOnScroll': false,
             	    'overlayShow'   : false,
             	    'titleShow'     : true,
             	    'titlePosition' : 'inside',
@@ -213,8 +214,17 @@
 	    {% ifequal w.type "youtube" %}
 	        var retry_{{w.id|cut:"-"}} = 0;
     	    function cbFunc_{{w.id|cut:"-"}}(data) {
-    	        try{
-    	        if (data.query.results.error || data.query.results === null){
+	            try{
+                if (data.query.results.error){
+                      if(retry_{{w.id|cut:"-"}} > 5) {
+                          return false;
+                      }
+                      retry_{{w.id|cut:"-"}}++;
+                      call_{{w.id|cut:"-"}}(retry_{{w.id|cut:"-"}});
+                }
+                }catch(err){}
+	            try{
+	            if (data.query.results === null){
                     if(retry_{{w.id|cut:"-"}} > 5) {
                         return false;
                     }
@@ -267,7 +277,16 @@
 	        var retry_{{w.id|cut:"-"}} = 0;
 	        function cbFunc_{{w.id|cut:"-"}}(data) {
 	            try{
-	            if (data.query.results.error || data.query.results === null){
+                if (data.query.results.error){
+                      if(retry_{{w.id|cut:"-"}} > 5) {
+                          return false;
+                      }
+                      retry_{{w.id|cut:"-"}}++;
+                      call_{{w.id|cut:"-"}}(retry_{{w.id|cut:"-"}});
+                }
+                }catch(err){}
+	            try{
+	            if (data.query.results === null){
                     if(retry_{{w.id|cut:"-"}} > 5) {
                         return false;
                     }
