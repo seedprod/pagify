@@ -493,6 +493,12 @@ z-index:999;}
 
 
 .widget h2{margin:0;padding:5px;font-size:138.5%;}
+#widget-list a {
+text-decoration: underline;
+}
+#widget-list a:hover {
+color:#3B5998;
+}
 #widget-list{margin:0 0 20px 0;
     background:#fef7d5 url(/static/images/widget-area.png) no-repeat 165px 85px;
     border:1px dashed #efe3ae;
@@ -670,6 +676,9 @@ z-index:999;}
 	height: 3px;
 }
 
+#tips ul li {
+list-style: none;
+}
 /* TipTip CSS - Version 1.2 */
 
 #tiptip_holder {
