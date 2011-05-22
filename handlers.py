@@ -50,7 +50,9 @@ def export_email_mailchimp(args):
     email = args["email"]
     fname = args["fname"]
     lname = args["lname"]
-    url = 'http://us2.api.mailchimp.com/1.3/?apikey=%s&id=acec1d11b2&double_optin=FALSE&email_address=%s&method=listSubscribe&output=json&merge_vars[FNAME]=%s&merge_vars[LNAME]=%s&merge_vars[PRODUCT]=Trial'  % ('41bd6a767d1f213b4e7dc87c88e11493-us2',email,fname,lname)
+    dt = datetime.date.today()
+    sudate = dt.strftime("%d/%m/%y")
+    url = 'http://us2.api.mailchimp.com/1.3/?apikey=%s&id=acec1d11b2&double_optin=FALSE&email_address=%s&method=listSubscribe&output=json&merge_vars[FNAME]=%s&merge_vars[LNAME]=%s&merge_vars[PRODUCT]=Trial&merge_vars[SIGNUP]=%s'  % ('41bd6a767d1f213b4e7dc87c88e11493-us2',email,fname,lname,sudate)
     logging.info(url)
     response = urlfetch.fetch(url=url,headers={'Content-Type': 'application/x-www-form-urlencoded' },method=urlfetch.GET)
     logging.info(response.content)

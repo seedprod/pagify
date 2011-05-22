@@ -208,7 +208,7 @@
                 
 			}
 			function call_{{w.id|cut:"-"}}() {
-			    yqlQuery('select * from html where url="http://www.flickr.com/badge_code_v2.gne?count={{w.flickr_count}}&display={{w.flickr_whichone}}&size=t&layout=x&source=user&user={{w.flickr_userid}}" and xpath=\'//div[@class="flickr_badge_image"]\'','cbFunc_{{w.id|cut:"-"}}','xml','3600');
+			    yqlQuery('select * from html where url="http://www.flickr.com/badge_code_v2.gne?count={{w.flickr_count}}&display={{w.flickr_whichone}}&size=t&layout=x&source=user&user={{w.flickr_userid}}" and xpath=\'//div[@class="flickr_badge_image"]\'','cbFunc_{{w.id|cut:"-"}}','xml','20');
             }
 		{% endifequal %}
 	    {% ifequal w.type "youtube" %}
@@ -224,7 +224,7 @@
                 }
                 }catch(err){}
 	            try{
-	            if (data.query.results === null){
+	            if (data.query.results == 'null'){
                     if(retry_{{w.id|cut:"-"}} > 5) {
                         return false;
                     }
@@ -270,7 +270,7 @@
             	});
             }
             function call_{{w.id|cut:"-"}}(retry) {
-                yqlQuery('select * from rss where url=\'http://gdata.youtube.com/feeds/base/users/{{w.youtube_username}}/uploads?alt=rss&v=2&orderby=published\'','cbFunc_{{w.id|cut:"-"}}','json','3600', null, retry);
+                yqlQuery('select * from rss where url=\'http://gdata.youtube.com/feeds/base/users/{{w.youtube_username}}/uploads?alt=rss&v=2&orderby=published\'','cbFunc_{{w.id|cut:"-"}}','json','200', null, retry);
             }
 	    {% endifequal %}
 	    {% ifequal w.type "feed" %}
@@ -286,7 +286,7 @@
                 }
                 }catch(err){}
 	            try{
-	            if (data.query.results === null){
+	            if (data.query.results == 'null'){
                     if(retry_{{w.id|cut:"-"}} > 5) {
                         return false;
                     }
@@ -314,7 +314,7 @@
             	targetTop();
             }
             function call_{{w.id|cut:"-"}}(retry) {
-                yqlQuery('select * from feednormalizer where url=\'{{w.feed_url}}\' and output=\'atom_1.0\'','cbFunc_{{w.id|cut:"-"}}','json','3600',null,retry);
+                yqlQuery('select * from feednormalizer where url=\'{{w.feed_url}}\' and output=\'atom_1.0\'','cbFunc_{{w.id|cut:"-"}}','json','20',null,retry);
             }
 	    {% endifequal %}
 	{% endfor %}
